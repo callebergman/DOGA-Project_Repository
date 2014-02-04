@@ -30,7 +30,7 @@ public class FrontPageFacade{
         Users    userFound = em.find (Users.class, username);
         return userFound;
     }
-    
+    /**/
     /*
     public UsersDTO getUser (String username, String password) {
         Users    userFound = em.find (Users.class, username);
