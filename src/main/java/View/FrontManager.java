@@ -20,6 +20,7 @@ public class FrontManager {
     private String name;
     private String lastName;    
     private String email;
+    private String[] areas = new String[10];
     
     private String transactionFailure;
     
@@ -27,6 +28,16 @@ public class FrontManager {
      * Creates a new instance of LoginManager
      */
     public FrontManager() {
+        areas[0] = "Korvgrillning";
+        areas[1] = "Karuselldrift";
+        areas[2] = "Diskotering";
+        areas[3] = "Programmering";
+        areas[4] = "Bilkörning";
+        areas[5] = "Lärande";
+        areas[6] = "Bakning";
+        areas[7] = "Servering";
+        areas[8] = "Taxering";
+        areas[9] = "Servicing";
     }
     
     public void login () {
@@ -49,6 +60,8 @@ public class FrontManager {
         this.name = newName;
     }
 
+    
+    
     public String getLastName() {
         return lastName;
     }

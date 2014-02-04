@@ -9,6 +9,12 @@ div{
     display: block;
 }
 
+#fillin
+{    
+    font-weight: bold;
+    color: GREY;
+}
+
 iframe{
     border-style: none;
 }

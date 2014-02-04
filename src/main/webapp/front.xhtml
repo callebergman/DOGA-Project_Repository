@@ -52,23 +52,39 @@
                 </div>
                 <div id="applicationForm">
                     <div id="basicInfo">
-                        <h2 class="title">Basic information</h2>
+                        <h2 class="title" id = "header">Basic information</h2>
                         
-                       
-                    <p>                    
+                    <div id="fillin">   
+                    <p>                         
                     <h:outputLabel for="Input" value="First name:  "/>
-                    <h:inputText id="Name" value="#{frontManager.name}"/>&nbsp;
+                    <br/>
+                    <h:inputText id="name" value="#{frontManager.name}"/>&nbsp;
+                    <br/>
                     <h:outputLabel for="Output" value="Last name: "/>
-                    <h:inputText id="Password" value="#{frontManager.lastName}"/>
+                    <br/>
+                    <h:inputText id="lastName" value="#{frontManager.lastName}"/>
+                    <br/>
                     <h:outputLabel for="Output" value="Email: "/>
-                    <h:inputText id="Password" value="#{frontManager.email}"/>
+                    <br/>
+                    <h:inputText id="email" value="#{frontManager.email}"/>
                       </p> 
-                        
+                    </div>
                         
                         
                     </div>
                     <div id="expertise">
                         <h2 class="title">Area of expertise</h2>
+                        <p>"Choose your destiny:" 
+                            <br/>
+                            <select>
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="mercedes">Mercedes</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        
+                            
+                        </p>
                     </div>
                     <div id="periods">
                         <h2 class="title">Time periods</h2>
