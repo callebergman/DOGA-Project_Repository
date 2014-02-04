@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <h:outputStylesheet library="css" name="front-style.css"  />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
+        <script>
+            $( document ).ready(function() {
+                $("#expertise").hide();
+                $("#periods").hide();
+                
+                $("#opt1").click(function(){
+                    $("#basicInfo").show();
+                    $("#expertise").hide();
+                    $("#periods").hide();});
+                
+                $("#opt2").click(function(){
+                    $("#expertise").show();
+                    $("#periods").hide();
+                    $("#basicInfo").hide();});
+                
+                $("#opt3").click(function(){
+                    $("#periods").show();
+                    $("#basicInfo").hide();
+                    $("#expertise").hide();});
+            });
+        </script>
+        <noscript>Sorry, your browser does not support JavaScript!</noscript>
+    </h:head>
+    <h:body> 
+        <div id="wrap">
+            <div id="bar">
+                <div id="content">
+                    <p class="tag"> Create applications or login to browse submissions </p>
+                    <ul class="nav">
+                        <li class="ico">
+                            <a href="faces/login.xhtml">Login / Signup </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="main">
+                <div id="options">
+                    <ul>
+                        <li><button id="opt1">Basic information</button></li>
+                        <li><button id="opt2">Area of expertise</button></li>
+                        <li><button id="opt3">Time periods</button></li>
+                    </ul>
+                </div>
+                <div id="applicationForm">
+                    <div id="basicInfo">
+                        <h2 class="title">Basic information</h2>
+                    </div>
+                    <div id="expertise">
+                        <h2 class="title">Area of expertise</h2>
+                    </div>
+                    <div id="periods">
+                        <h2 class="title">Time periods</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+
