@@ -44,6 +44,7 @@ iframe{
 #bar ul{
     padding: 0;
     list-style-type: none;
+    margin-right: 10px;
 }
 #bar li {
     background: url('ico.png') no-repeat;
