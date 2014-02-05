@@ -36,9 +36,12 @@ public class Person implements Serializable {
     private String password;
     private BigInteger role_id;
     private String username;
-
+/*
     @ManyToOne
     @JoinColumn(name="role_id")
+*/
+    @ManyToOne
+    @JoinColumn(name="role_id", insertable=false, updatable=false)
     private Roles role;
     public Roles getRole()
     {
