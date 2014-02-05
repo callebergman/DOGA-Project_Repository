@@ -8,6 +8,9 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Collection;
+import java.util.HashSet;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,6 +43,7 @@ public class Person implements Serializable {
     @ManyToOne
     @JoinColumn(name="role_id")
 */
+    
     @ManyToOne
     @JoinColumn(name="role_id", insertable=false, updatable=false)
     private Roles role;
@@ -50,6 +54,26 @@ public class Person implements Serializable {
     void setRole(Roles role)
     {
         this.role=role;
+    }
+    @OneToMany(mappedBy="person",cascade=REMOVE)
+    private Collection<Availability> availability = new HashSet ();
+
+    public Collection<Availability> getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Collection<Availability> availability) {
+        this.availability = availability;
+    }
+    @OneToMany(mappedBy="person_id",cascade=REMOVE)
+    private Collection<Competence_profile> competence_profile = new HashSet ();
+
+    public Collection<Competence_profile> getCompetence_profile() {
+        return competence_profile;
+    }
+
+    public void setCompetence_profile(Collection<Competence_profile> competence_profile) {
+        this.competence_profile = competence_profile;
     }
     /*
     @OneToMany

@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -31,7 +33,17 @@ public class Competence implements Serializable {
     public void setId(BigInteger id) {
         this.id = id;
     }
-
+    @ManyToOne
+    @JoinColumn(name="competence_id", insertable=false, updatable=false)
+    private Competence_profile competence_profile;
+    public Competence_profile getCompetence_profile()
+    {
+        return competence_profile;
+    }
+    void setCompetence_profile(Competence_profile competence_profile)
+    {
+        this.competence_profile = competence_profile;
+    }
     @Override
     public int hashCode() {
         int hash = 0;

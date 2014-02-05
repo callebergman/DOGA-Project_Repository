@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import javax.persistence.OneToOne;
 
@@ -29,6 +31,18 @@ public class Availability implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger id;
+    
+     @ManyToOne
+    @JoinColumn(name="person_id", insertable=false, updatable=false)
+    private Person person;
+    public Person person()
+    {
+        return person;
+    }
+    void setPerson(Person person)
+    {
+        this.person = person;
+    }
     /*
     @OneToOne(mappedBy="availability",cascade=REMOVE)
     private Collection<Person> persons = new HashSet ();

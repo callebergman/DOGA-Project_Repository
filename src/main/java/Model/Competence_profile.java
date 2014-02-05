@@ -8,10 +8,16 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Collection;
+import java.util.HashSet;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -31,7 +37,28 @@ public class Competence_profile implements Serializable {
     public void setId(BigInteger id) {
         this.id = id;
     }
+   @ManyToOne
+    @JoinColumn(name="person_id", insertable=false, updatable=false)
+    private Person person;
+    public Person person()
+    {
+        return person;
+    }
+    void setPerson(Person person)
+    {
+        this.person = person;
+    }
+    @OneToMany(mappedBy="competence_id",cascade=REMOVE)
+    private Collection<Competence> competence = new HashSet ();
 
+    public Collection<Competence> getCompetence() {
+        return competence;
+    }
+
+    public void setCompetence(Collection<Competence> competence) {
+        this.competence = competence;
+    }
+  
     @Override
     public int hashCode() {
         int hash = 0;
