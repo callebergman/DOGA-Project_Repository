@@ -31,9 +31,9 @@ public class Roles implements Serializable {
     @Id
     private BigInteger id;
     
+    @OneToMany(mappedBy="role",cascade=REMOVE)
     private Collection<Person> persons = new HashSet ();
 
-    @OneToMany(mappedBy="role",cascade=REMOVE)
     public Collection<Person> getPersons() {
         return persons;
     }
