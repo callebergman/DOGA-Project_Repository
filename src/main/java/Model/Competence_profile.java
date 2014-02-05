@@ -39,7 +39,7 @@ public class Competence_profile implements Serializable {
     @JoinColumn(name="person_id", insertable=false, updatable=false)
     private Person person;
 
-    @OneToMany(mappedBy="competence_id",cascade=REMOVE)
+    @OneToMany(mappedBy="competence_profile",cascade=REMOVE)
     private Collection<Competence> competence = new HashSet ();
     
   /*
