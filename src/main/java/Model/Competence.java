@@ -21,29 +21,43 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Competence implements Serializable {
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private BigInteger id;
-
-    public BigInteger getId() {
-        return id;
-    }
-
-    public void setId(BigInteger id) {
-        this.id = id;
-    }
+    private BigInteger competence_id;
+    private String name;
+    
     @ManyToOne
     @JoinColumn(name="competence_id", insertable=false, updatable=false)
     private Competence_profile competence_profile;
-    public Competence_profile getCompetence_profile()
-    {
+
+    public BigInteger getCompetence_id() {
+        return competence_id;
+    }
+
+    public void setCompetence_id(BigInteger competence_id) {
+        this.competence_id = competence_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Competence_profile getCompetence_profile() {
         return competence_profile;
     }
-    void setCompetence_profile(Competence_profile competence_profile)
-    {
+
+    public void setCompetence_profile(Competence_profile competence_profile) {
         this.competence_profile = competence_profile;
     }
+    
+        /*
     @Override
     public int hashCode() {
         int hash = 0;
@@ -68,5 +82,5 @@ public class Competence implements Serializable {
     public String toString() {
         return "Model.Competence[ id=" + id + " ]";
     }
-    
+    */
 }

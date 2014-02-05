@@ -8,6 +8,7 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.sql.Date;
 import java.util.Collection;
 import java.util.HashSet;
 import static javax.persistence.CascadeType.REMOVE;
@@ -31,30 +32,10 @@ public class Availability implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger id;
-    
-     @ManyToOne
-    @JoinColumn(name="person_id", insertable=false, updatable=false)
-    private Person person;
-    public Person person()
-    {
-        return person;
-    }
-    void setPerson(Person person)
-    {
-        this.person = person;
-    }
-    /*
-    @OneToOne(mappedBy="availability",cascade=REMOVE)
-    private Collection<Person> persons = new HashSet ();
+    private Date from_date;
+    private Date to_date;
+    private BigInteger person_id;
 
-    public Collection<Person> getPersons() {
-        return persons;
-    }
-
-    public void setPersons(Collection<Person> persons) {
-        this.persons = persons;
-    }
-*/
     public BigInteger getId() {
         return id;
     }
@@ -62,6 +43,42 @@ public class Availability implements Serializable {
     public void setId(BigInteger id) {
         this.id = id;
     }
+
+    public Date getFrom_date() {
+        return from_date;
+    }
+
+    public void setFrom_date(Date from_date) {
+        this.from_date = from_date;
+    }
+
+    public Date getTo_date() {
+        return to_date;
+    }
+
+    public void setTo_date(Date to_date) {
+        this.to_date = to_date;
+    }
+
+    public BigInteger getPerson_id() {
+        return person_id;
+    }
+
+    public void setPerson_id(BigInteger person_id) {
+        this.person_id = person_id;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+    
+    @ManyToOne
+    @JoinColumn(name="person_id", insertable=false, updatable=false)
+    private Person person;
 
     @Override
     public int hashCode() {

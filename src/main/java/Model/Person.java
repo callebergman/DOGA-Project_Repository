@@ -39,14 +39,38 @@ public class Person implements Serializable {
     private String password;
     private BigInteger role_id;
     private String username;
-/*
-    @ManyToOne
-    @JoinColumn(name="role_id")
-*/
     
     @ManyToOne
     @JoinColumn(name="role_id", insertable=false, updatable=false)
     private Roles role;
+
+    @OneToMany(mappedBy="person",cascade=REMOVE)
+    private Collection<Availability> availabilitys = new HashSet ();
+    
+    @OneToMany(mappedBy="person",cascade=REMOVE)
+    private Collection<Competence_profile> competence_profiles = new HashSet ();
+
+    
+    
+    
+    
+    
+    public Collection<Competence_profile> getCompetence_profile() {
+        return competence_profiles;
+    }
+
+    public void setCompetence_profile(Collection<Competence_profile> competence_profile) {
+        this.competence_profiles = competence_profile;
+    }
+    
+    public Collection<Availability> getAvailability() {
+        return availabilitys;
+    }
+
+    public void setAvailability(Collection<Availability> availability) {
+        this.availabilitys = availability;
+    }
+    
     public Roles getRole()
     {
         return role;
@@ -55,66 +79,6 @@ public class Person implements Serializable {
     {
         this.role=role;
     }
-    @OneToMany(mappedBy="person",cascade=REMOVE)
-    private Collection<Availability> availability = new HashSet ();
-
-    public Collection<Availability> getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(Collection<Availability> availability) {
-        this.availability = availability;
-    }
-    @OneToMany(mappedBy="person_id",cascade=REMOVE)
-    private Collection<Competence_profile> competence_profile = new HashSet ();
-
-    public Collection<Competence_profile> getCompetence_profile() {
-        return competence_profile;
-    }
-
-    public void setCompetence_profile(Collection<Competence_profile> competence_profile) {
-        this.competence_profile = competence_profile;
-    }
-    /*
-    @OneToMany
-    @JoinColumn(name="person_id", insertable=false, updatable=false)
-    private Availability availability;
-    public Availability getAvailability()
-    {
-        return availability;
-    }
-    public void setAvailability(Availability availability)
-    {
-        this.availability = availability;
-    }
-
-/*
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Person)) {
-            return false;
-        }
-        Person other = (Person) object;
-        if ((this.person_id == null && other.person_id != null) || (this.person_id != null && !this.person_id.equals(other.person_id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Model.Person[ id=" + person_id + " ]";
-    }
- */
-    
     
     /**
      * @return the person_id
@@ -227,5 +191,30 @@ public class Person implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-    
+    /*
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Person)) {
+            return false;
+        }
+        Person other = (Person) object;
+        if ((this.person_id == null && other.person_id != null) || (this.person_id != null && !this.person_id.equals(other.person_id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Model.Person[ id=" + person_id + " ]";
+    }
+ */
 }
