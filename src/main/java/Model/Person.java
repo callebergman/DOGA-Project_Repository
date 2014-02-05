@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -48,12 +49,13 @@ public class Person implements Serializable {
         this.role=role;
     }
     @OneToMany
+    @JoinColumn(name="person_id")
     private Availability availability;
     public Availability getAvailability()
     {
         return availability;
     }
-    public void setAvailability()
+    public void setAvailability(Availability availability)
     {
         this.availability = availability;
     }
