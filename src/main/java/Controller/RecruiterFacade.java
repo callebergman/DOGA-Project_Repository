@@ -7,6 +7,8 @@
 package Controller;
 
 import javax.ejb.Stateful;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -14,7 +16,8 @@ import javax.ejb.Stateful;
  */
 @Stateful
 public class RecruiterFacade {
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+/*
+    @PersistenceContext(unitName = "com.mycompany_DOGA-Project_war_1.0-SNAPSHOTPU")
+    private EntityManager em;
+    */
 }
