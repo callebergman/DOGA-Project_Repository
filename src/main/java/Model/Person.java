@@ -52,7 +52,7 @@ public class Person implements Serializable {
         this.role=role;
     }
     @OneToMany
-    @JoinColumn(name="person_id")
+    @JoinColumn(name="person_id", insertable=false, updatable=false)
     private Availability availability;
     public Availability getAvailability()
     {
