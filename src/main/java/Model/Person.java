@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -38,6 +39,24 @@ public class Person implements Serializable {
     @ManyToOne
     @JoinColumn(name="role_id")
     private Roles role;
+    public Roles getRole()
+    {
+        return role;
+    }
+    void setRole(Roles role)
+    {
+        this.role=role;
+    }
+    @OneToMany
+    private Availability availability;
+    public Availability getAvailability()
+    {
+        return availability;
+    }
+    public void setAvailability()
+    {
+        this.availability = availability;
+    }
 
 /*
     @Override
@@ -65,14 +84,7 @@ public class Person implements Serializable {
         return "Model.Person[ id=" + person_id + " ]";
     }
  */
-    public Roles getRole()
-    {
-        return role;
-    }
-    void setRole(Roles role)
-    {
-        this.role=role;
-    }
+    
     
     /**
      * @return the person_id
