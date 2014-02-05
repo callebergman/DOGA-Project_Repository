@@ -25,8 +25,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class Availability implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private BigInteger id;
+    /*
     @OneToOne(mappedBy="availability",cascade=REMOVE)
     private Collection<Person> persons = new HashSet ();
 
@@ -37,8 +40,7 @@ public class Availability implements Serializable {
     public void setPersons(Collection<Person> persons) {
         this.persons = persons;
     }
-    @Id
-    private BigInteger id;
+*/
     public BigInteger getId() {
         return id;
     }
