@@ -8,6 +8,10 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Collection;
+import java.util.HashSet;
+import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,26 +20,43 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author Calle
+ * @author Hikari
  */
 @Entity
-public class Role implements Serializable {
+public class Roles implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private BigInteger role_id;
-    private String name;
-    private Person person;
+    private BigInteger id;
+    
+    @OneToMany(mappedBy="role",cascade=REMOVE)
+    private Collection<Person> persons = new HashSet ();
 
-   
-/*
+    public Collection<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(Collection<Person> persons) {
+        this.persons = persons;
+    }
+    
+    public BigInteger getId() {
+        return id;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+    
+    /*
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
-    }*/
+    }
 
     @Override
     public boolean equals(Object object) {
@@ -44,54 +65,15 @@ public class Role implements Serializable {
             return false;
         }
         Role other = (Role) object;
-        if ((this.role_id == null && other.role_id != null) || (this.role_id != null && !this.role_id.equals(other.role_id))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
-    
     }
-    @OneToMany
-    public Person
-            getPerson()
-            {
-                return person;
-            }
-            void setPerson(Person person)
-            {
-                this.person=person;
-            }
 
     @Override
     public String toString() {
-        return "Model.Role[ id=" + role_id + " ]";
+        return "Model.Role[ id=" + id + " ]";
     }
-
-    /**
-     * @return the role_id
-     */
-    public BigInteger getRole_id() {
-        return role_id;
-    }
-
-    /**
-     * @param role_id the role_id to set
-     */
-    public void setRole_id(BigInteger role_id) {
-        this.role_id = role_id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-    
+    */
 }

@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -22,8 +23,9 @@ import javax.persistence.ManyToOne;
 public class Person implements Serializable {
    
     private static final long serialVersionUID = 1L;
-    @Id
+    
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private BigInteger person_id;
     private String name;
     private String surname;
@@ -32,8 +34,10 @@ public class Person implements Serializable {
     private String password;
     private BigInteger role_id;
     private String username;
-    private Role role;
-    
+
+    @ManyToOne
+    @JoinColumn(name="role_id")
+    private Roles role;
 
 /*
     @Override
@@ -41,7 +45,7 @@ public class Person implements Serializable {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
-    }*/
+    }
 
     @Override
     public boolean equals(Object object) {
@@ -55,22 +59,21 @@ public class Person implements Serializable {
         }
         return true;
     }
-    @ManyToOne
-    public Role
-            getRole()
-            {
-                return role;
-            }
-            void setRole(Role role)
-            {
-                this.role=role;
-            }
 
     @Override
     public String toString() {
         return "Model.Person[ id=" + person_id + " ]";
     }
-
+ */
+    public Roles getRole()
+    {
+        return role;
+    }
+    void setRole(Roles role)
+    {
+        this.role=role;
+    }
+    
     /**
      * @return the person_id
      */
