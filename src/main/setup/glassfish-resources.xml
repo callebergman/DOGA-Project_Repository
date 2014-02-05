@@ -10,5 +10,5 @@
         <property name="URL" value="jdbc:derby://localhost:1527/DOGA-ProjectDB"/>
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="DOGA-Project" object-type="user" pool-name="derby_net_DOGA-ProejctDB_rootPool"/>
+    <jdbc-resource enabled="true" jndi-name="DOGA-Project" object-type="user" pool-name="derby_net_DOGA-ProjectDB_rootPool"/>
 </resources>
