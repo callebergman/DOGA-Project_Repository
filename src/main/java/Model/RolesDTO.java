@@ -11,5 +11,24 @@ package Model;
  * @author Hikari
  */
 public class RolesDTO {
-    
+    private String name;
+    public RolesDTO(String name)
+    {
+        this.name = name;
+        
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 }

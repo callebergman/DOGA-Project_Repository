@@ -16,7 +16,11 @@ public class AvailabilityDTO
 {
     private Date from_date;
     private Date to_date;
-
+    public AvailabilityDTO(Date from_date, Date to_date)
+    {
+        this.from_date = from_date;
+        this.to_date = to_date;
+    }
     /**
      * @return the from_date
      */
