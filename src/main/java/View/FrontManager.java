@@ -47,7 +47,6 @@ public class FrontManager {
     
     public void login () {
         transactionFailure = "a";
-        applicantFacade.addApplicant("Hikari", "Watanabe", "hikari@kth.se");
     }
 
    /**
@@ -65,8 +64,6 @@ public class FrontManager {
     public void setName(String newName) {
         this.name = newName;
     }
-
-    
     
     public String getLastName() {
         return lastName;

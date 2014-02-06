@@ -28,7 +28,7 @@ public class Roles implements Serializable {
     
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private BigInteger id;
+    private BigInteger role_id;
     private String name;
     
     @OneToMany(mappedBy="role",cascade=REMOVE)
@@ -43,11 +43,11 @@ public class Roles implements Serializable {
     }
     
     public BigInteger getId() {
-        return id;
+        return role_id;
     }
 
-    public void setId(BigInteger id) {
-        this.id = id;
+    public void setId(BigInteger role_id) {
+        this.role_id = role_id;
     }
     
     /*

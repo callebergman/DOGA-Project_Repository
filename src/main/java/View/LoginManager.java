@@ -6,6 +6,8 @@
 
 package View;
 
+import Controller.ApplicantFacade;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
@@ -18,6 +20,9 @@ import javax.inject.Named;
 @ManagedBean
 @RequestScoped
 public class LoginManager {
+    
+    @EJB
+    private ApplicantFacade applicantFacade;
     
     private String userName;
     private String passwd;
@@ -32,6 +37,7 @@ public class LoginManager {
     
     public void login () {
         transactionFailure = "a";
+                applicantFacade.addApplicant("Hikari", "Watanabe", "hikari@kth.se");
     }
 
    /**
