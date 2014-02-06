@@ -19,9 +19,6 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class FrontManager {
     
-    @EJB
-    private ApplicantFacade applicantFacade;
-    
     private String name;
     private String lastName;    
     private String email;

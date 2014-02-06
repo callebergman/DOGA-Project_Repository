@@ -36,21 +36,28 @@ public class ApplicantFacade {
         person = new Person (name, surname, email);
     }
     
-    public void addCompetenceProfile (int years_of_experience){
-        competences.add (new Competence_profile (years_of_experience));
+    public void addCompetenceProfile (String competenceName, int years_of_experience){
+        Competence c = em.find (Competence.class, competenceName);
+        BigInteger  competence_id = c.getCompetence_id();
+        competences.add (new Competence_profile (competence_id, years_of_experience));
     }
     
     public void addAvailability (Date from_date, Date to_date){
         availabilitys.add (new Availability (from_date, to_date));
     }
-    /*
+    
     public void submitApplication () {
         em.persist(person);
         person_id = (BigInteger)em.createQuery("select max(u.id) from User u").getSingleResult();
         
         for(Competence_profile cp : competences){
-            BigInteger competence_id = em.find (Competence.class, cp.getCompetence_id());
+            cp.setPerson_id(person_id);
+            em.persist(cp);
+        }
+        
+        for(Availability availability : availabilitys){
+            availability.setPerson_id(person_id);
+            em.persist(availability);
         }
     }
-    */
 }
