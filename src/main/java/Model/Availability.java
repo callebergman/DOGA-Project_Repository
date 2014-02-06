@@ -26,7 +26,7 @@ public class Availability implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private BigInteger id;
+    private BigInteger availability_id;
     private Date from_date;
     private Date to_date;
     private BigInteger person_id;
@@ -44,11 +44,11 @@ public class Availability implements Serializable {
     private Person person;
 
         public BigInteger getId() {
-        return id;
+        return availability_id;
     }
 
     public void setId(BigInteger id) {
-        this.id = id;
+        this.availability_id = availability_id;
     }
 
     public Date getFrom_date() {
@@ -87,7 +87,7 @@ public class Availability implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (availability_id != null ? availability_id.hashCode() : 0);
         return hash;
     }
     
@@ -98,7 +98,7 @@ public class Availability implements Serializable {
             return false;
         }
         Availability other = (Availability) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.availability_id == null && other.availability_id != null) || (this.availability_id != null && !this.availability_id.equals(other.availability_id))) {
             return false;
         }
         return true;
@@ -106,7 +106,7 @@ public class Availability implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Availability[ id=" + id + " ]";
+        return "Model.Availability[ id=" + availability_id + " ]";
     }
     
 }
