@@ -16,8 +16,5 @@ import javax.persistence.PersistenceContext;
  */
 @Stateful
 public class RecruiterFacade {
-/*
-    @PersistenceContext(unitName = "com.mycompany_DOGA-Project_war_1.0-SNAPSHOTPU")
-    private EntityManager em;
-    */
+    
 }
