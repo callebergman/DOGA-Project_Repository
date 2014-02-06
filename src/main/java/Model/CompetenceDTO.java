@@ -10,6 +10,25 @@ package Model;
  *
  * @author Hikari
  */
-public class CompetenceDTO {
-    
+public class CompetenceDTO 
+{
+     private String name;
+     public CompetenceDTO(String name)
+     {
+      this.name = name;   
+     }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 }
