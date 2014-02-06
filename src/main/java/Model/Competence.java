@@ -33,6 +33,8 @@ public class Competence implements Serializable {
     @JoinColumn(name="competence_id", insertable=false, updatable=false)
     private Competence_profile competence_profile;
 
+    
+    
     public BigInteger getCompetence_id() {
         return competence_id;
     }

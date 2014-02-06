@@ -73,22 +73,101 @@
                         
                     </div>
                     <div id="expertise">
-                        <h2 class="title">Area of expertise</h2>
-                        <p>"Choose your destiny:" 
-                            <br/>
-                            <select>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
-                            </select>
                         
-                            
+                        <h2 class="title">Area of expertise</h2>
+                        <div id="fillin">                 
+                        <p>Choose your area of expertise: 
+                            <br/>
+                            <select id="areas" value="#{frontManager.currentArea}">                                           
+                             <c:forEach items="#{frontManager.allAreas.stream().map(b->b).distinct().toList()}" var="area">
+                             <option value="#{area}">${area}</option>
+                             </c:forEach>   
+                            </select>
+                            <br/>
+                            <br/>
+                        <h:outputLabel for="Output" value="Years of expertise: "/>
+                        <br/>
+                        <h:inputText id="years" value="#{frontManager.years}"/>
+                        <br/>    
+                        <br/>
+                        <button id="opt">Add entry</button>
+                        
                         </p>
+                        </div>
+                        
+                    <table border="1">
+                    <tr>
+                        <th>Area of expertise</th>
+                        <th>Years</th>
+                    </tr>
+                    <ui:repeat var="expertise" value="hej">
+                        <tr>
+                            <td>#{frontManager.currentArea}</td>
+                            <td>#{frontManager.years}</td>
+                        </tr>
+                    </ui:repeat>
+                    </table>
+                        
+                        
                     </div>
                     <div id="periods">
                         <h2 class="title">Time periods</h2>
+                        
+                         <div id="fillin">                 
+                        <p>Choose the time you'll be available:
+                            <br/>
+                            <br/>
+                            <h:outputLabel for="Output" value="From: "/>
+                            <br/>
+                            Year:
+                            <select id="time">                                           
+                             <c:forEach begin="2014" end="2030" varStatus="status">
+                             <option value="${status.index}">${status.index}</option>
+                             </c:forEach>   
+                            </select>
+                             Month:
+                            <select id="time">                                           
+                             <c:forEach begin="1" end="12" varStatus="status">
+                             <option value="${status.index}">${status.index}</option>
+                             </c:forEach>   
+                            </select>
+                              Day:
+                            <select id="time">                                           
+                             <c:forEach begin="1" end="32" varStatus="status">
+                             <option value="${status.index}">${status.index}</option>
+                             </c:forEach>   
+                            </select>     
+                            <br/>
+                            <br/>
+                        <h:outputLabel for="Output" value="To: "/>
+                        <br/>
+                        Year:
+                            <select id="time">                                           
+                             <c:forEach begin="2014" end="2030" varStatus="status">
+                             <option value="${status.index}">${status.index}</option>
+                             </c:forEach>   
+                            </select>
+                             Month:
+                            <select id="time">                                           
+                             <c:forEach begin="1" end="12" varStatus="status">
+                             <option value="${status.index}">${status.index}</option>
+                             </c:forEach>   
+                            </select>
+                              Day:
+                            <select id="time">                                           
+                             <c:forEach begin="1" end="32" varStatus="status">
+                             <option value="${status.index}">${status.index}</option>
+                             </c:forEach>   
+                            </select> 
+                            <br/>
+                            <br/>    
+                        <button id="opt">Add time period</button>
+                        
+                        </p>
+                        </div>
                     </div>
+                                                           
+                    
                 </div>
             </div>
         </div>

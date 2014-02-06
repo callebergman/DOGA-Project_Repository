@@ -25,6 +25,8 @@ public class FrontManager {
     private String name;
     private String lastName;    
     private String email;
+    private int years;
+    private String currentArea;
     private String[] areas = new String[10];
     
     private String transactionFailure;
@@ -47,7 +49,6 @@ public class FrontManager {
     
     public void login () {
         transactionFailure = "a";
-        applicantFacade.addApplicant("Hikari", "Watanabe", "hikari@kth.se");
     }
 
    /**
@@ -66,7 +67,30 @@ public class FrontManager {
         this.name = newName;
     }
 
+    public int getYears()
+    {
+        return years;
+    }
     
+    public void setYears(int newYears)
+    {
+        years = newYears;
+    }
+    
+    public String[] getAllAreas()
+    {
+        return areas;
+    }
+    
+    public String getCurrentArea()
+    {
+        return currentArea;
+    }
+    
+    public void setCurrentArea(String newArea)
+    {
+        currentArea = newArea;
+    }
     
     public String getLastName() {
         return lastName;

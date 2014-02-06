@@ -6,6 +6,8 @@
 
 package View;
 
+import Controller.ApplicantFacade;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
@@ -18,7 +20,7 @@ import javax.inject.Named;
 @ManagedBean
 @RequestScoped
 public class LoginManager {
-    
+
     private String userName;
     private String passwd;
     
