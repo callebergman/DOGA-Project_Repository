@@ -34,7 +34,6 @@ public class ApplicantFacade {
     
     public void addApplicant (String name, String surname, String email){
         person = new Person (name, surname, email);
-        em.persist(person);
     }
     
     public void addCompetenceProfile (int years_of_experience){
@@ -44,4 +43,14 @@ public class ApplicantFacade {
     public void addAvailability (Date from_date, Date to_date){
         availabilitys.add (new Availability (from_date, to_date));
     }
+    /*
+    public void submitApplication () {
+        em.persist(person);
+        person_id = (BigInteger)em.createQuery("select max(u.id) from User u").getSingleResult();
+        
+        for(Competence_profile cp : competences){
+            em.find (Competence.class, cp.get);
+        }
+    }
+    */
 }

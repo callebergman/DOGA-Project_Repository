@@ -48,7 +48,25 @@ public class Competence_profile implements Serializable {
     public Competence_profile(int years_of_experience) {
         this.years_of_experience = years_of_experience;
     }
-  /*
+    
+  
+
+    public BigInteger getCompetence_id() {
+        return competence_id;
+    }
+
+    public void setCompetence_id(BigInteger competence_id) {
+        this.competence_id = competence_id;
+    }
+
+    public int getYears_of_experience() {
+        return years_of_experience;
+    }
+
+    public void setYears_of_experience(int years_of_experience) {
+        this.years_of_experience = years_of_experience;
+    }
+      /*
     @Override
     public int hashCode() {
         int hash = 0;
