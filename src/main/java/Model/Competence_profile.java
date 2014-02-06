@@ -41,7 +41,13 @@ public class Competence_profile implements Serializable {
 
     @OneToMany(mappedBy="competence_profile",cascade=REMOVE)
     private Collection<Competence> competence = new HashSet ();
+
+    public Competence_profile() {
+    }
     
+    public Competence_profile(int years_of_experience) {
+        this.years_of_experience = years_of_experience;
+    }
   /*
     @Override
     public int hashCode() {

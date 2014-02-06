@@ -50,10 +50,23 @@ public class Person implements Serializable {
     @OneToMany(mappedBy="person",cascade=REMOVE)
     private Collection<Competence_profile> competence_profiles = new HashSet ();
 
+    public Person() {
+    }
     
-    
-    
-    
+    public Person(String name, String surname, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+    }
+
+    public Person(String name, String surname, int ssn, String email, String password, String username) {
+        this.name = name;
+        this.surname = surname;
+        this.ssn = ssn;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+    }
     
     public Collection<Competence_profile> getCompetence_profile() {
         return competence_profiles;

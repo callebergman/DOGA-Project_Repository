@@ -6,7 +6,13 @@
 
 package Controller;
 
+import Model.Availability;
+import Model.Competence;
+import Model.Competence_profile;
 import Model.Person;
+import java.math.BigInteger;
+import java.sql.Date;
+import java.util.List;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,5 +27,20 @@ public class ApplicantFacade {
     @PersistenceContext(unitName = "projectPU")
     private EntityManager em;
    
+    private BigInteger person_id;
     private Person person;
+    private List<Competence_profile> competences;
+    private List<Availability> availabilitys;
+    
+    public void addApplicant (String name, String surname, String email){
+        person = new Person (name, surname, email);
+    }
+    
+    public void addCompetenceProfile (int years_of_experience){
+        competences.add (new Competence_profile (years_of_experience));
+    }
+    
+    public void addAvailability (Date from_date, Date to_date){
+        availabilitys.add (new Availability (from_date, to_date));
+    }
 }

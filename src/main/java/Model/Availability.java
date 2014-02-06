@@ -9,17 +9,12 @@ package Model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Date;
-import java.util.Collection;
-import java.util.HashSet;
-import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -35,6 +30,14 @@ public class Availability implements Serializable {
     private Date from_date;
     private Date to_date;
     private BigInteger person_id;
+
+    public Availability() {
+    }
+
+    public Availability(Date from_date, Date to_date) {
+        this.from_date = from_date;
+        this.to_date = to_date;
+    }
 
     public BigInteger getId() {
         return id;
