@@ -19,9 +19,14 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class FrontManager {
     
+    @EJB
+    private ApplicantFacade applicantFacade;
+    
     private String name;
     private String lastName;    
     private String email;
+    private int years;
+    private String currentArea;
     private String[] areas = new String[10];
     
     private String transactionFailure;
@@ -60,6 +65,31 @@ public class FrontManager {
 
     public void setName(String newName) {
         this.name = newName;
+    }
+
+    public int getYears()
+    {
+        return years;
+    }
+    
+    public void setYears(int newYears)
+    {
+        years = newYears;
+    }
+    
+    public String[] getAllAreas()
+    {
+        return areas;
+    }
+    
+    public String getCurrentArea()
+    {
+        return currentArea;
+    }
+    
+    public void setCurrentArea(String newArea)
+    {
+        currentArea = newArea;
     }
     
     public String getLastName() {
