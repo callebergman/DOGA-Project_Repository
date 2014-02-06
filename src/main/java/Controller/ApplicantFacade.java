@@ -49,7 +49,7 @@ public class ApplicantFacade {
         person_id = (BigInteger)em.createQuery("select max(u.id) from User u").getSingleResult();
         
         for(Competence_profile cp : competences){
-            em.find (Competence.class, cp.get);
+            BigInteger competence_id = em.find (Competence.class, cp.getCompetence_id());
         }
     }
     */
