@@ -29,6 +29,7 @@ public class Roles implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private BigInteger id;
+    private String name;
     
     @OneToMany(mappedBy="role",cascade=REMOVE)
     private Collection<Person> persons = new HashSet ();

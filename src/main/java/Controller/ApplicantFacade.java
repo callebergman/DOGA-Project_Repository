@@ -34,6 +34,7 @@ public class ApplicantFacade {
     
     public void addApplicant (String name, String surname, String email){
         person = new Person (name, surname, email);
+        em.persist(person);
     }
     
     public void addCompetenceProfile (int years_of_experience){

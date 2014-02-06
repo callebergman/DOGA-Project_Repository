@@ -6,6 +6,8 @@
 
 package View;
 
+import Controller.ApplicantFacade;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -16,6 +18,9 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class FrontManager {
+    
+    @EJB
+    private ApplicantFacade applicantFacade;
     
     private String name;
     private String lastName;    
@@ -42,6 +47,7 @@ public class FrontManager {
     
     public void login () {
         transactionFailure = "a";
+        applicantFacade.addApplicant("Hikari", "Watanabe", "hikari@kth.se");
     }
 
    /**
