@@ -24,7 +24,7 @@ import javax.persistence.OneToMany;
  * @author User
  */
 @Entity
-public class Person implements Serializable {
+public class Person implements PersonDTO,Serializable {
    
     private static final long serialVersionUID = 1L;
     
@@ -33,7 +33,7 @@ public class Person implements Serializable {
     private BigInteger person_id;
     private String name;
     private String surname;
-    private int ssn;
+    private String ssn;
     private String email;
     private String password;
     private BigInteger role_id;
@@ -58,7 +58,7 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public Person(String name, String surname, int ssn, String email, String password, String username) {
+    public Person(String name, String surname, String ssn, String email, String password, String username) {
         this.name = name;
         this.surname = surname;
         this.ssn = ssn;
@@ -137,14 +137,14 @@ public class Person implements Serializable {
     /**
      * @return the ssn
      */
-    public int getSsn() {
+    public String getSsn() {
         return ssn;
     }
 
     /**
      * @param ssn the ssn to set
      */
-    public void setSsn(int ssn) {
+    public void setSsn(String ssn) {
         this.ssn = ssn;
     }
 
