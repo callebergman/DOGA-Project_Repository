@@ -6,7 +6,7 @@
 
 package Controller;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,9 +14,11 @@ import javax.persistence.PersistenceContext;
  *
  * @author Hikari
  */
-@Stateful
-public class RecruiterFacade {
+@Stateless
+public class LoginFacade {
     
     @PersistenceContext(unitName = "projectPU")
     private EntityManager em;
+    
+    
 }
