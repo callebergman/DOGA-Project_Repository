@@ -7,15 +7,23 @@
 package View;
 
 import Controller.ApplicantFacade;
+import Model.Availability;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author Calle
  */
 @ManagedBean
+@Named("frontmanager")
 @SessionScoped
 public class FrontManager {
     
@@ -29,6 +37,17 @@ public class FrontManager {
     private String currentArea;
     private String[] areas = new String[10];
     
+    private List<Availability> availabilities;
+    
+    private String fromDate;
+    private String toDate;
+        
+    private int toYear;
+    private int toMonth;
+    private int toDay;
+    private int fromYear;
+    private int fromMonth;
+    private int fromDay;    
     private String transactionFailure;
     
     /**
@@ -115,6 +134,169 @@ public class FrontManager {
     public void setTransactionFailure(String transactionFailure) {
         this.transactionFailure = transactionFailure;
     }
+    
+     /**
+     * Adds an availability date
+     * @return jsf22Bugfix();
+     */
+    public void addAvailability () {
+        Date fDate = null;
+        Date tDate = null;
+          System.out.println("hej");
+        if(fromMonth < 10 && fromDay < 10)
+            setFromDate(Integer.toString(fromYear)+ "0" + Integer.toString(fromMonth)+ "0" + Integer.toString(fromDay));
+        else if(fromMonth < 10 && fromDay > 9)
+            setFromDate(Integer.toString(fromYear)+ "0" + Integer.toString(fromMonth)+ "" + Integer.toString(fromDay));
+        else if(fromMonth > 9 && fromDay < 10)
+            setFromDate(Integer.toString(fromYear)+ ""+ Integer.toString(fromMonth)+ "0" +Integer.toString(fromDay));
+        else
+            setFromDate(Integer.toString(fromYear)+ ""+ Integer.toString(fromMonth)+ "" + Integer.toString(fromDay));
+        
+        if(toMonth < 10 && toDay < 10)
+            setToDate(Integer.toString(toYear)+ "0" + Integer.toString(toMonth)+ "0" + Integer.toString(toDay));
+        else if(toMonth < 10 && toDay > 9)
+            setToDate(Integer.toString(toYear)+ "0" + Integer.toString(toMonth)+ "" + Integer.toString(toDay));
+        else if(toMonth > 9 && toDay < 10)
+            setToDate(Integer.toString(toYear)+ ""+ Integer.toString(toMonth)+ "0" +Integer.toString(toDay));
+        else
+            setToDate(Integer.toString(toYear)+ ""+ Integer.toString(toMonth)+ "" + Integer.toString(toDay));
+        
+        DateFormat df = new SimpleDateFormat("ddMMyyyy");
+        
+        try
+        {
+             fDate = (Date)df.parse(getFromDate());
+             tDate = (Date)df.parse(getToDate());
+        }
+        catch(ParseException e)
+        {
+            
+        }        
+        //applicantFacade.addAvailability(fDate, tDate);
+        availabilities.add(new Availability(fDate, tDate));
+        //return jsf22Bugfix();
+    }
+    
+     /**
+     * Returns the current availabilities
+     * @return the availability
+     */
+    public List<Availability> getAvailabilites() {
+        return availabilities;
+    }
+
+    /**
+     * @return the toYear
+     */
+    public int getToYear() {
+        return toYear;
+    }
+
+    /**
+     * @param toYear the toYear to set
+     */
+    public void setToYear(int toYear) {
+        this.toYear = toYear;
+    }
+
+    /**
+     * @return the toMonth
+     */
+    public int getToMonth() {
+        return toMonth;
+    }
+
+    /**
+     * @param toMonth the toMonth to set
+     */
+    public void setToMonth(int toMonth) {
+        this.toMonth = toMonth;
+    }
+
+    /**
+     * @return the toDay
+     */
+    public int getToDay() {
+        return toDay;
+    }
+
+    /**
+     * @param toDay the toDay to set
+     */
+    public void setToDay(int toDay) {
+        this.toDay = toDay;
+    }
+
+    /**
+     * @return the fromYear
+     */
+    public int getFromYear() {
+        return fromYear;
+    }
+
+    /**
+     * @param fromYear the fromYear to set
+     */
+    public void setFromYear(int fromYear) {
+        this.fromYear = fromYear;
+    }
+
+    /**
+     * @return the fromMonth
+     */
+    public int getFromMonth() {
+        return fromMonth;
+    }
+
+    /**
+     * @param fromMonth the fromMonth to set
+     */
+    public void setFromMonth(int fromMonth) {
+        this.fromMonth = fromMonth;
+    }
+
+    /**
+     * @return the fromDay
+     */
+    public int getFromDay() {
+        return fromDay;
+    }
+
+    /**
+     * @param fromDay the fromDay to set
+     */
+    public void setFromDay(int fromDay) {
+        this.fromDay = fromDay;
+    }
+
+    /**
+     * @return the fromDate
+     */
+    public String getFromDate() {
+        return fromDate;
+    }
+
+    /**
+     * @param fromDate the fromDate to set
+     */
+    public void setFromDate(String fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    /**
+     * @return the toDate
+     */
+    public String getToDate() {
+        return toDate;
+    }
+
+    /**
+     * @param toDate the toDate to set
+     */
+    public void setToDate(String toDate) {
+        this.toDate = toDate;
+    }
+    
     
     
 }

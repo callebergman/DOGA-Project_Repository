@@ -46,6 +46,10 @@ public class ApplicantFacade {
         availabilitys.add (new Availability (from_date, to_date));
     }
     
+    public List<Availability> getAvailabilities() {
+        return availabilitys;
+    }
+    
     public void submitApplication () {
         em.persist(person);
         person_id = (BigInteger)em.createQuery("select max(u.id) from User u").getSingleResult();

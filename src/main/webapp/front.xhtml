@@ -107,8 +107,7 @@
                         </tr>
                     </ui:repeat>
                     </table>
-                        
-                        
+                                               
                     </div>
                     <div id="periods">
                         <h2 class="title">Time periods</h2>
@@ -120,19 +119,19 @@
                             <h:outputLabel for="Output" value="From: "/>
                             <br/>
                             Year:
-                            <select id="time">                                           
+                            <select id="time" value="#{frontManager.fromYear}">                                           
                              <c:forEach begin="2014" end="2030" varStatus="status">
                              <option value="${status.index}">${status.index}</option>
                              </c:forEach>   
                             </select>
                              Month:
-                            <select id="time">                                           
+                            <select id="time" value="#{frontManager.fromMonth}">                                           
                              <c:forEach begin="1" end="12" varStatus="status">
                              <option value="${status.index}">${status.index}</option>
                              </c:forEach>   
                             </select>
                               Day:
-                            <select id="time">                                           
+                            <select id="time" value="#{frontManager.fromDay}">                                           
                              <c:forEach begin="1" end="32" varStatus="status">
                              <option value="${status.index}">${status.index}</option>
                              </c:forEach>   
@@ -142,28 +141,42 @@
                         <h:outputLabel for="Output" value="To: "/>
                         <br/>
                         Year:
-                            <select id="time">                                           
+                            <select id="time" value="#{frontManager.toYear}">                                           
                              <c:forEach begin="2014" end="2030" varStatus="status">
                              <option value="${status.index}">${status.index}</option>
                              </c:forEach>   
                             </select>
                              Month:
-                            <select id="time">                                           
+                            <select id="time" value="#{frontManager.toMonth}">                                           
                              <c:forEach begin="1" end="12" varStatus="status">
                              <option value="${status.index}">${status.index}</option>
                              </c:forEach>   
                             </select>
                               Day:
-                            <select id="time">                                           
+                            <select id="time" value="#{frontManager.toDay}">                                           
                              <c:forEach begin="1" end="32" varStatus="status">
                              <option value="${status.index}">${status.index}</option>
                              </c:forEach>   
                             </select> 
                             <br/>
                             <br/>    
-                        <button id="opt">Add time period</button>
-                        
+                            <h:commandButton id="opt" value="Add time period" action="#{frontManager.addAvailability()}"/>
                         </p>
+                             
+                    <table border="1">
+                    <tr>
+                        <th>From date</th>
+                        <th>To date</th>
+                    </tr>
+                        <ui:repeat var="availability" value="#{frontManager.availabilites}">
+                        <tr>
+                            <td>#{availability.from_date}</td>
+                            <td>#{availability.to_date}</td>
+                        </tr>
+                    </ui:repeat>
+                    </table>
+                             
+                             
                         </div>
                     </div>
                                                            
