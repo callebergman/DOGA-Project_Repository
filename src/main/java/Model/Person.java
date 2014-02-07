@@ -24,7 +24,7 @@ import javax.persistence.OneToMany;
  * @author User
  */
 @Entity
-public class Person implements Serializable {
+public class Person implements PersonDTO,Serializable {
    
     private static final long serialVersionUID = 1L;
     
