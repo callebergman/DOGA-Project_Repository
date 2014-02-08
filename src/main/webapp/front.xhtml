@@ -50,7 +50,11 @@
                         <li><button id="opt3">Time periods</button></li>
                     </ul>
                 </div>
+                
                 <div id="applicationForm">
+                    <h:form>
+                        
+                    </h:form>
                     <div id="basicInfo">
                         <h2 class="title" id = "header">Basic information</h2>
                         
@@ -110,7 +114,8 @@
                                                
                     </div>
                     <div id="periods">
-                        <h2 class="title">Time periods</h2>
+                        <h:form>
+                                                   <h2 class="title">Time periods</h2>
                          <div id="fillin">                 
                         <p>Choose the time you'll be available:
                             <br/>
@@ -161,25 +166,26 @@
                             <br/>    
                             <h:commandButton id="opt" value="Add time period" action="#{frontManager.addAvailability()}"/>
                         </p>
-                             
-                    <table border="1">
-                    <tr>
-                        <th>From date</th>
-                        <th>To date</th>
-                    </tr>
-                        <ui:repeat var="availability" value="#{frontManager.availabilites}">
+                             <h:outputLabel for="Output" value="TEST: #{frontManager.test}"/>         
+                    <table class="availability-table" border="1">
                         <tr>
-                            <td>#{availability.from_date}</td>
-                            <td>#{availability.to_date}</td>
+                            <th class="table-header"> From date</th>
+                            <th class="table-header">To date</th>
                         </tr>
-                    </ui:repeat>
+                        <tbody>
+                            <ui:repeat var="a" value="#{frontManager.availabilities}">
+                                <tr>
+                                    <td class="table-row">>#{a.from_date}</td>
+                                    <td class="table-row">>#{a.to_date}</td> 
+                                </tr>
+                            </ui:repeat>
+                        </tbody>
                     </table>
                              
                              
                         </div>
+                        </h:form>
                     </div>
-                                                           
-                    
                 </div>
             </div>
         </div>

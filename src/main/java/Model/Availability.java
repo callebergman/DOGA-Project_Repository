@@ -106,7 +106,7 @@ public class Availability implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Availability[ id=" + availability_id + " ]";
+        return "[[from_date] ~ [to_date]]";
     }
     
 }

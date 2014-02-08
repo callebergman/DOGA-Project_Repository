@@ -8,24 +8,26 @@ package View;
 
 import Controller.ApplicantFacade;
 import Model.Availability;
+import java.io.Serializable;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Named;
 
 /**
  *
  * @author Calle
  */
 //@ManagedBean
-@Named("frontManager")
+@ManagedBean(name="frontManager", eager=true)
+//@Named("frontManager")
 @SessionScoped
-public class FrontManager {
+public class FrontManager implements Serializable{
     
     @EJB
     private ApplicantFacade applicantFacade;
@@ -38,7 +40,7 @@ public class FrontManager {
     private String[] areas = new String[10];
     
     private List<Availability> availabilities;
-    
+    private String test;
     private String fromDate;
     private String toDate;
         
@@ -64,8 +66,12 @@ public class FrontManager {
         areas[7] = "Servering";
         areas[8] = "Taxering";
         areas[9] = "Servicing";
+        availabilities = new ArrayList<Availability> ();
+        test = "I DONT SEE";
     }
     
+    public String getTest (){ return test;}
+    public void setTest (String s){test = s;}
     public void login () {
         transactionFailure = "a";
     }
@@ -98,6 +104,10 @@ public class FrontManager {
     
     public String[] getAllAreas()
     {
+        return areas;
+    }
+    
+    public String[] getAreas(){
         return areas;
     }
     
@@ -139,10 +149,11 @@ public class FrontManager {
      * Adds an availability date
      * @return jsf22Bugfix();
      */
-    public void addAvailability () {
+    public String addAvailability () {
+        System.out.println("Hello!!!");
+        name = "I SEE NOW";
         Date fDate = null;
         Date tDate = null;
-          System.out.println("hej");
         if(fromMonth < 10 && fromDay < 10)
             setFromDate(Integer.toString(fromYear)+ "0" + Integer.toString(fromMonth)+ "0" + Integer.toString(fromDay));
         else if(fromMonth < 10 && fromDay > 9)
@@ -175,13 +186,14 @@ public class FrontManager {
         //applicantFacade.addAvailability(fDate, tDate);
         availabilities.add(new Availability(fDate, tDate));
         //return jsf22Bugfix();
+        return "hej";
     }
     
      /**
      * Returns the current availabilities
      * @return the availability
      */
-    public List<Availability> getAvailabilites() {
+    public List<Availability> getAvailabilities() {
         return availabilities;
     }
 
@@ -296,7 +308,16 @@ public class FrontManager {
     public void setToDate(String toDate) {
         this.toDate = toDate;
     }
-    
-    
-    
+
+      /**
+     * This return value is needed because of a JSF 2.2 bug. Note 3 on page 7-10
+     * of the JSF 2.2 specification states that action handling methods may be
+     * void. In JSF 2.2, however, a void action handling method plus an
+     * if-element that evaluates to true in the faces-config navigation case
+     * causes an exception.     *
+     * @return an empty string.
+     */
+    private String jsf22Bugfix() {
+        return "";
+    }  
 }
