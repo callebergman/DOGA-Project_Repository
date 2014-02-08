@@ -9,7 +9,7 @@ package View;
 import Controller.ApplicantFacade;
 import Model.Availability;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +40,6 @@ public class FrontManager implements Serializable{
     private String[] areas = new String[10];
     
     private List<Availability> availabilities;
-    private String test;
     private String fromDate;
     private String toDate;
         
@@ -67,11 +66,8 @@ public class FrontManager implements Serializable{
         areas[8] = "Taxering";
         areas[9] = "Servicing";
         availabilities = new ArrayList<Availability> ();
-        test = "I DONT SEE";
     }
     
-    public String getTest (){ return test;}
-    public void setTest (String s){test = s;}
     public void login () {
         transactionFailure = "a";
     }
@@ -149,9 +145,7 @@ public class FrontManager implements Serializable{
      * Adds an availability date
      * @return jsf22Bugfix();
      */
-    public String addAvailability () {
-        System.out.println("Hello!!!");
-        name = "I SEE NOW";
+    public void addAvailability () {
         Date fDate = null;
         Date tDate = null;
         if(fromMonth < 10 && fromDay < 10)
@@ -174,19 +168,18 @@ public class FrontManager implements Serializable{
         
         DateFormat df = new SimpleDateFormat("ddMMyyyy");
         
-        try
+        try 
         {
-             fDate = (Date)df.parse(getFromDate());
-             tDate = (Date)df.parse(getToDate());
+             fDate = (df.parse(getFromDate()));
+             tDate = (df.parse(getToDate()));
         }
         catch(ParseException e)
         {
             
         }        
         //applicantFacade.addAvailability(fDate, tDate);
-        availabilities.add(new Availability(fDate, tDate));
+        availabilities.add(new Availability(new java.sql.Date (fDate.getTime()), new java.sql.Date (tDate.getTime())));
         //return jsf22Bugfix();
-        return "hej";
     }
     
      /**
