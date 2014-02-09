@@ -23,9 +23,8 @@ import javax.faces.bean.SessionScoped;
  *
  * @author Calle
  */
-//@ManagedBean
+
 @ManagedBean(name="frontManager", eager=true)
-//@Named("frontManager")
 @SessionScoped
 public class FrontManager implements Serializable{
     
@@ -42,13 +41,13 @@ public class FrontManager implements Serializable{
     private List<Availability> availabilities;
     private String fromDate;
     private String toDate;
-        
     private int toYear;
     private int toMonth;
     private int toDay;
     private int fromYear;
     private int fromMonth;
     private int fromDay;    
+    
     private String transactionFailure;
     
     /**
@@ -78,59 +77,6 @@ public class FrontManager implements Serializable{
      */
     public boolean getSuccess() {
         return transactionFailure == null;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String newName) {
-        this.name = newName;
-    }
-
-    public int getYears()
-    {
-        return years;
-    }
-    
-    public void setYears(int newYears)
-    {
-        years = newYears;
-    }
-    
-    public String[] getAllAreas()
-    {
-        return areas;
-    }
-    
-    public String[] getAreas(){
-        return areas;
-    }
-    
-    public String getCurrentArea()
-    {
-        return currentArea;
-    }
-    
-    public void setCurrentArea(String newArea)
-    {
-        currentArea = newArea;
-    }
-    
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String newLast) {
-        this.lastName = newLast;
-    }
-    
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String newEmail) {
-        this.email = newEmail;
     }
 
     public String getTransactionFailure() {
@@ -173,13 +119,56 @@ public class FrontManager implements Serializable{
              fDate = (df.parse(getFromDate()));
              tDate = (df.parse(getToDate()));
         }
-        catch(ParseException e)
-        {
-            
-        }        
-        //applicantFacade.addAvailability(fDate, tDate);
+        catch(ParseException e){}        
         availabilities.add(new Availability(new java.sql.Date (fDate.getTime()), new java.sql.Date (tDate.getTime())));
-        //return jsf22Bugfix();
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String newName) {
+        this.name = newName;
+    }
+
+    public int getYears()
+    {
+        return years;
+    }
+    
+    public void setYears(int newYears)
+    {
+        years = newYears;
+    }
+    
+    public String[] getAreas(){
+        return areas;
+    }
+    
+    public String getCurrentArea()
+    {
+        return currentArea;
+    }
+    
+    public void setCurrentArea(String newArea)
+    {
+        currentArea = newArea;
+    }
+    
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String newLast) {
+        this.lastName = newLast;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String newEmail) {
+        this.email = newEmail;
     }
     
      /**
@@ -301,16 +290,4 @@ public class FrontManager implements Serializable{
     public void setToDate(String toDate) {
         this.toDate = toDate;
     }
-
-      /**
-     * This return value is needed because of a JSF 2.2 bug. Note 3 on page 7-10
-     * of the JSF 2.2 specification states that action handling methods may be
-     * void. In JSF 2.2, however, a void action handling method plus an
-     * if-element that evaluates to true in the faces-config navigation case
-     * causes an exception.     *
-     * @return an empty string.
-     */
-    private String jsf22Bugfix() {
-        return "";
-    }  
 }
