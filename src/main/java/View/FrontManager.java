@@ -22,8 +22,7 @@ import javax.inject.Named;
  *
  * @author Calle
  */
-@ManagedBean
-@Named("frontmanager")
+@Named("frontManager")
 @SessionScoped
 public class FrontManager {
     
