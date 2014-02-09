@@ -118,7 +118,7 @@
                                 <p>Choose your area of expertise: 
                                 <br/>
                                 <select id="areas" value="#{frontManager.currentArea}">                                           
-                                    <c:forEach items="#{frontManager.allAreas.stream().map(b->b).distinct().toList()}" var="area">
+                                    <c:forEach items="#{frontManager.areas.stream().map(b->b).distinct().toList()}" var="area">
                                         <option value="#{area}">${area}</option>
                                     </c:forEach>   
                                 </select>

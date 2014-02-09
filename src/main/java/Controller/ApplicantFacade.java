@@ -8,11 +8,9 @@ package Controller;
 
 import Model.ApplicationDTO;
 import Model.Availability;
-import Model.Competence;
 import Model.Competence_profile;
 import Model.Person;
 import java.math.BigInteger;
-import java.sql.Date;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
