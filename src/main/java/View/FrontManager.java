@@ -8,23 +8,22 @@ package View;
 
 import Controller.ApplicantFacade;
 import Model.Availability;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import Model.Competence_profile;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Named;
 
 /**
  *
  * @author Calle
  */
-@Named("frontManager")
+
+@ManagedBean(name="frontManager", eager=true)
 @SessionScoped
-public class FrontManager {
+public class FrontManager implements Serializable{
     
     @EJB
     private ApplicantFacade applicantFacade;
@@ -37,16 +36,16 @@ public class FrontManager {
     private String[] areas = new String[10];
     
     private List<Availability> availabilities;
-    
+    private List<Competence_profile> competences;
     private String fromDate;
     private String toDate;
-        
-    private int toYear;
+    private String toYear = "wtf";
     private int toMonth;
     private int toDay;
     private int fromYear;
     private int fromMonth;
     private int fromDay;    
+    
     private String transactionFailure;
     
     /**
@@ -63,6 +62,7 @@ public class FrontManager {
         areas[7] = "Servering";
         areas[8] = "Taxering";
         areas[9] = "Servicing";
+        availabilities = new ArrayList<Availability> ();
     }
     
     public void login () {
@@ -77,6 +77,60 @@ public class FrontManager {
         return transactionFailure == null;
     }
 
+    public String getTransactionFailure() {
+        return transactionFailure;
+    }
+
+    public void setTransactionFailure(String transactionFailure) {
+        this.transactionFailure = transactionFailure;
+    }
+    
+    public void addCompetence()
+    {
+        competences.add(new Competence_profile(currentArea, years));
+    }
+    
+    
+     /**
+     * Adds an availability date
+     * @return jsf22Bugfix();
+     */
+    public void addAvailability () {
+       /* Date fDate = null;
+        Date tDate = null;
+        */
+        if(fromMonth < 10 && fromDay < 10)
+            setFromDate(Integer.toString(fromYear)+ "0" + Integer.toString(fromMonth)+ "0" + Integer.toString(fromDay));
+        else if(fromMonth < 10 && fromDay > 9)
+            setFromDate(Integer.toString(fromYear)+ "0" + Integer.toString(fromMonth)+ "" + Integer.toString(fromDay));
+        else if(fromMonth > 9 && fromDay < 10)
+            setFromDate(Integer.toString(fromYear)+ ""+ Integer.toString(fromMonth)+ "0" +Integer.toString(fromDay));
+        else
+            setFromDate(Integer.toString(fromYear)+ ""+ Integer.toString(fromMonth)+ "" + Integer.toString(fromDay));
+        
+        if(toMonth < 10 && toDay < 10)
+            setToDate(toYear+ "0" + Integer.toString(toMonth)+ "0" + Integer.toString(toDay));
+        else if(toMonth < 10 && toDay > 9)
+            setToDate(toYear+ "0" + Integer.toString(toMonth)+ "" + Integer.toString(toDay));
+        else if(toMonth > 9 && toDay < 10)
+            setToDate(toYear+ ""+ Integer.toString(toMonth)+ "0" +Integer.toString(toDay));
+        else
+            setToDate(toYear+ ""+ Integer.toString(toMonth)+ "" + Integer.toString(toDay));
+        
+        /*
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        try 
+        {
+             fDate = (df.parse(getFromDate()));
+             tDate = (df.parse(getToDate()));
+        }
+        catch(ParseException e){}        
+        */
+        availabilities.add(new Availability(this.fromDate, this.toDate));
+        
+    }
+    
     public String getName() {
         return name;
     }
@@ -95,8 +149,7 @@ public class FrontManager {
         years = newYears;
     }
     
-    public String[] getAllAreas()
-    {
+    public String[] getAreas(){
         return areas;
     }
     
@@ -125,76 +178,34 @@ public class FrontManager {
     public void setEmail(String newEmail) {
         this.email = newEmail;
     }
-
-    public String getTransactionFailure() {
-        return transactionFailure;
-    }
-
-    public void setTransactionFailure(String transactionFailure) {
-        this.transactionFailure = transactionFailure;
-    }
-    
-     /**
-     * Adds an availability date
-     * @return jsf22Bugfix();
-     */
-    public void addAvailability () {
-        Date fDate = null;
-        Date tDate = null;
-          System.out.println("hej");
-        if(fromMonth < 10 && fromDay < 10)
-            setFromDate(Integer.toString(fromYear)+ "0" + Integer.toString(fromMonth)+ "0" + Integer.toString(fromDay));
-        else if(fromMonth < 10 && fromDay > 9)
-            setFromDate(Integer.toString(fromYear)+ "0" + Integer.toString(fromMonth)+ "" + Integer.toString(fromDay));
-        else if(fromMonth > 9 && fromDay < 10)
-            setFromDate(Integer.toString(fromYear)+ ""+ Integer.toString(fromMonth)+ "0" +Integer.toString(fromDay));
-        else
-            setFromDate(Integer.toString(fromYear)+ ""+ Integer.toString(fromMonth)+ "" + Integer.toString(fromDay));
-        
-        if(toMonth < 10 && toDay < 10)
-            setToDate(Integer.toString(toYear)+ "0" + Integer.toString(toMonth)+ "0" + Integer.toString(toDay));
-        else if(toMonth < 10 && toDay > 9)
-            setToDate(Integer.toString(toYear)+ "0" + Integer.toString(toMonth)+ "" + Integer.toString(toDay));
-        else if(toMonth > 9 && toDay < 10)
-            setToDate(Integer.toString(toYear)+ ""+ Integer.toString(toMonth)+ "0" +Integer.toString(toDay));
-        else
-            setToDate(Integer.toString(toYear)+ ""+ Integer.toString(toMonth)+ "" + Integer.toString(toDay));
-        
-        DateFormat df = new SimpleDateFormat("ddMMyyyy");
-        
-        try
-        {
-             fDate = (Date)df.parse(getFromDate());
-             tDate = (Date)df.parse(getToDate());
-        }
-        catch(ParseException e)
-        {
-            
-        }        
-        //applicantFacade.addAvailability(fDate, tDate);
-        availabilities.add(new Availability(fDate, tDate));
-        //return jsf22Bugfix();
-    }
     
      /**
      * Returns the current availabilities
      * @return the availability
      */
-    public List<Availability> getAvailabilites() {
+    public List<Availability> getAvailabilities() {
         return availabilities;
+    }
+    
+     /**
+     * Returns the current competences
+     * @return the competences
+     */
+    public List<Competence_profile> getCompetences() {
+        return competences;
     }
 
     /**
      * @return the toYear
      */
-    public int getToYear() {
+    public String getToYear() {
         return toYear;
     }
 
     /**
      * @param toYear the toYear to set
      */
-    public void setToYear(int toYear) {
+    public void setToYear(String toYear) {
         this.toYear = toYear;
     }
 
@@ -295,7 +306,4 @@ public class FrontManager {
     public void setToDate(String toDate) {
         this.toDate = toDate;
     }
-    
-    
-    
 }

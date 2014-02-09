@@ -27,14 +27,14 @@ public class Availability implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger availability_id;
-    private Date from_date;
-    private Date to_date;
+    private String from_date;
+    private String to_date;
     private BigInteger person_id;
 
     public Availability() {
     }
 
-    public Availability(Date from_date, Date to_date) {
+    public Availability(String from_date, String to_date) {
         this.from_date = from_date;
         this.to_date = to_date;
     }
@@ -51,19 +51,19 @@ public class Availability implements Serializable {
         this.availability_id = availability_id;
     }
 
-    public Date getFrom_date() {
+    public String getFrom_date() {
         return from_date;
     }
 
-    public void setFrom_date(Date from_date) {
+    public void setFrom_date(String from_date) {
         this.from_date = from_date;
     }
 
-    public Date getTo_date() {
+    public String getTo_date() {
         return to_date;
     }
 
-    public void setTo_date(Date to_date) {
+    public void setTo_date(String to_date) {
         this.to_date = to_date;
     }
 
@@ -106,7 +106,7 @@ public class Availability implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Availability[ id=" + availability_id + " ]";
+        return "[[from_date] ~ [to_date]]";
     }
     
 }

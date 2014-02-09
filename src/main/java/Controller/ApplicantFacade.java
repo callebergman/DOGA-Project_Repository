@@ -6,12 +6,11 @@
 
 package Controller;
 
+import Model.ApplicationDTO;
 import Model.Availability;
-import Model.Competence;
 import Model.Competence_profile;
 import Model.Person;
 import java.math.BigInteger;
-import java.sql.Date;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
@@ -27,11 +26,12 @@ public class ApplicantFacade {
     @PersistenceContext(unitName = "projectPU")
     private EntityManager em;
    
-    private BigInteger person_id;
+    private BigInteger person_id; 
     private Person person;
     private List<Competence_profile> competences;
     private List<Availability> availabilitys;
     
+    /*
     public void addApplicant (String name, String surname, String email){
         person = new Person (name, surname, email);
     }
@@ -49,16 +49,18 @@ public class ApplicantFacade {
     public List<Availability> getAvailabilities() {
         return availabilitys;
     }
-    
-    public void submitApplication () {
-        em.persist(person);
+    */
+    public void submitApplication (ApplicationDTO ADTO) {
+        em.persist(ADTO.getPerson());
         person_id = (BigInteger)em.createQuery("select max(u.id) from User u").getSingleResult();
         
+        competences = ADTO.getCompetences();
         for(Competence_profile cp : competences){
             cp.setPerson_id(person_id);
             em.persist(cp);
         }
         
+        availabilitys = ADTO.getAvailabilitys();
         for(Availability availability : availabilitys){
             availability.setPerson_id(person_id);
             em.persist(availability);
