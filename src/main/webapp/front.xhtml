@@ -130,7 +130,7 @@
                                 <h:inputText id="years" value="#{frontManager.years}"/>
                                 <br/>    
                                 <br/>
-                                <h:commandButton id="opt" value="Add entry" action="#{frontManager.addCompetence()}"/>             
+                                <h:commandButton id="opt1" value="Add entry" action="#{frontManager.addCompetence()}"/>             
                                 </p>
                             </div>
                             <table border="1">
@@ -161,13 +161,13 @@
                                         </c:forEach>   
                                     </h:selectOneMenu>
                                     Month:
-                                    <h:selectOneMenu id="time" value="#{frontManager.fromMonth}">                                           
+                                    <h:selectOneMenu id="time1" value="#{frontManager.fromMonth}">                                           
                                         <c:forEach begin="1" end="12" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
                                     Day:
-                                    <h:selectOneMenu id="time" value="#{frontManager.fromDay}">                                           
+                                    <h:selectOneMenu id="time2" value="#{frontManager.fromDay}">                                           
                                         <c:forEach begin="1" end="32" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
@@ -177,26 +177,26 @@
                                     <h:outputLabel for="Output" value="To: "/>
                                     <br/>
                                     Year:
-                                    <h:selectOneMenu id="time" value="#{frontManager.toYear}">                                           
+                                    <h:selectOneMenu id="time3" value="#{frontManager.toYear}">                                           
                                         <c:forEach begin="2014" end="2030" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
                                     Month:
-                                    <h:selectOneMenu id="time" value="#{frontManager.toMonth}">                                           
+                                    <h:selectOneMenu id="time4" value="#{frontManager.toMonth}">                                           
                                         <c:forEach begin="1" end="12" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
                                     Day:
-                                    <h:selectOneMenu id="time" value="#{frontManager.toDay}">                                           
+                                    <h:selectOneMenu id="time5" value="#{frontManager.toDay}">                                           
                                         <c:forEach begin="1" end="32" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
                                     <br/>
                                     <br/>    
-                                    <h:commandButton id="opt" value="Add time period" action="#{frontManager.addAvailability()}"/>
+                                    <h:commandButton id="opt2" value="Add time period" action="#{frontManager.addAvailability()}"/>
                                 </p>        
                                 <table class="availability-table" border="1">
                                     <tr>
