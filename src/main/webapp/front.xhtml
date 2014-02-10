@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
        xmlns:c="http://java.sun.com/jsp/jstl/core"
+       xmlns:f="http://java.sun.com/jsf/core"
        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="front-style.css"  />
@@ -10,23 +11,64 @@
         <script>
             $( document ).ready(function() {
                 $("#expertise").hide();
-                $("#periods").hide();
+                $("#periods").hide(); 
                 
                 $("#opt1").click(function(){
                     $("#basicInfo").show();
                     $("#expertise").hide();
-                    $("#periods").hide();});
+                    $("#periods").hide();
+                    setCookie("opt1", true, 365);
+                    setCookie("opt2", false, 365);
+                    setCookie("opt3", false, 365);
+                });
                 
                 $("#opt2").click(function(){
                     $("#expertise").show();
                     $("#periods").hide();
-                    $("#basicInfo").hide();});
+                    $("#basicInfo").hide();
+                    setCookie("opt1", false, 365);
+                    setCookie("opt2", true, 365);
+                    setCookie("opt3", false, 365);
+                });
                 
                 $("#opt3").click(function(){
                     $("#periods").show();
                     $("#basicInfo").hide();
-                    $("#expertise").hide();});
+                    $("#expertise").hide();
+                    setCookie("opt1", false, 365);
+                    setCookie("opt2", false, 365);
+                    setCookie("opt3", true, 365);
+                });
+                
+                if(getCookie("opt2") == "true"){
+                    $("#expertise").show();
+                    $("#periods").hide();
+                    $("#basicInfo").hide();
+                }
+                else if(getCookie("opt3") == "true"){
+                    $("#periods").show();
+                    $("#basicInfo").hide();
+                    $("#expertise").hide();
+                }
             });
+            
+            function setCookie(c_name, value, exdays) {
+                var exdate = new Date();
+                exdate.setDate(exdate.getDate() + exdays);
+                var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+                document.cookie = c_name + "=" + c_value;
+            }
+            function getCookie(c_name) {
+                var i, x, y, ARRcookies = document.cookie.split(";");
+                for (i = 0; i &lt; ARRcookies.length; i++) {
+                    x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                    y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                    x = x.replace(/^\s+|\s+$/g, "");
+                    if (x == c_name) {
+                        return unescape(y);
+                    }
+                }
+            }
         </script>
         <noscript>Sorry, your browser does not support JavaScript!</noscript>
     </h:head>
@@ -37,7 +79,7 @@
                     <p class="tag"> Create applications or login to browse submissions </p>
                     <ul class="nav">
                         <li class="ico">
-                            <a href="faces/login.xhtml">Login / Signup </a>
+                            <a href="faces/recruiterPage.xhtml">Login / Signup </a>
                         </li>
                     </ul>
                 </div>
@@ -50,122 +92,129 @@
                         <li><button id="opt3">Time periods</button></li>
                     </ul>
                 </div>
+                
                 <div id="applicationForm">
-                    <div id="basicInfo">
-                        <h2 class="title" id = "header">Basic information</h2>
-                        
-                    <div id="fillin">   
-                    <p>                         
-                    <h:outputLabel for="Input" value="First name:  "/>
-                    <br/>
-                    <h:inputText id="name" value="#{frontManager.name}"/>&nbsp;
-                    <br/>
-                    <h:outputLabel for="Output" value="Last name: "/>
-                    <br/>
-                    <h:inputText id="lastName" value="#{frontManager.lastName}"/>
-                    <br/>
-                    <h:outputLabel for="Output" value="Email: "/>
-                    <br/>
-                    <h:inputText id="email" value="#{frontManager.email}"/>
-                      </p> 
-                    </div>
-                        
-                        
-                    </div>
-                    <div id="expertise">
-                        
-                        <h2 class="title">Area of expertise</h2>
-                        <div id="fillin">                 
-                        <p>Choose your area of expertise: 
-                            <br/>
-                            <select id="areas" value="#{frontManager.currentArea}">                                           
-                             <c:forEach items="#{frontManager.allAreas.stream().map(b->b).distinct().toList()}" var="area">
-                             <option value="#{area}">${area}</option>
-                             </c:forEach>   
-                            </select>
-                            <br/>
-                            <br/>
-                        <h:outputLabel for="Output" value="Years of expertise: "/>
-                        <br/>
-                        <h:inputText id="years" value="#{frontManager.years}"/>
-                        <br/>    
-                        <br/>
-                        <button id="opt">Add entry</button>
-                        
-                        </p>
+                    <h:form>
+                        <div id="basicInfo">
+                            <h2 class="title" id = "header">Basic information</h2>
+                            <div id="fillin">   
+                                <p>                         
+                                    <h:outputLabel for="Input" value="First name:  "/>
+                                    <br/>
+                                    <h:inputText id="name" value="#{frontManager.name}"/>&nbsp;
+                                    <br/>
+                                    <h:outputLabel for="Output" value="Last name: "/>
+                                    <br/>
+                                    <h:inputText id="lastName" value="#{frontManager.lastName}"/>
+                                    <br/>
+                                    <h:outputLabel for="Output" value="Email: "/>
+                                    <br/>
+                                    <h:inputText id="email" value="#{frontManager.email}"/>
+                                </p> 
+                            </div>  
+                        </div> 
+                        <div id="expertise">
+                            <h2 class="title">Area of expertise</h2>
+                            <div id="fillin">                 
+                                <p>Choose your area of expertise: 
+                                <br/>
+                                <h:selectOneMenu id="areas" value="#{frontManager.currentArea}">                                           
+                                    <c:forEach items="#{frontManager.areas.stream().map(b->b).distinct().toList()}" var="area">
+                                        <f:selectItem itemValue="#{area}" itemLabel="${area}"/>
+                                    </c:forEach>   
+                                </h:selectOneMenu>
+                                <br/>
+                                <br/>
+                                <h:outputLabel for="Output" value="Years of expertise: "/>
+                                <br/>
+                                <h:inputText id="years" value="#{frontManager.years}"/>
+                                <br/>    
+                                <br/>
+                                <h:commandButton id="opt" value="Add entry" action="#{frontManager.addCompetence()}"/>             
+                                </p>
+                            </div>
+                            <table border="1">
+                                <tr>
+                                    <th>Area of expertise</th>
+                                    <th>Years</th>
+                                </tr>
+                                <ui:repeat var="comp" value="#{frontManager.competences}">
+                                    <tr>
+                                        <td>#{comp.area}</td>
+                                        <td>#{comp.years_of_experience}</td>
+                                    </tr>
+                                </ui:repeat>
+                            </table>
+                        </div> 
+                        <div id="periods">
+                            <h2 class="title">Time periods</h2>
+                            <div id="fillin">                 
+                                <p>Choose the time you'll be available:
+                                    <br/>
+                                    <br/>
+                                    <h:outputLabel for="Output" value="From: "/>
+                                    <br/>
+                                    Year:
+                                     <h:selectOneMenu id="time" value="#{frontManager.fromYear}">                                           
+                                        <c:forEach begin="2014" end="2030" varStatus="status">
+                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                        </c:forEach>   
+                                    </h:selectOneMenu>
+                                    Month:
+                                    <h:selectOneMenu id="time" value="#{frontManager.fromMonth}">                                           
+                                        <c:forEach begin="1" end="12" varStatus="status">
+                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                        </c:forEach>   
+                                    </h:selectOneMenu>
+                                    Day:
+                                    <h:selectOneMenu id="time" value="#{frontManager.fromDay}">                                           
+                                        <c:forEach begin="1" end="32" varStatus="status">
+                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                        </c:forEach>   
+                                    </h:selectOneMenu>   
+                                    <br/>
+                                    <br/>
+                                    <h:outputLabel for="Output" value="To: "/>
+                                    <br/>
+                                    Year:
+                                    <h:selectOneMenu id="time" value="#{frontManager.toYear}">                                           
+                                        <c:forEach begin="2014" end="2030" varStatus="status">
+                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                        </c:forEach>   
+                                    </h:selectOneMenu>
+                                    Month:
+                                    <h:selectOneMenu id="time" value="#{frontManager.toMonth}">                                           
+                                        <c:forEach begin="1" end="12" varStatus="status">
+                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                        </c:forEach>   
+                                    </h:selectOneMenu>
+                                    Day:
+                                    <h:selectOneMenu id="time" value="#{frontManager.toDay}">                                           
+                                        <c:forEach begin="1" end="32" varStatus="status">
+                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                        </c:forEach>   
+                                    </h:selectOneMenu>
+                                    <br/>
+                                    <br/>    
+                                    <h:commandButton id="opt" value="Add time period" action="#{frontManager.addAvailability()}"/>
+                                </p>        
+                                <table class="availability-table" border="1">
+                                    <tr>
+                                        <th class="table-header">From date</th>
+                                        <th class="table-header">To date</th>
+                                    </tr>
+                                    <tbody>
+                                        <ui:repeat var="a" value="#{frontManager.availabilities}">
+                                            <tr>
+                                                <td class="table-row">#{a.from_date}</td>
+                                                <td class="table-row">#{a.to_date}</td> 
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        
-                    <table border="1">
-                    <tr>
-                        <th>Area of expertise</th>
-                        <th>Years</th>
-                    </tr>
-                    <ui:repeat var="expertise" value="hej">
-                        <tr>
-                            <td>#{frontManager.currentArea}</td>
-                            <td>#{frontManager.years}</td>
-                        </tr>
-                    </ui:repeat>
-                    </table>
-                        
-                        
-                    </div>
-                    <div id="periods">
-                        <h2 class="title">Time periods</h2>
-                        
-                         <div id="fillin">                 
-                        <p>Choose the time you'll be available:
-                            <br/>
-                            <br/>
-                            <h:outputLabel for="Output" value="From: "/>
-                            <br/>
-                            Year:
-                            <select id="time">                                           
-                             <c:forEach begin="2014" end="2030" varStatus="status">
-                             <option value="${status.index}">${status.index}</option>
-                             </c:forEach>   
-                            </select>
-                             Month:
-                            <select id="time">                                           
-                             <c:forEach begin="1" end="12" varStatus="status">
-                             <option value="${status.index}">${status.index}</option>
-                             </c:forEach>   
-                            </select>
-                              Day:
-                            <select id="time">                                           
-                             <c:forEach begin="1" end="32" varStatus="status">
-                             <option value="${status.index}">${status.index}</option>
-                             </c:forEach>   
-                            </select>     
-                            <br/>
-                            <br/>
-                        <h:outputLabel for="Output" value="To: "/>
-                        <br/>
-                        Year:
-                            <select id="time">                                           
-                             <c:forEach begin="2014" end="2030" varStatus="status">
-                             <option value="${status.index}">${status.index}</option>
-                             </c:forEach>   
-                            </select>
-                             Month:
-                            <select id="time">                                           
-                             <c:forEach begin="1" end="12" varStatus="status">
-                             <option value="${status.index}">${status.index}</option>
-                             </c:forEach>   
-                            </select>
-                              Day:
-                            <select id="time">                                           
-                             <c:forEach begin="1" end="32" varStatus="status">
-                             <option value="${status.index}">${status.index}</option>
-                             </c:forEach>   
-                            </select> 
-                            <br/>
-                            <br/>    
-                        <button id="opt">Add time period</button>
-                        
-                        </p>
-                        </div>
-                    </div>
+                    </h:form>
                 </div>
             </div>
         </div>

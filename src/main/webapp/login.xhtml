@@ -18,20 +18,23 @@
                 </div>
             </div>  
             <div id="login">
-                <h:form>
+                <form method="post" action="j_security_check">
                     <h1>Recruiter login</h1>
                     <p>
-                        <font color = "#FF000"> <h:outputLabel for="Output" value="#{loginManager.transactionFailure}" /></font>
                         <br></br>
-                        <h:outputLabel for="Input" value="Username:  "/>
-                        <h:inputText id="Name" value="#{loginManager.userName}"/>&nbsp;
-                        <h:outputLabel for="Output" value="Password: "/>
-                        <h:inputSecret id="Passwd" value="#{loginManager.passwd}"/>
+                        Username: <input type="text" name="j_username" />
+                        Password: <input type="password" name="j_password" />
                     </p> 
-                    <p>
-                        <h:commandButton value="Login" action="#{loginManager.login()}"/>&nbsp;
-                    </p>
-               </h:form>               
+                    <input type="submit" value="Login" />
+                </form>
+                <footer>
+                    <h>Site Created By:
+                        <br>Hikari Watanabe</br>
+                        Fredrik Bitén
+                        <br>Calle Bergman</br>
+                    </h>
+                </footer>
+
             </div>
         </div>
     </h:body>
