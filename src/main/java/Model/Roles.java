@@ -32,6 +32,9 @@ public class Roles implements Serializable {
     private String name;
     
     @OneToMany(mappedBy="role",cascade=REMOVE)
+    private Collection<Person_Groups> person_groups = new HashSet ();
+    
+    @OneToMany(mappedBy="role",cascade=REMOVE)
     private Collection<Person> persons = new HashSet ();
 
     public Collection<Person> getPersons() {

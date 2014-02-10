@@ -9,12 +9,10 @@ package Model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -22,57 +20,20 @@ import javax.persistence.OneToOne;
  * @author Hikari
  */
 @Entity
+@IdClass(Person_Groups_CompKey.class)
 public class Person_Groups implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    private String username;
+    private BigInteger role_id;
+    private BigInteger person_id;
     
     @Id
-    private String GroupID;
+    @ManyToOne
+    @JoinColumn(name = "role_id", insertable=false, updatable=false)
+    private Roles    role;
+    
     @Id
     @OneToOne
-    @JoinColumn(name = "username", insertable=false, updatable=false)
-    private Person user;
-
-    public String getGroupID() {
-        return GroupID;
-    }
-
-    public void setGroupID(String GroupID) {
-        this.GroupID = GroupID;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String Username) {
-        this.username = Username;
-    }
-    
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (GroupID != null ? GroupID.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Person_Groups)) {
-            return false;
-        }
-        Person_Groups other = (Person_Groups) object;
-        if ((this.GroupID == null && other.GroupID != null) || (this.GroupID != null && !this.GroupID.equals(other.GroupID))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Model.Person_Groups[ id=" + GroupID + " ]";
-    }
-    
+    @JoinColumn(name = "person_id", insertable=false, updatable=false)
+    private Person person;
 }

@@ -38,10 +38,10 @@
         </auth-constraint>
     </security-constraint>
     
-    <security-role>
-        <description/>
-        <role-name>recruiter</role-name>
-    </security-role>
+    <security-role-mapping>
+        <role-name>Recruiter</role-name>
+        <group-name>Recruiter</group-name>
+    </security-role-mapping>
     
     <login-config>
         <auth-method>FORM</auth-method>
