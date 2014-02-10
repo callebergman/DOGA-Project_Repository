@@ -17,7 +17,7 @@ import javax.inject.Named;
  *
  * @author Hikari
  */
-@ManagedBean
+@ManagedBean(name="loginManager")
 @RequestScoped
 public class LoginManager {
 

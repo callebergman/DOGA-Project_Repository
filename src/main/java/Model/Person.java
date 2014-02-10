@@ -48,7 +48,7 @@ public class Person implements PersonDTO,Serializable {
     
     @OneToMany(mappedBy="person",cascade=REMOVE)
     private Collection<Competence_profile> competence_profiles = new HashSet ();
-
+    
     public Person() {
     }
     
