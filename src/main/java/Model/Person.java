@@ -10,14 +10,18 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashSet;
+import javax.persistence.CascadeType;
 import static javax.persistence.CascadeType.REMOVE;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -35,9 +39,14 @@ public class Person implements PersonDTO,Serializable {
     private String surname;
     private String ssn;
     private String email;
+    @Column(length = 32, columnDefinition = "VARCHAR(32)")
     private String password;
     private BigInteger role_id;
+    @Column(unique=true)
     private String username;
+    
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "person")
+    private Person_Groups person_group;
     
     @ManyToOne
     @JoinColumn(name="role_id", insertable=false, updatable=false)
@@ -48,7 +57,7 @@ public class Person implements PersonDTO,Serializable {
     
     @OneToMany(mappedBy="person",cascade=REMOVE)
     private Collection<Competence_profile> competence_profiles = new HashSet ();
-    
+ 
     public Person() {
     }
     

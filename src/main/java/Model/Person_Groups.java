@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -23,10 +24,15 @@ import javax.persistence.OneToMany;
 @Entity
 public class Person_Groups implements Serializable {
     private static final long serialVersionUID = 1L;
+    private String username;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String GroupID;
-    private String Username;
+    @Id
+    @OneToOne
+    @JoinColumn(name = "username")
+    private Person user;
 
     public String getGroupID() {
         return GroupID;
@@ -37,11 +43,11 @@ public class Person_Groups implements Serializable {
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String Username) {
-        this.Username = Username;
+        this.username = Username;
     }
     
     @Override
