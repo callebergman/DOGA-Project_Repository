@@ -31,6 +31,11 @@
             <url-pattern>/faces/recruiterPage.xhtml</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -38,10 +43,10 @@
         </auth-constraint>
     </security-constraint>
     
-    <security-role-mapping>
+    <security-role>
+        <description/>
         <role-name>Recruiter</role-name>
-        <group-name>Recruiter</group-name>
-    </security-role-mapping>
+    </security-role>
     
     <login-config>
         <auth-method>FORM</auth-method>

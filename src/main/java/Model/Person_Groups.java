@@ -8,6 +8,8 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -24,16 +26,44 @@ import javax.persistence.OneToOne;
 public class Person_Groups implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    private BigInteger role_id;
-    private BigInteger person_id;
-    
     @Id
+    private BigInteger role_id;
+    @Id
+    private String username;
+
     @ManyToOne
     @JoinColumn(name = "role_id", insertable=false, updatable=false)
     private Roles    role;
-    
-    @Id
+        
     @OneToOne
-    @JoinColumn(name = "person_id", insertable=false, updatable=false)
+    @JoinColumn(name = "username", insertable=false, updatable=false)
     private Person person;
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.role_id);
+        hash = 37 * hash + Objects.hashCode(this.username);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Person_Groups other = (Person_Groups) obj;
+        if (!Objects.equals(this.role_id, other.role_id)) {
+            return false;
+        }
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

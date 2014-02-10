@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
@@ -212,30 +213,26 @@ public class Person implements PersonDTO,Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-    /*
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.person_id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Person)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Person other = (Person) object;
-        if ((this.person_id == null && other.person_id != null) || (this.person_id != null && !this.person_id.equals(other.person_id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Person other = (Person) obj;
+        if (!Objects.equals(this.person_id, other.person_id)) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Model.Person[ id=" + person_id + " ]";
-    }
- */
 }

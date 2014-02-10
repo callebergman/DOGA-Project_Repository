@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,31 +53,27 @@ public class Roles implements Serializable {
     public void setId(BigInteger role_id) {
         this.role_id = role_id;
     }
-    
-    /*
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 73 * hash + Objects.hashCode(this.role_id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Role)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Role other = (Role) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Roles other = (Roles) obj;
+        if (!Objects.equals(this.role_id, other.role_id)) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Model.Role[ id=" + id + " ]";
-    }
-    */
+    
 }

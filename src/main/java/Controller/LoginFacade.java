@@ -20,7 +20,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class LoginFacade {
-    
+    /*
     @PersistenceContext(unitName = "projectPU")
     private EntityManager em;
     
@@ -32,4 +32,5 @@ public class LoginFacade {
         PersonDTO   person = (Person)list.get(0);
         return person;
     }
+    */
 }
