@@ -40,12 +40,12 @@
     
     <security-role>
         <description/>
-        <role-name>Recruiter</role-name>
+        <role-name>recruiter</role-name>
     </security-role>
     
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>DOGA-Realm</realm-name>
+        <realm-name>myrealm</realm-name>
         <form-login-config>
             <form-login-page>/faces/login.xhtml</form-login-page>
             <form-error-page>/faces/login.xhtml</form-error-page>

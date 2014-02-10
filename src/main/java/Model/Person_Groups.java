@@ -24,14 +24,14 @@ import javax.persistence.OneToOne;
 @Entity
 public class Person_Groups implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     private String username;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String GroupID;
     @Id
     @OneToOne
-    @JoinColumn(name = "username")
+    @JoinColumn(name = "username", insertable=false, updatable=false)
     private Person user;
 
     public String getGroupID() {

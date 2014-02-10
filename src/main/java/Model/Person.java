@@ -45,7 +45,7 @@ public class Person implements PersonDTO,Serializable {
     @Column(unique=true)
     private String username;
     
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "person")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
     private Person_Groups person_group;
     
     @ManyToOne
