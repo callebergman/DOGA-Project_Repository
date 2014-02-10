@@ -39,7 +39,7 @@ public class FrontManager implements Serializable{
     private List<Competence_profile> competences;
     private String fromDate;
     private String toDate;
-    private String toYear = "wtf";
+    private int toYear;
     private int toMonth;
     private int toDay;
     private int fromYear;
@@ -63,6 +63,7 @@ public class FrontManager implements Serializable{
         areas[8] = "Taxering";
         areas[9] = "Servicing";
         availabilities = new ArrayList<Availability> ();
+        competences = new ArrayList<Competence_profile> ();
     }
     
     public void login () {
@@ -87,7 +88,7 @@ public class FrontManager implements Serializable{
     
     public void addCompetence()
     {
-        competences.add(new Competence_profile(currentArea, years));
+        competences.add(new Competence_profile(this.currentArea, this.years));
     }
     
     
@@ -100,22 +101,22 @@ public class FrontManager implements Serializable{
         Date tDate = null;
         */
         if(fromMonth < 10 && fromDay < 10)
-            setFromDate(Integer.toString(fromYear)+ "0" + Integer.toString(fromMonth)+ "0" + Integer.toString(fromDay));
+            setFromDate(Integer.toString(fromYear)+ "-0" + Integer.toString(fromMonth)+ "-0" + Integer.toString(fromDay));
         else if(fromMonth < 10 && fromDay > 9)
-            setFromDate(Integer.toString(fromYear)+ "0" + Integer.toString(fromMonth)+ "" + Integer.toString(fromDay));
+            setFromDate(Integer.toString(fromYear)+ "-0" + Integer.toString(fromMonth)+ "-" + Integer.toString(fromDay));
         else if(fromMonth > 9 && fromDay < 10)
-            setFromDate(Integer.toString(fromYear)+ ""+ Integer.toString(fromMonth)+ "0" +Integer.toString(fromDay));
+            setFromDate(Integer.toString(fromYear)+ "-"+ Integer.toString(fromMonth)+ "-0" +Integer.toString(fromDay));
         else
-            setFromDate(Integer.toString(fromYear)+ ""+ Integer.toString(fromMonth)+ "" + Integer.toString(fromDay));
+            setFromDate(Integer.toString(fromYear)+ "-"+ Integer.toString(fromMonth)+ "-" + Integer.toString(fromDay));
         
         if(toMonth < 10 && toDay < 10)
-            setToDate(toYear+ "0" + Integer.toString(toMonth)+ "0" + Integer.toString(toDay));
+            setToDate(toYear+ "-0" + Integer.toString(toMonth)+ "-0" + Integer.toString(toDay));
         else if(toMonth < 10 && toDay > 9)
-            setToDate(toYear+ "0" + Integer.toString(toMonth)+ "" + Integer.toString(toDay));
+            setToDate(toYear+ "-0" + Integer.toString(toMonth)+ "-" + Integer.toString(toDay));
         else if(toMonth > 9 && toDay < 10)
-            setToDate(toYear+ ""+ Integer.toString(toMonth)+ "0" +Integer.toString(toDay));
+            setToDate(toYear+ "-"+ Integer.toString(toMonth)+ "-0" +Integer.toString(toDay));
         else
-            setToDate(toYear+ ""+ Integer.toString(toMonth)+ "" + Integer.toString(toDay));
+            setToDate(toYear+ "-"+ Integer.toString(toMonth)+ "-" + Integer.toString(toDay));
         
         /*
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -198,14 +199,14 @@ public class FrontManager implements Serializable{
     /**
      * @return the toYear
      */
-    public String getToYear() {
+    public int getToYear() {
         return toYear;
     }
 
     /**
      * @param toYear the toYear to set
      */
-    public void setToYear(String toYear) {
+    public void setToYear(int toYear) {
         this.toYear = toYear;
     }
 
