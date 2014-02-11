@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import static javax.persistence.CascadeType.REMOVE;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,6 +31,7 @@ public class Roles implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private BigInteger role_id;
+    @Column(unique=true)
     private String name;
     
     @OneToMany(mappedBy="role",cascade=REMOVE)
@@ -75,6 +77,4 @@ public class Roles implements Serializable {
         }
         return true;
     }
-    
-    
 }

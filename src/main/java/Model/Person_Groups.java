@@ -25,13 +25,18 @@ import javax.persistence.OneToOne;
 public class Person_Groups implements Serializable {
     private static final long serialVersionUID = 1L;
     
+    public static enum ROLE {
+ 
+        ADMINISTRATOR, USER, GUEST
+    }
+    
     @Id
-    private BigInteger role_id;
+    private String rolename;
     @Id
     private String username;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", insertable=false, updatable=false)
+    @JoinColumn(name = "rolename", insertable=false, updatable=false, referencedColumnName = "name")
     private Roles    role;
         
     @OneToOne
@@ -41,8 +46,7 @@ public class Person_Groups implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.role_id);
-        hash = 89 * hash + Objects.hashCode(this.username);
+        hash = 53 * hash + Objects.hashCode(this.rolename);
         return hash;
     }
 
@@ -55,13 +59,10 @@ public class Person_Groups implements Serializable {
             return false;
         }
         final Person_Groups other = (Person_Groups) obj;
-        if (!Objects.equals(this.role_id, other.role_id)) {
+        if (!Objects.equals(this.rolename, other.rolename)) {
             return false;
         }
         if (!Objects.equals(this.username, other.username)) {
-            return false;
-        }
-        if (!Objects.equals(this.role, other.role)) {
             return false;
         }
         return true;

@@ -15,14 +15,13 @@ import java.util.Objects;
  * @author Hikari
  */
     public class Person_Groups_CompKey implements Serializable{
-        private BigInteger role_id;
+        private String rolename;
         private String username; 
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.role_id);
-        hash = 67 * hash + Objects.hashCode(this.username);
+        hash = 83 * hash + Objects.hashCode(this.rolename);
         return hash;
     }
 
@@ -35,7 +34,7 @@ import java.util.Objects;
             return false;
         }
         final Person_Groups_CompKey other = (Person_Groups_CompKey) obj;
-        if (!Objects.equals(this.role_id, other.role_id)) {
+        if (!Objects.equals(this.rolename, other.rolename)) {
             return false;
         }
         if (!Objects.equals(this.username, other.username)) {
@@ -45,4 +44,4 @@ import java.util.Objects;
     }
         
         
-    }
+}
