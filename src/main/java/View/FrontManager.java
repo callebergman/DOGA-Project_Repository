@@ -56,8 +56,8 @@ public class FrontManager implements Serializable{
         areas[1] = "Karuselldrift";
         areas[2] = "Diskotering";
         areas[3] = "Programmering";
-        areas[4] = "Bilkörning";
-        areas[5] = "Lärande";
+        areas[4] = "Guiding";
+        areas[5] = "Maskin reparering";
         areas[6] = "Bakning";
         areas[7] = "Servering";
         areas[8] = "Taxering";
