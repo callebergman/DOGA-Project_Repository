@@ -57,7 +57,7 @@ public class Roles implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 73 * hash + Objects.hashCode(this.role_id);
+        hash = 43 * hash + Objects.hashCode(this.role_id);
         return hash;
     }
 
@@ -75,5 +75,6 @@ public class Roles implements Serializable {
         }
         return true;
     }
+    
     
 }

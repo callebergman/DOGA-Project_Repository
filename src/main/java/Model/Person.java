@@ -46,7 +46,7 @@ public class Person implements PersonDTO,Serializable {
     @Column(unique=true)
     private String username;
     
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "person")
+    @OneToOne(mappedBy="person",cascade=REMOVE)
     private Person_Groups person_group;
     
     @ManyToOne
@@ -217,7 +217,8 @@ public class Person implements PersonDTO,Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.person_id);
+        hash = 59 * hash + Objects.hashCode(this.person_id);
+        hash = 59 * hash + Objects.hashCode(this.username);
         return hash;
     }
 
@@ -233,6 +234,11 @@ public class Person implements PersonDTO,Serializable {
         if (!Objects.equals(this.person_id, other.person_id)) {
             return false;
         }
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
         return true;
     }
+    
+    
 }
