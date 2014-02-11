@@ -50,6 +50,12 @@ public class ApplicantFacade {
         return availabilitys;
     }
     */
+    public void testMethod (){
+        Person  p = new Person ();
+        p.setPassword("1234");
+        p.setUsername("root");
+    }
+    
     public void submitApplication (ApplicationDTO ADTO) {
         em.persist(ADTO.getPerson());
         person_id = (BigInteger)em.createQuery("select max(u.id) from User u").getSingleResult();
