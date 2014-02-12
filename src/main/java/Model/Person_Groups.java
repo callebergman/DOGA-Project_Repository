@@ -8,65 +8,73 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Objects;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Hikari
  */
 @Entity
+@IdClass(Person_Groups_CompKey.class)
 public class Person_Groups implements Serializable {
     private static final long serialVersionUID = 1L;
+    
+    public static enum ROLE {
+ 
+        ADMINISTRATOR, USER, GUEST
+    }
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String GroupID;
-    private String Username;
+    private String rolename;
+    @Id
+    private String username;
 
-    public String getGroupID() {
-        return GroupID;
+    @ManyToOne
+    @JoinColumn(name = "rolename", insertable=false, updatable=false, referencedColumnName = "name")
+    private Roles    role;
+        
+    @OneToOne
+    @JoinColumn(name = "username", insertable=false, updatable=false, referencedColumnName = "username")
+    private Person person;
+
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
     }
 
-    public void setGroupID(String GroupID) {
-        this.GroupID = GroupID;
-    }
-
-    public String getUsername() {
-        return Username;
-    }
-
-    public void setUsername(String Username) {
-        this.Username = Username;
+    public void setUsername(String username) {
+        this.username = username;
     }
     
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (GroupID != null ? GroupID.hashCode() : 0);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.rolename);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Person_Groups)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Person_Groups other = (Person_Groups) object;
-        if ((this.GroupID == null && other.GroupID != null) || (this.GroupID != null && !this.GroupID.equals(other.GroupID))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Person_Groups other = (Person_Groups) obj;
+        if (!Objects.equals(this.rolename, other.rolename)) {
+            return false;
+        }
+        if (!Objects.equals(this.username, other.username)) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Model.Person_Groups[ id=" + GroupID + " ]";
-    }
+    
     
 }

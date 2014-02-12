@@ -10,6 +10,8 @@ import Model.ApplicationDTO;
 import Model.Availability;
 import Model.Competence_profile;
 import Model.Person;
+import Model.Person_Groups;
+import Model.Roles;
 import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Stateful;
@@ -48,6 +50,21 @@ public class ApplicantFacade {
     
     public List<Availability> getAvailabilities() {
         return availabilitys;
+    }
+    public void testMethod (){
+        
+        Person  p = new Person ();
+        p.setPassword("1234");
+        p.setUsername("root");
+        p.setPerson_id(BigInteger.valueOf (1));
+        p.setRole_id(BigInteger.valueOf (1));
+        em.persist(p);
+        Person_Groups   pg = new Person_Groups ();
+        pg.setRolename("Recruiter");
+        pg.setUsername("root");
+        em.persist(pg);
+           
+        //em.persist (new Roles(BigInteger.valueOf (3), "TEST"));
     }
     */
     public void submitApplication (ApplicationDTO ADTO) {

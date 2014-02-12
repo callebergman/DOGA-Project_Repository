@@ -6,11 +6,19 @@
 
 package Model;
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javax.persistence.CascadeType.REMOVE;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +26,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -35,9 +44,14 @@ public class Person implements PersonDTO,Serializable {
     private String surname;
     private String ssn;
     private String email;
+    //@Column(length = 32, columnDefinition = "VARCHAR(32)")
     private String password;
     private BigInteger role_id;
+    @Column(unique=true)
     private String username;
+    
+    @OneToOne(mappedBy="person",cascade=REMOVE)
+    private Person_Groups person_group;
     
     @ManyToOne
     @JoinColumn(name="role_id", insertable=false, updatable=false)
@@ -48,7 +62,7 @@ public class Person implements PersonDTO,Serializable {
     
     @OneToMany(mappedBy="person",cascade=REMOVE)
     private Collection<Competence_profile> competence_profiles = new HashSet ();
-    
+ 
     public Person() {
     }
     
@@ -63,7 +77,7 @@ public class Person implements PersonDTO,Serializable {
         this.surname = surname;
         this.ssn = ssn;
         this.email = email;
-        this.password = password;
+        this.password = sha256(password);
         this.username = username;
     }
     
@@ -173,7 +187,7 @@ public class Person implements PersonDTO,Serializable {
      * @param password the password to set
      */
     public void setPassword(String password) {
-        this.password = password;
+        this.password = sha256(password);
     }
 
     /**
@@ -203,30 +217,44 @@ public class Person implements PersonDTO,Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-    /*
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.person_id);
+        hash = 59 * hash + Objects.hashCode(this.username);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Person)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Person other = (Person) object;
-        if ((this.person_id == null && other.person_id != null) || (this.person_id != null && !this.person_id.equals(other.person_id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Person other = (Person) obj;
+        if (!Objects.equals(this.person_id, other.person_id)) {
+            return false;
+        }
+        if (!Objects.equals(this.username, other.username)) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Model.Person[ id=" + person_id + " ]";
+    
+    public static String sha256(String base){
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(base.getBytes("UTF-8"));
+            byte[] digest = md.digest();
+            return (Base64.encode(digest)).toString ();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Person.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Person.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
- */
 }
