@@ -28,7 +28,8 @@
         <web-resource-collection>
             <web-resource-name>Application Storage resource</web-resource-name>
             <description/>
-            <url-pattern>/faces/recruiterPage.xhtml</url-pattern>
+            <url-pattern>/faces/faces/restricted/*</url-pattern>
+            <url-pattern>/faces/restricted/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>HEAD</http-method>

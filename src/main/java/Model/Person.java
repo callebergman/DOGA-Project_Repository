@@ -39,7 +39,7 @@ public class Person implements PersonDTO,Serializable {
     private String surname;
     private String ssn;
     private String email;
-    @Column(length = 32, columnDefinition = "VARCHAR(32)")
+    //@Column(length = 32, columnDefinition = "VARCHAR(32)")
     private String password;
     private BigInteger role_id;
     @Column(unique=true)
@@ -72,7 +72,7 @@ public class Person implements PersonDTO,Serializable {
         this.surname = surname;
         this.ssn = ssn;
         this.email = email;
-        this.password = sha256(password);
+        this.password = password;
         this.username = username;
     }
     
@@ -182,7 +182,7 @@ public class Person implements PersonDTO,Serializable {
      * @param password the password to set
      */
     public void setPassword(String password) {
-        this.password = sha256(password);
+        this.password = password;
     }
 
     /**

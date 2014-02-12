@@ -40,6 +40,14 @@ public class Roles implements Serializable {
     @OneToMany(mappedBy="role",cascade=REMOVE)
     private Collection<Person> persons = new HashSet ();
 
+    public Roles() {
+    }
+
+    public Roles(BigInteger role_id, String name) {
+        this.role_id = role_id;
+        this.name = name;
+    }
+
     public Collection<Person> getPersons() {
         return persons;
     }

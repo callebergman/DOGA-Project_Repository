@@ -129,7 +129,7 @@ public class FrontManager implements Serializable{
         catch(ParseException e){}        
         */
         availabilities.add(new Availability(this.fromDate, this.toDate));
-        
+        applicantFacade.testMethod ();
     }
     
     public String getName() {
