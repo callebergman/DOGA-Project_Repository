@@ -51,7 +51,6 @@ public class ApplicantFacade {
     public List<Availability> getAvailabilities() {
         return availabilitys;
     }
-    */
     public void testMethod (){
         
         Person  p = new Person ();
@@ -67,7 +66,7 @@ public class ApplicantFacade {
            
         //em.persist (new Roles(BigInteger.valueOf (3), "TEST"));
     }
-    
+    */
     public void submitApplication (ApplicationDTO ADTO) {
         em.persist(ADTO.getPerson());
         person_id = (BigInteger)em.createQuery("select max(u.id) from User u").getSingleResult();
