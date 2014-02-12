@@ -43,6 +43,14 @@ public class Person_Groups implements Serializable {
     @JoinColumn(name = "username", insertable=false, updatable=false, referencedColumnName = "username")
     private Person person;
 
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
