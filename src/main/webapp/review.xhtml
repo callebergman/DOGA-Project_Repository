@@ -97,45 +97,25 @@
                 
                 <div id="applicationForm">
                     <h:form>
-                        <div id="basicInfo">
-                            <h2 class="title" id = "header">Yoyoma</h2>
+                        <h2 class="title" id = "header">Basic information</h2>
                             <div id="fillin">   
                                 <p>                         
                                     <h:outputLabel for="Input" value="First name:  "/>
                                     <br/>
-                                    <h:inputText id="name" value="#{frontManager.name}"/>&nbsp;
+                                    <h:outputLabel for="Input" value="#{frontManager.name}"/>
                                     <br/>
                                     <h:outputLabel for="Output" value="Last name: "/>
                                     <br/>
-                                    <h:inputText id="lastName" value="#{frontManager.lastName}"/>
+                                    <h:outputLabel for="Input" value="#{frontManager.lastName}"/>
                                     <br/>
                                     <h:outputLabel for="Output" value="Email: "/>
                                     <br/>
-                                    <h:inputText id="email" value="#{frontManager.email}"/>
+                                    <h:outputLabel for="Input" value="#{frontManager.email}"/>
                                 </p> 
                             </div>  
-                        </div> 
-                        <div id="expertise">
-                            <h2 class="title">Area of expertise</h2>
-                            <div id="fillin">                 
-                                <p>Choose your area of expertise: 
-                                <br/>
-                                <h:selectOneMenu id="ca" value="#{frontManager.currentArea}">                                           
-                                    <c:forEach items="#{frontManager.areas.stream().map(b->b).distinct().toList()}" var="area">
-                                        <f:selectItem itemValue="#{area}" itemLabel="#{area}"/>
-                                    </c:forEach>   
-                                </h:selectOneMenu>
-                                <br/>
-                                <br/>
-                                <h:outputLabel for="Output" value="Years of expertise: "/>
-                                <br/>
-                                <h:inputText id="areayears" value="#{frontManager.years}"/>
-                                <br/>    
-                                <br/>
-                                <h:commandButton id="opt7" value="Add entry" action="#{frontManager.addCompetence()}"/>             
-                                </p>
-                            </div>
-                            <table border="1">
+                        
+                         <h2 class="title" id = "header">Areas of Expertise</h2>
+                         <table border="1">
                                 <tr>
                                     <th>Area of expertise</th>
                                     <th>Years</th>
@@ -147,60 +127,9 @@
                                     </tr>
                                 </ui:repeat>
                             </table>
-                        </div> 
-                        <div id="periods">
-                            <h2 class="title">Time periods</h2>
-                            <div id="fillin">                 
-                                <p>Choose the time you'll be available:
-                                    <br/>
-                                    <br/>
-                                    <h:outputLabel for="Output" value="From: "/>
-                                    <br/>
-                                    Year:
-                                     <h:selectOneMenu id="time" value="#{frontManager.fromYear}">                                           
-                                        <c:forEach begin="2014" end="2030" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>
-                                    Month:
-                                    <h:selectOneMenu id="time1" value="#{frontManager.fromMonth}">                                           
-                                        <c:forEach begin="1" end="12" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>
-                                    Day:
-                                    <h:selectOneMenu id="time2" value="#{frontManager.fromDay}">                                           
-                                        <c:forEach begin="1" end="32" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>   
-                                    <br/>
-                                    <br/>
-                                    <h:outputLabel for="Output" value="To: "/>
-                                    <br/>
-                                    Year:
-                                    <h:selectOneMenu id="time3" value="#{frontManager.toYear}">                                           
-                                        <c:forEach begin="2014" end="2030" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>
-                                    Month:
-                                    <h:selectOneMenu id="time4" value="#{frontManager.toMonth}">                                           
-                                        <c:forEach begin="1" end="12" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>
-                                    Day:
-                                    <h:selectOneMenu id="time5" value="#{frontManager.toDay}">                                           
-                                        <c:forEach begin="1" end="32" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>
-                                    <br/>
-                                    <br/>    
-                                    <h:commandButton id="opt9" value="Add time period" action="#{frontManager.addAvailability()}"/>
-                                </p>        
-                                <table class="availability-table" border="1">
+                        <br/>
+                         <h2 class="title" id = "header">Time Periods</h2>
+                         <table class="availability-table" border="1">
                                     <tr>
                                         <th class="table-header">From date</th>
                                         <th class="table-header">To date</th>
@@ -214,8 +143,9 @@
                                         </ui:repeat>
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
+                                <br/>
+                                <h:commandButton value="Submit Application"/>
+                               
                     </h:form>
                 </div>
             </div>
