@@ -3,10 +3,216 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="login-style.css"  />
+        <style type ="text/css">
+            .FilterOptions{
+                align:left;
+            }
+            .CSSTableGenerator {
+                margin:0px;padding:0px;
+                width:100%;
+                box-shadow: 10px 10px 5px #888888;
+                border:1px solid #000000;
+
+                -moz-border-radius-bottomleft:0px;
+                -webkit-border-bottom-left-radius:0px;
+                border-bottom-left-radius:0px;
+
+                -moz-border-radius-bottomright:0px;
+                -webkit-border-bottom-right-radius:0px;
+                border-bottom-right-radius:0px;
+
+                -moz-border-radius-topright:0px;
+                -webkit-border-top-right-radius:0px;
+                border-top-right-radius:0px;
+
+                -moz-border-radius-topleft:0px;
+                -webkit-border-top-left-radius:0px;
+                border-top-left-radius:0px;
+            }.CSSTableGenerator table{
+                border-collapse: collapse;
+                border-spacing: 0;
+                width:100%;
+                height:50%;
+                margin:0px;padding:0px;
+            }.CSSTableGenerator tr:last-child td:last-child {
+                -moz-border-radius-bottomright:0px;
+                -webkit-border-bottom-right-radius:0px;
+                border-bottom-right-radius:0px;
+            }
+            .CSSTableGenerator table tr:first-child td:first-child {
+                -moz-border-radius-topleft:0px;
+                -webkit-border-top-left-radius:0px;
+                border-top-left-radius:0px;
+            }
+            .CSSTableGenerator table tr:first-child td:last-child {
+                -moz-border-radius-topright:0px;
+                -webkit-border-top-right-radius:0px;
+                border-top-right-radius:0px;
+            }.CSSTableGenerator tr:last-child td:first-child{
+                -moz-border-radius-bottomleft:0px;
+                -webkit-border-bottom-left-radius:0px;
+                border-bottom-left-radius:0px;
+            }.CSSTableGenerator tr:hover td{
+
+            }
+            .CSSTableGenerator tr:nth-child(odd){ background-color:#e5e5e5; }
+            .CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
+                vertical-align:middle;
+
+
+                border:1px solid #000000;
+                border-width:0px 1px 1px 0px;
+                text-align:left;
+                padding:7px;
+                font-size:13px;
+                font-family:Times New Roman;
+                font-weight:normal;
+                color:#000000;
+            }.CSSTableGenerator tr:last-child td{
+                border-width:0px 1px 0px 0px;
+            }.CSSTableGenerator tr td:last-child{
+                border-width:0px 0px 1px 0px;
+            }.CSSTableGenerator tr:last-child td:last-child{
+                border-width:0px 0px 0px 0px;
+            }
+            .CSSTableGenerator tr:first-child td{
+                background:-o-linear-gradient(bottom, #191919 5%, #191919 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #191919), color-stop(1, #191919) );
+                background:-moz-linear-gradient( center top, #191919 5%, #191919 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#191919", endColorstr="#191919");	background: -o-linear-gradient(top,#191919,191919);
+
+                background-color:#191919;
+                border:0px solid #000000;
+                text-align:center;
+                border-width:0px 0px 1px 1px;
+                font-size:14px;
+                font-family:Helvetica;
+                font-weight:bold;
+                color:#ffffff;
+            }
+            .CSSTableGenerator tr:first-child:hover td{
+                background:-o-linear-gradient(bottom, #191919 5%, #191919 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #191919), color-stop(1, #191919) );
+                background:-moz-linear-gradient( center top, #191919 5%, #191919 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#191919", endColorstr="#191919");	background: -o-linear-gradient(top,#191919,191919);
+
+                background-color:#191919;
+            }
+            .CSSTableGenerator tr:first-child td:first-child{
+                border-width:0px 0px 1px 0px;
+            }
+            .CSSTableGenerator tr:first-child td:last-child{
+                border-width:0px 0px 1px 1px;
+            }
+        </style>
     </h:head>
-    <h:body>
-        This is the recruiterPage!
+    <h:body> 
+        <div id="wrap">
+            <div id="bar">
+                <div id="content">
+                    <p class="tag"> Recruiter Loggin Page</p>
+                    <ul class="nav">
+                        <li class="ico">
+                            <a href="loginForm.xhtml">Logged in </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <h2>Applicant Table</h2>
+            </div>
+            <fieldset>
+                <legend>Filter Options</legend>
+                <h3>Time Period</h3>
+                <label for="firstname">From</label>
+                <input type="text" name="firstname" id="firstname" />
+                <label for="lastname">To</label>
+                <input type="text" name="lastname" id="lastname" />
+                <br></br>
+                <label for="firstname"><h3>Date of Registration</h3></label>
+                
+                <input type="text" name="firstname" id="firstname" />
+                <br></br>
+                <label for="firstname"><h3>Competence</h3></label>
+                
+                <input type="text" name="firstname" id="firstname" />
+                
+            </fieldset>
+            <div class="CSSTableGenerator" >
+                <table >
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td >
+                            SSN
+                        </td>
+                        <td>
+                            E-mail
+                        </td>
+                        <td>
+                            Adress
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            Row 1
+                        </td>
+                        <td>
+                            Row 1
+                        </td>
+                        <td>
+                            Row 1
+                        </td>
+                        <td>
+                            Row 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            Row 2
+                        </td>
+                        <td>
+                            Row 2
+                        </td>
+                        <td>
+                            Row 2
+                        </td>
+                        <td>
+                            Row 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            Row 2
+                        </td>
+                        <td>
+                            Row 2
+                        </td>
+                        <td>
+                            Row 2
+                        </td>
+                        <td>
+                            Row 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            Row 3
+                        </td>
+                        <td>
+                            Row 3
+                        </td>
+                        <td>
+                            Row 3
+                        </td>
+                        <td>
+                            Row 1
+                        </td>
+                    </tr>
+                </table>
+                
+            </div>
+        </div>
     </h:body>
 </html>
 
