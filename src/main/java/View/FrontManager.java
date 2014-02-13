@@ -319,7 +319,7 @@ public class FrontManager implements Serializable{
                 competence_profiles, availabilities));
     }
     
-    public String findCompetenceName(BigInteger    competence_id)
+    public String findCompetenceName(BigInteger competence_id)
     {
          for(int i = 0; i < competences.size(); i++)
              if(competences.get(i).getCompetence_id() == competence_id)
