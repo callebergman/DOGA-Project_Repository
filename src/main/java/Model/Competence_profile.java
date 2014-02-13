@@ -34,22 +34,17 @@ public class Competence_profile implements Serializable {
     private BigInteger person_id;
     private BigInteger competence_id;
     private int years_of_experience;
-    private String area;
+    
 
    @ManyToOne
     @JoinColumn(name="person_id", insertable=false, updatable=false)
     private Person person;
-
-    @OneToMany(mappedBy="competence_profile",cascade=REMOVE)
-    private Collection<Competence> competence = new HashSet ();
+   
+   @ManyToOne
+    @JoinColumn(name="competence_id", insertable=false, updatable=false)
+    private Competence competence;
 
     public Competence_profile() {
-    }
-    
-    public Competence_profile(String area, int newYears)
-    {
-        this.area = area;
-        this.years_of_experience = newYears;
     }
 
     public Competence_profile(BigInteger competence_id, int years_of_experience) {
@@ -57,10 +52,15 @@ public class Competence_profile implements Serializable {
         this.years_of_experience = years_of_experience;
     }
     
+    
     public void setPerson_id(BigInteger person_id) {
         this.person_id = person_id;
     }
-
+    
+    public BigInteger getCompetence_id() {
+        return competence_id;
+    }
+    
     public void setCompetence_id(BigInteger competence_id) {
         this.competence_id = competence_id;
     }
@@ -108,17 +108,5 @@ public class Competence_profile implements Serializable {
     }
     */
 
-    /**
-     * @return the area
-     */
-    public String getArea() {
-        return area;
-    }
-
-    /**
-     * @param area the area to set
-     */
-    public void setArea(String area) {
-        this.area = area;
-    }
+   
 }

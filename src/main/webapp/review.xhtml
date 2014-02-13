@@ -61,9 +61,9 @@
                                     <th>Area of expertise</th>
                                     <th>Years</th>
                                 </tr>
-                                <ui:repeat var="comp" value="#{frontManager.competences}">
+                                 <ui:repeat var="comp" value="#{frontManager.competence_profiles}">
                                     <tr>
-                                        <td>#{comp.area}</td>
+                                        <td>#{frontManager.findCompetenceName(comp.competence_id)}</td>
                                         <td>#{comp.years_of_experience}</td>
                                     </tr>
                                 </ui:repeat>
@@ -85,7 +85,7 @@
                                     </tbody>
                                 </table>
                                 <br/>
-                                <h:commandButton value="Submit Application"/>                                
+                                <h:commandButton value="Submit Application" action="#{frontManager.sendApp()}"/>                                
                                 </h:form>
                 </div>
             </div>

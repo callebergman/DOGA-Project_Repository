@@ -7,11 +7,16 @@
 package View;
 
 import Controller.ApplicantFacade;
+import Model.ApplicationDTO;
 import Model.Availability;
+import Model.Competence;
 import Model.Competence_profile;
+import Model.Person;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -36,7 +41,8 @@ public class FrontManager implements Serializable{
     private String[] areas = new String[10];
     
     private List<Availability> availabilities;
-    private List<Competence_profile> competences;
+    private List<Competence_profile>    competence_profiles;
+    private List<Competence>    competences;
     private String fromDate;
     private String toDate;
     private int toYear;
@@ -48,24 +54,22 @@ public class FrontManager implements Serializable{
     
     private String transactionFailure;
     
+    @PostConstruct
+    private void init(){
+        competences = applicantFacade.getCompetences();
+        for(int i = 0; i < competences.size(); i++)
+            areas[i] = competences.get(i).getName();
+    }
+    
     /**
      * Creates a new instance of LoginManager
      */
     public FrontManager() {
-        areas[0] = "Korvgrillning";
-        areas[1] = "Karuselldrift";
-        areas[2] = "Diskotering";
-        areas[3] = "Programmering";
-        areas[4] = "Guiding";
-        areas[5] = "Maskin reparering";
-        areas[6] = "Bakning";
-        areas[7] = "Servering";
-        areas[8] = "Taxering";
-        areas[9] = "Servicing";
+        competences = new ArrayList<Competence>();
         availabilities = new ArrayList<Availability> ();
-        competences = new ArrayList<Competence_profile> ();
+        competence_profiles = new ArrayList<Competence_profile> ();
     }
-    
+
     public void login () {
         transactionFailure = "a";
     }
@@ -88,9 +92,8 @@ public class FrontManager implements Serializable{
     
     public void addCompetence()
     {
-        competences.add(new Competence_profile(this.currentArea, this.years));
+        competence_profiles.add(new Competence_profile(applicantFacade.getCompetenceID(currentArea), this.years));
     }
-    
     
      /**
      * Adds an availability date
@@ -189,11 +192,11 @@ public class FrontManager implements Serializable{
     }
     
      /**
-     * Returns the current competences
-     * @return the competences
+     * Returns the current competence_profiles
+     * @return the competence_profiles
      */
-    public List<Competence_profile> getCompetences() {
-        return competences;
+    public List<Competence_profile> getCompetence_profiles() {
+        return competence_profiles;
     }
 
     /**
@@ -308,4 +311,17 @@ public class FrontManager implements Serializable{
         this.toDate = toDate;
     }
     
+    public void sendApp()
+    {
+        applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name,this.lastName,this.email),
+                competence_profiles, availabilities));
+    }
+    
+    public String findCompetenceName(BigInteger    competence_id)
+    {
+         for(int i = 0; i < competences.size(); i++)
+             if(competences.get(i).getCompetence_id() == competence_id)
+                 return competences.get(i).getName();
+         return " ";
+    }    
 }
