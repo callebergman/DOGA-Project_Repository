@@ -69,9 +69,6 @@ public class ApplicantFacade {
         pg.setRolename("Recruiter");
         pg.setUsername("root");
         em.persist(pg);
-        
-           
-        //em.persist (new Roles(BigInteger.valueOf (3), "TEST"));
     }
     
     public void submitApplication (ApplicationDTO ADTO) {
