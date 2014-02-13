@@ -51,6 +51,7 @@ public class ApplicantFacade {
     public List<Availability> getAvailabilities() {
         return availabilitys;
     }
+    
     public void testMethod (){
         
         Person  p = new Person ();
