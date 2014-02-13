@@ -7,6 +7,7 @@
        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="front-style.css"  />
+         <h:outputStylesheet library="css" name="basicInfo.css"  />
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
         <script src="#{request.contextPath}/js/frontPageJS.js"></script>
         <noscript>Sorry, your browser does not support JavaScript!</noscript>
@@ -75,6 +76,7 @@
                                 <h:commandButton id="opt7" value="Add entry" action="#{frontManager.addCompetence()}"/>             
                                 </p>
                             </div>
+                            <div class="CSSTableGenerator">
                             <table border="1">
                                 <tr>
                                     <th>Area of expertise</th>
@@ -87,6 +89,7 @@
                                     </tr>
                                 </ui:repeat>
                             </table>
+                            </div>
                         </div> 
                         <div id="periods">
                             <h2 class="title">Time periods</h2>
@@ -140,20 +143,22 @@
                                     <br/>    
                                     <h:commandButton id="opt9" value="Add time period" action="#{frontManager.addAvailability()}"/>
                                 </p>        
-                                <table class="availability-table" border="1">
+                                <div class="CSSTableGenerator">
+                                <table border="1">
                                     <tr>
-                                        <th class="table-header">From date</th>
-                                        <th class="table-header">To date</th>
+                                        <th>From date</th>
+                                        <th>To date</th>
                                     </tr>
-                                    <tbody>
+                                    
                                         <ui:repeat var="a" value="#{frontManager.availabilities}">
                                             <tr>
-                                                <td class="table-row">#{a.from_date}</td>
-                                                <td class="table-row">#{a.to_date}</td> 
+                                                <td>#{a.from_date}</td>
+                                                <td>#{a.to_date}</td> 
                                             </tr>
                                         </ui:repeat>
-                                    </tbody>
+                                    
                                 </table>
+                                </div>
                             </div>
                         </div>
                     </h:form>
