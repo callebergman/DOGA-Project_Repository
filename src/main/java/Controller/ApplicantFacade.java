@@ -12,6 +12,7 @@ import Model.Competence_profile;
 import Model.Person;
 import Model.Person_Groups;
 import Model.Roles;
+import View.FrontManager;
 import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Stateful;
@@ -32,7 +33,7 @@ public class ApplicantFacade {
     private Person person;
     private List<Competence_profile> competences;
     private List<Availability> availabilitys;
-    
+    private FrontManager f;
     
     /*
     public void addApplicant (String name, String surname, String email){
@@ -65,6 +66,7 @@ public class ApplicantFacade {
         pg.setRolename("Recruiter");
         pg.setUsername("root");
         em.persist(pg);
+        f.fillTable();
            
         //em.persist (new Roles(BigInteger.valueOf (3), "TEST"));
     }
