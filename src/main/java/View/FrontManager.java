@@ -9,6 +9,8 @@ package View;
 import Controller.ApplicantFacade;
 import Model.Availability;
 import Model.Competence_profile;
+import Model.Person;
+import Model.PersonDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +36,11 @@ public class FrontManager implements Serializable{
     private int years;
     private String currentArea;
     private String[] areas = new String[10];
+    private String[] apa = new String[5];
     
     private List<Availability> availabilities;
     private List<Competence_profile> competences;
+    private List<Person> person;
     private String fromDate;
     private String toDate;
     private int toYear;
@@ -47,6 +51,7 @@ public class FrontManager implements Serializable{
     private int fromDay;    
     
     private String transactionFailure;
+    
     
     /**
      * Creates a new instance of LoginManager
@@ -64,6 +69,7 @@ public class FrontManager implements Serializable{
         areas[9] = "Servicing";
         availabilities = new ArrayList<Availability> ();
         competences = new ArrayList<Competence_profile> ();
+        person = new ArrayList<Person>();
     }
     
     public void login () {
@@ -90,6 +96,14 @@ public class FrontManager implements Serializable{
     {
         competences.add(new Competence_profile(this.currentArea, this.years));
     }
+    
+    public void fillTable()
+    {
+      String apa = "hej";
+        person.add(new Person(apa,apa,apa,apa,apa,apa));
+    }
+    
+    
     
     
      /**

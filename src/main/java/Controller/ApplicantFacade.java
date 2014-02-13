@@ -33,6 +33,7 @@ public class ApplicantFacade {
     private List<Competence_profile> competences;
     private List<Availability> availabilitys;
     
+    
     /*
     public void addApplicant (String name, String surname, String email){
         person = new Person (name, surname, email);
