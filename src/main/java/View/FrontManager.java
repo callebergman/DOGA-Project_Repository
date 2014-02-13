@@ -306,4 +306,10 @@ public class FrontManager implements Serializable{
     public void setToDate(String toDate) {
         this.toDate = toDate;
     }
+    
+    public void onSubmit()
+    {
+        
+    }
+    
 }

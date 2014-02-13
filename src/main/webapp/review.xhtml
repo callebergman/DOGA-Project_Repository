@@ -13,6 +13,15 @@
                 $("#expertise").hide();
                 $("#periods").hide(); 
                 
+                $("#back").click(function()){
+                    $("#basicInfo").show();
+                    $("#expertise").hide();
+                    $("#periods").hide();
+                    setCookie("opt1", true, 365);
+                    setCookie("opt2", false, 365);
+                    setCookie("opt3", false, 365);
+                }
+                
                 $("#opt1").click(function(){
                     $("#basicInfo").show();
                     $("#expertise").hide();
@@ -144,8 +153,8 @@
                                     </tbody>
                                 </table>
                                 <br/>
-                                <h:commandButton value="Submit Application"/>
-                               
+                                <h:commandButton value="Submit Application"/>                                
+                                <button id="back" onclick="window.location.href='loginError.xhtml'">Back</button>
                     </h:form>
                 </div>
             </div>
