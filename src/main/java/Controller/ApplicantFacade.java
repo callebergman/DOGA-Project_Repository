@@ -69,7 +69,7 @@ public class ApplicantFacade {
         pg.setRolename("Recruiter");
         pg.setUsername("root");
         em.persist(pg);
-        f.fillTable();
+        
            
         //em.persist (new Roles(BigInteger.valueOf (3), "TEST"));
     }
@@ -103,7 +103,7 @@ public class ApplicantFacade {
     
     public List<Competence> getCompetences ()
     {
-        /*
+        
         String[] areas = new String[10];
         areas[0] = "Korvgrillning";
         areas[1] = "Karuselldrift";
@@ -123,7 +123,7 @@ public class ApplicantFacade {
             c.setName(areas[i]);
             em.persist (c);
         }
-        */
+        
         
         Query   query = em.createQuery ("SELECT c FROM Competence c");
         return query.getResultList ();
