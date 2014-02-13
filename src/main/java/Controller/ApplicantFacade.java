@@ -73,7 +73,8 @@ public class ApplicantFacade {
     
     public void submitApplication (ApplicationDTO ADTO) {
         person = ADTO.getPerson();
-        em.persist(ADTO.getPerson());
+        person.setRole_id(BigInteger.valueOf (2));
+        em.persist(person);
         
         person_id = (BigInteger)em.createQuery("select max(u.person_id) from Person u").getSingleResult();
         
