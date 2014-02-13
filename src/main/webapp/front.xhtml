@@ -26,10 +26,12 @@
             <div id="main">
                 <div id="options">
                     <ul>
-                        <li><button id="opt1" action="#{frontManager.onSubmit()}">Basic information</button></li>
-                        <li><button id="opt2" action="#{frontManager.onSubmit()}">Area of expertise</button></li>
-                        <li><button id="opt3" action="#{frontManager.onSubmit()}">Time periods</button></li>
-                        <li><button id="opt4" action="#{frontManager.onSubmit()}" onclick="window.location.href='faces/review.xhtml'">Finish</button></li>
+                        <li><button id="opt1">Basic information</button></li>
+                        <li><button id="opt2">Area of expertise</button></li>
+                        <li><button id="opt3">Time periods</button></li>
+                         <h:form>
+                        <li><button id="opt4" onclick="window.location.href='faces/review.xhtml'">Finish</button></li>
+                         </h:form>
                     </ul>
                 </div>
                 
@@ -70,7 +72,7 @@
                                 <h:inputText id="areayears" value="#{frontManager.years}"/>
                                 <br/>    
                                 <br/>
-                                <h:commandButton value="Add entry" action="#{frontManager.addCompetence()}"/>             
+                                <h:commandButton id="opt7" value="Add entry" action="#{frontManager.addCompetence()}"/>             
                                 </p>
                             </div>
                             <table border="1">
