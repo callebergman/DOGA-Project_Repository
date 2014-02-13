@@ -147,24 +147,38 @@
                         
                         </td>
                         <td >
-                            SSN
+                            Last Name
                         </td>
                         <td>
                             E-mail
                         </td>
                        
                          <td>
-                            Username
+                            Competences
+                        </td>
+                        <td>
+                            Time Periods
                         </td>
                     </tr>
-                   <ui:repeat var="item" value="#{FrontManager.person}">
+                    <ui:repeat var="item" value="#{recruiterManager.applicationsList}">
                         <tr>
-                            <td>#{person.name}</td>
-                            <td>#{person.surname}</td>
-                            <td>#{person.ssn}</td>
-                            <td>#{person.email}</td>
-                            <td>#{person.username}</td>
-                            <td>#{person.password}</td>
+                            <td>#{item.person.name}</td>
+                            <td>#{item.person.surname}</td>
+                            <td>#{item.person.email}</td>
+                            <td>
+                                <ui:repeat var="comp" value="#{item.competences}">
+                                #{frontManager.findCompetenceName(comp.competence_id)} 
+                                #{comp.years_of_experience} years
+                                <br/>
+                                 </ui:repeat>
+                            </td>
+                            <td>
+                                <ui:repeat var="time" value="#{item.availabilitys}">
+                                #{time.from_date} -
+                                #{time.to_date}
+                                <br/>
+                                 </ui:repeat>
+                           </td>
                         </tr>
                     </ui:repeat>
                     
