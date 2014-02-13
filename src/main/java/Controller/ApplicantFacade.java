@@ -58,6 +58,7 @@ public class ApplicantFacade {
         return availabilitys;
     }
     */
+    /*
     public void testMethod (){
         Person  p = new Person ();
         p.setPassword("1234");
@@ -69,7 +70,7 @@ public class ApplicantFacade {
         pg.setRolename("Recruiter");
         pg.setUsername("root");
         em.persist(pg);
-    }
+    }*/
     
     public void submitApplication (ApplicationDTO ADTO) {
         person = ADTO.getPerson();
@@ -100,8 +101,8 @@ public class ApplicantFacade {
     }
     
     public List<Competence> getCompetences ()
-    {
-        /*
+    {/*
+        
         String[] areas = new String[10];
         areas[0] = "Korvgrillning";
         areas[1] = "Karuselldrift";
@@ -120,8 +121,8 @@ public class ApplicantFacade {
             c.setCompetence_id(new BigInteger (s));
             c.setName(areas[i]);
             em.persist (c);
-        }
-        */
+        }*/
+        
         
         Query   query = em.createQuery ("SELECT c FROM Competence c");
         return query.getResultList ();
