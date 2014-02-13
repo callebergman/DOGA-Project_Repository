@@ -129,6 +129,7 @@ public class FrontManager implements Serializable{
         catch(ParseException e){}        
         */
         availabilities.add(new Availability(this.fromDate, this.toDate));
+        //applicantFacade.testMethod();
     }
     
     public String getName() {
@@ -305,11 +306,6 @@ public class FrontManager implements Serializable{
      */
     public void setToDate(String toDate) {
         this.toDate = toDate;
-    }
-    
-    public void onSubmit()
-    {
-        
     }
     
 }
