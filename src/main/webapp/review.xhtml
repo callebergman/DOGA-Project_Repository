@@ -57,7 +57,8 @@
                             </div>  
                         
                          <h2 class="title" id = "header">Areas of Expertise</h2>
-                         <table border="1" class="CSSTableGenerator">
+                         <div class ="CSSTableGenerator">
+                         <table border="1">
                                 <tr>
                                     <th>Area of expertise</th>
                                     <th>Years</th>
@@ -69,9 +70,11 @@
                                     </tr>
                                 </ui:repeat>
                             </table>
+                         </div>
                         <br/>
                          <h2 class="title" id = "header">Time Periods</h2>
-                         <table class="CSSTableGenerator" border="1">
+                         <div class="CSSTableGenerator">
+                         <table border="1">
                                     <tr>
                                         <th>From date</th>
                                         <th>To date</th>
@@ -79,12 +82,13 @@
                                     
                                         <ui:repeat var="a" value="#{frontManager.availabilities}">
                                             <tr>
-                                                <td class="table-row">#{a.from_date}</td>
-                                                <td class="table-row">#{a.to_date}</td> 
+                                                <td>#{a.from_date}</td>
+                                                <td>#{a.to_date}</td> 
                                             </tr>
                                         </ui:repeat>
                                     
                                 </table>
+                         </div>
                                 <br/>
                                 <h:commandButton value="Submit Application" action="#{frontManager.sendApp()}"/>                                
                                 </h:form>
