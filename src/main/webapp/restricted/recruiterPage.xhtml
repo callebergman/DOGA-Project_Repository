@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="login-style.css"  />
         <style type ="text/css">
@@ -151,31 +152,21 @@
                         <td>
                             E-mail
                         </td>
-                        <td>
-                            Competence
-                        </td>
+                       
                          <td>
-                            Availability
+                            Username
                         </td>
                     </tr>
-                    <tr>
-                        <td >
-                            Row 1
-                        </td>
-                        <td>
-                            Row 1
-                        </td>
-                        <td>
-                            Row 1
-                        </td>
-                        <td>
-                            Row 1
-                        </td>
-                        <td>
-                            Row 1
-                        </td>
-                        
-                    </tr>
+                   <ui:repeat var="item" value="#{FrontManager.person}">
+                        <tr>
+                            <td>#{person.name}</td>
+                            <td>#{person.surname}</td>
+                            <td>#{person.ssn}</td>
+                            <td>#{person.email}</td>
+                            <td>#{person.username}</td>
+                            <td>#{person.password}</td>
+                        </tr>
+                    </ui:repeat>
                     
                     
                 </table>
@@ -185,10 +176,10 @@
             </div>
              <br></br>
                 <label for="SSN"><h3>Applicant</h3></label>  
-                <input type="text" name="accept" id="accept" />
+                <input type="text" name="accept" id="#{Person.setSsn()}" />
                 <br></br>
-                <button type="button">Accept</button>
-                <button type="button">Deny</button>
+                <button type="button" id="">Accept</button>
+                <button type="button" id="">Deny</button>
                 </fieldset>
         </div>
     </h:body>

@@ -39,6 +39,7 @@ public class FrontManager implements Serializable{
     private int years;
     private String currentArea;
     private String[] areas = new String[10];
+    private String[] apa = new String[5];
     
     private List<Availability> availabilities;
     private List<Competence_profile>    competence_profiles;
@@ -53,6 +54,7 @@ public class FrontManager implements Serializable{
     private int fromDay;    
     
     private String transactionFailure;
+    
     
     @PostConstruct
     private void init(){
