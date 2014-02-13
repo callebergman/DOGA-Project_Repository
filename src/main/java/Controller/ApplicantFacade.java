@@ -18,6 +18,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -26,7 +27,7 @@ import javax.persistence.Query;
  * 
  * @author Hikari
  */
-@Stateful
+@Stateless
 public class ApplicantFacade {
     
     @PersistenceContext(unitName = "projectPU")
@@ -58,7 +59,6 @@ public class ApplicantFacade {
     }
     */
     public void testMethod (){
-        
         Person  p = new Person ();
         p.setPassword("1234");
         p.setUsername("root");
@@ -69,9 +69,6 @@ public class ApplicantFacade {
         pg.setRolename("Recruiter");
         pg.setUsername("root");
         em.persist(pg);
-        f.fillTable();
-           
-        //em.persist (new Roles(BigInteger.valueOf (3), "TEST"));
     }
     
     public void submitApplication (ApplicationDTO ADTO) {

@@ -23,15 +23,31 @@ public class ApplicationDTO
         this.availabilitys = availabilitys;
     }
 
+    public ApplicationDTO() {
+
+    }
+
     public Person getPerson() {
         return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public List<Competence_profile> getCompetences() {
         return competences;
     }
 
+    public void setCompetences(List<Competence_profile> competences) {
+        this.competences = competences;
+    }
+
     public List<Availability> getAvailabilitys() {
         return availabilitys;
+    }
+
+    public void setAvailabilitys(List<Availability> availabilitys) {
+        this.availabilitys = availabilitys;
     }
 }

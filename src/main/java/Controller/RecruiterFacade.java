@@ -6,17 +6,57 @@
 
 package Controller;
 
+import Model.ApplicationDTO;
+import Model.Competence;
+import Model.Person;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author Hikari
  */
-@Stateful
+@Stateless
 public class RecruiterFacade {
     
     @PersistenceContext(unitName = "projectPU")
     private EntityManager em;
+    
+    public List<ApplicationDTO> getAllApplications ()
+    {
+        List<ApplicationDTO>    list = new ArrayList<ApplicationDTO> ();
+        Query   query = em.createQuery ("SELECT c FROM Person c");
+        List<Person>    plist = query.getResultList ();
+        
+        Person  p;
+        for (int i=0; i<plist.size(); i++)
+        {
+            ApplicationDTO  dto = new ApplicationDTO ();
+            
+            p = plist.get(i);
+            dto.setPerson(p);
+            
+            query = em.createQuery ("SELECT c FROM Competence_profile c WHERE c.person_id=:n");
+            query.setParameter ("n", p.getPerson_id());
+            dto.setCompetences(query.getResultList());
+            
+            query = em.createQuery ("SELECT c FROM Availability c WHERE c.person_id:n");
+            query.setParameter ("n", p.getPerson_id());
+            dto.setAvailabilitys(query.getResultList());
+        }
+        
+        return list;
+    }
+    
+    public String getCompetenceName (BigInteger competence_id){
+        String name;
+        Competence  c = em.find (Competence.class, competence_id);
+        return (c.getName());
+    }
 }
