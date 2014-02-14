@@ -9,6 +9,7 @@ package Controller;
 import Model.ApplicationDTO;
 import Model.Competence;
 import Model.Person;
+import Model.Roles;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,14 @@ public class RecruiterFacade {
     
     public List<ApplicationDTO> getAllApplications ()
     {
+        Query   query = em.createQuery ("SELECT c FROM Roles c WHERE c.name=:n");
+        query.setParameter ("n", "Applicant");
+        Roles   tmp = (Roles) query.getSingleResult();
+        BigInteger  role_id = tmp.getId();
+        
         List<ApplicationDTO>    list = new ArrayList<ApplicationDTO> ();
-        Query   query = em.createQuery ("SELECT c FROM Person c");
+        query = em.createQuery ("SELECT c FROM Person c WHERE c.role_id=:ri");
+        query.setParameter ("ri", role_id);
         List<Person>    plist = query.getResultList ();
         
         Person  p;

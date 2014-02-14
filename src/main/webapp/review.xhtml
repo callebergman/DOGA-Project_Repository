@@ -7,6 +7,7 @@
        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="front-style.css"  />
+        <h:outputStylesheet library="css" name="basicInfo.css"  />
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
         <script src="#{request.contextPath}/js/reviewJS.js"></script>
@@ -56,6 +57,7 @@
                             </div>  
                         
                          <h2 class="title" id = "header">Areas of Expertise</h2>
+                         <div class ="CSSTableGenerator">
                          <table border="1">
                                 <tr>
                                     <th>Area of expertise</th>
@@ -68,22 +70,25 @@
                                     </tr>
                                 </ui:repeat>
                             </table>
+                         </div>
                         <br/>
                          <h2 class="title" id = "header">Time Periods</h2>
-                         <table class="availability-table" border="1">
+                         <div class="CSSTableGenerator">
+                         <table border="1">
                                     <tr>
-                                        <th class="table-header">From date</th>
-                                        <th class="table-header">To date</th>
+                                        <th>From date</th>
+                                        <th>To date</th>
                                     </tr>
-                                    <tbody>
+                                    
                                         <ui:repeat var="a" value="#{frontManager.availabilities}">
                                             <tr>
-                                                <td class="table-row">#{a.from_date}</td>
-                                                <td class="table-row">#{a.to_date}</td> 
+                                                <td>#{a.from_date}</td>
+                                                <td>#{a.to_date}</td> 
                                             </tr>
                                         </ui:repeat>
-                                    </tbody>
+                                    
                                 </table>
+                         </div>
                                 <br/>
                                 <h:commandButton value="Submit Application" action="#{frontManager.sendApp()}"/>                                
                                 </h:form>
