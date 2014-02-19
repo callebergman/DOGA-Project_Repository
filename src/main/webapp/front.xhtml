@@ -2,168 +2,171 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-       xmlns:c="http://java.sun.com/jsp/jstl/core"
-       xmlns:f="http://java.sun.com/jsf/core"
-       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="front-style.css"  />
-         <h:outputStylesheet library="css" name="basicInfo.css"  />
+        <h:outputStylesheet library="css" name="basicInfo.css"  />
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
         <script src="#{request.contextPath}/js/frontPageJS.js"></script>
         <noscript>Sorry, your browser does not support JavaScript!</noscript>
     </h:head>
-    <h:body> 
+    <h:body>
+
         <div id="wrap">
-            <div id="bar">
-                <div id="content">
-                    <p class="tag"> Create applications or login to browse submissions </p>
-                    <ul class="nav">
-                        <li class="ico">
-                            <a href="faces/restricted/recruiterPage.xhtml">Login / Signup </a>
-                        </li>
-                    </ul>
+            <header>
+                <div id="bar">
+                    <div id="content">
+                        <p class="tag"> Create applications or login to browse submissions </p>
+                        <ul class="nav">
+                            <li class="ico">
+                                <a href="faces/restricted/recruiterPage.xhtml">Login / Signup </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div id="main">
-                <div id="options">
-                    <ul>
-                        <li><button id="opt1">Basic information</button></li>
-                        <li><button id="opt2">Area of expertise</button></li>
-                        <li><button id="opt3">Time periods</button></li>
-                        
-                        <li><button id="opt4" onclick="window.location.href='faces/review.xhtml'">Finish</button></li>
-                        
-                    </ul>
-                </div>
-                
-                <div id="applicationForm">
-                    <h:form>
-                        <div id="basicInfo">
-                            <h2 class="title" id = "header">Basic information</h2>
-                            <div id="fillin">   
-                                <p>                         
-                                    <h:outputLabel for="Input" value="First name:  "/>
-                                    <br/>
-                                    <h:inputText id="name" value="#{frontManager.name}"/>&nbsp;
-                                    <br/>
-                                    <h:outputLabel for="Output" value="Last name: "/>
-                                    <br/>
-                                    <h:inputText id="lastName" value="#{frontManager.lastName}"/>
-                                    <br/>
-                                    <h:outputLabel for="Output" value="Email: "/>
-                                    <br/>
-                                    <h:inputText id="email" value="#{frontManager.email}"/>
-                                </p> 
-                            </div>  
-                        </div> 
-                        <div id="expertise">
-                            <h2 class="title">Area of expertise</h2>
-                            <div id="fillin">                 
-                                <p>Choose your area of expertise: 
-                                <br/>
-                                <h:selectOneMenu id="ca" value="#{frontManager.currentArea}">                                           
-                                    <c:forEach items="#{frontManager.areas.stream().map(b->b).distinct().toList()}" var="area">
-                                        <f:selectItem itemValue="#{area}" itemLabel="#{area}"/>
-                                    </c:forEach>   
-                                </h:selectOneMenu>
-                                <br/>
-                                <br/>
-                                <h:outputLabel for="Output" value="Years of expertise: "/>
-                                <br/>
-                                <h:inputText id="areayears" value="#{frontManager.years}"/>
-                                <br/>    
-                                <br/>
-                                <h:commandButton id="opt7" value="Add entry" action="#{frontManager.addCompetence()}"/>             
-                                </p>
-                            </div>
-                            <div class="CSSTableGenerator">
-                            <table border="1">
-                                <tr>
-                                    <th>Area of expertise</th>
-                                    <th>Years</th>
-                                </tr>
-                                <ui:repeat var="comp" value="#{frontManager.competence_profiles}">
-                                    <tr>
-                                        <td>#{frontManager.findCompetenceName(comp.competence_id)}</td>
-                                        <td>#{comp.years_of_experience}</td>
-                                    </tr>
-                                </ui:repeat>
-                            </table>
-                            </div>
-                        </div> 
-                        <div id="periods">
-                            <h2 class="title">Time periods</h2>
-                            <div id="fillin">                 
-                                <p>Choose the time you'll be available:
-                                    <br/>
-                                    <br/>
-                                    <h:outputLabel for="Output" value="From: "/>
-                                    <br/>
-                                    Year:
-                                     <h:selectOneMenu id="time" value="#{frontManager.fromYear}">                                           
-                                        <c:forEach begin="2014" end="2030" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>
-                                    Month:
-                                    <h:selectOneMenu id="time1" value="#{frontManager.fromMonth}">                                           
-                                        <c:forEach begin="1" end="12" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>
-                                    Day:
-                                    <h:selectOneMenu id="time2" value="#{frontManager.fromDay}">                                           
-                                        <c:forEach begin="1" end="32" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>   
-                                    <br/>
-                                    <br/>
-                                    <h:outputLabel for="Output" value="To: "/>
-                                    <br/>
-                                    Year:
-                                    <h:selectOneMenu id="time3" value="#{frontManager.toYear}">                                           
-                                        <c:forEach begin="2014" end="2030" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>
-                                    Month:
-                                    <h:selectOneMenu id="time4" value="#{frontManager.toMonth}">                                           
-                                        <c:forEach begin="1" end="12" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>
-                                    Day:
-                                    <h:selectOneMenu id="time5" value="#{frontManager.toDay}">                                           
-                                        <c:forEach begin="1" end="32" varStatus="status">
-                                            <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
-                                        </c:forEach>   
-                                    </h:selectOneMenu>
-                                    <br/>
-                                    <br/>    
-                                    <h:commandButton id="opt9" value="Add time period" action="#{frontManager.addAvailability()}"/>
-                                </p>        
+            </header>
+                <div id="main">
+                    <div id="options">
+                        <ul>
+                            <li><button id="opt1">Basic information</button></li>
+                            <li><button id="opt2">Area of expertise</button></li>
+                            <li><button id="opt3">Time periods</button></li>
+
+                            <li><button id="opt4" onclick="window.location.href = 'faces/review.xhtml'">Finish</button></li>
+
+                        </ul>
+                    </div>
+
+                    <div id="applicationForm">
+                        <h:form>
+                            <div id="basicInfo">
+                                <h2 class="title" id = "header">Basic information</h2>
+                                <div id="fillin">   
+                                    <p>                         
+                                        <h:outputLabel for="Input" value="First name:  "/>
+                                        <br/>
+                                        <h:inputText id="name" value="#{frontManager.name}"/>&nbsp;
+                                        <br/>
+                                        <h:outputLabel for="Output" value="Last name: "/>
+                                        <br/>
+                                        <h:inputText id="lastName" value="#{frontManager.lastName}"/>
+                                        <br/>
+                                        <h:outputLabel for="Output" value="Email: "/>
+                                        <br/>
+                                        <h:inputText id="email" value="#{frontManager.email}"/>
+                                    </p> 
+                                </div>  
+                            </div> 
+                            <div id="expertise">
+                                <h2 class="title">Area of expertise</h2>
+                                <div id="fillin">                 
+                                    <p>Choose your area of expertise: 
+                                        <br/>
+                                        <h:selectOneMenu id="ca" value="#{frontManager.currentArea}">                                           
+                                            <c:forEach items="#{frontManager.areas.stream().map(b->b).distinct().toList()}" var="area">
+                                                <f:selectItem itemValue="#{area}" itemLabel="#{area}"/>
+                                            </c:forEach>   
+                                        </h:selectOneMenu>
+                                        <br/>
+                                        <br/>
+                                        <h:outputLabel for="Output" value="Years of expertise: "/>
+                                        <br/>
+                                        <h:inputText id="areayears" value="#{frontManager.years}"/>
+                                        <br/>    
+                                        <br/>
+                                        <h:commandButton id="opt7" value="Add entry" action="#{frontManager.addCompetence()}"/>             
+                                    </p>
+                                </div>
                                 <div class="CSSTableGenerator">
-                                <table border="1">
-                                    <tr>
-                                        <th>From date</th>
-                                        <th>To date</th>
-                                    </tr>
-                                    
-                                        <ui:repeat var="a" value="#{frontManager.availabilities}">
+                                    <table border="1">
+                                        <tr>
+                                            <th>Area of expertise</th>
+                                            <th>Years</th>
+                                        </tr>
+                                        <ui:repeat var="comp" value="#{frontManager.competence_profiles}">
                                             <tr>
-                                                <td>#{a.from_date}</td>
-                                                <td>#{a.to_date}</td> 
+                                                <td>#{frontManager.findCompetenceName(comp.competence_id)}</td>
+                                                <td>#{comp.years_of_experience}</td>
                                             </tr>
                                         </ui:repeat>
-                                    
-                                </table>
+                                    </table>
+                                </div>
+                            </div> 
+                            <div id="periods">
+                                <h2 class="title">Time periods</h2>
+                                <div id="fillin">                 
+                                    <p>Choose the time you'll be available:
+                                        <br/>
+                                        <br/>
+                                        <h:outputLabel for="Output" value="From: "/>
+                                        <br/>
+                                        Year:
+                                        <h:selectOneMenu id="time" value="#{frontManager.fromYear}">                                           
+                                            <c:forEach begin="2014" end="2030" varStatus="status">
+                                                <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                            </c:forEach>   
+                                        </h:selectOneMenu>
+                                        Month:
+                                        <h:selectOneMenu id="time1" value="#{frontManager.fromMonth}">                                           
+                                            <c:forEach begin="1" end="12" varStatus="status">
+                                                <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                            </c:forEach>   
+                                        </h:selectOneMenu>
+                                        Day:
+                                        <h:selectOneMenu id="time2" value="#{frontManager.fromDay}">                                           
+                                            <c:forEach begin="1" end="32" varStatus="status">
+                                                <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                            </c:forEach>   
+                                        </h:selectOneMenu>   
+                                        <br/>
+                                        <br/>
+                                        <h:outputLabel for="Output" value="To: "/>
+                                        <br/>
+                                        Year:
+                                        <h:selectOneMenu id="time3" value="#{frontManager.toYear}">                                           
+                                            <c:forEach begin="2014" end="2030" varStatus="status">
+                                                <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                            </c:forEach>   
+                                        </h:selectOneMenu>
+                                        Month:
+                                        <h:selectOneMenu id="time4" value="#{frontManager.toMonth}">                                           
+                                            <c:forEach begin="1" end="12" varStatus="status">
+                                                <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                            </c:forEach>   
+                                        </h:selectOneMenu>
+                                        Day:
+                                        <h:selectOneMenu id="time5" value="#{frontManager.toDay}">                                           
+                                            <c:forEach begin="1" end="32" varStatus="status">
+                                                <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
+                                            </c:forEach>   
+                                        </h:selectOneMenu>
+                                        <br/>
+                                        <br/>    
+                                        <h:commandButton id="opt9" value="Add time period" action="#{frontManager.addAvailability()}"/>
+                                    </p>        
+                                    <div class="CSSTableGenerator">
+                                        <table border="1">
+                                            <tr>
+                                                <th>From date</th>
+                                                <th>To date</th>
+                                            </tr>
+
+                                            <ui:repeat var="a" value="#{frontManager.availabilities}">
+                                                <tr>
+                                                    <td>#{a.from_date}</td>
+                                                    <td>#{a.to_date}</td> 
+                                                </tr>
+                                            </ui:repeat>
+
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </h:form>
+                        </h:form>
+                    </div>
                 </div>
-            </div>
         </div>
     </h:body>
 </html>
