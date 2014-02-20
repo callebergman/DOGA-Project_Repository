@@ -31,11 +31,8 @@ public class Competence_profile implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger competence_profile_id;
-    private BigInteger person_id;
-    private BigInteger competence_id;
     private int years_of_experience;
-    
-
+   
    @ManyToOne
     @JoinColumn(name="person_id", insertable=false, updatable=false)
     private Person person;
@@ -46,41 +43,7 @@ public class Competence_profile implements Serializable {
 
     public Competence_profile() {
     }
-
-    public Competence_profile(BigInteger competence_id, int years_of_experience) {
-        this.competence_id = competence_id;
-        this.years_of_experience = years_of_experience;
-    }
-    
-    
-    public void setPerson_id(BigInteger person_id) {
-        this.person_id = person_id;
-    }
-    
-    public BigInteger getCompetence_id() {
-        return competence_id;
-    }
-    
-    public void setCompetence_id(BigInteger competence_id) {
-        this.competence_id = competence_id;
-    }
-
-    public BigInteger getCompetence_profile_id() {
-        return competence_profile_id;
-    }
-
-    public void setCompetence_profile_id(BigInteger competence_profile_id) {
-        this.competence_profile_id = competence_profile_id;
-    }
-
-    public int getYears_of_experience() {
-        return years_of_experience;
-    }
-
-    public void setYears_of_experience(int years_of_experience) {
-        this.years_of_experience = years_of_experience;
-    }
-    
+ 
           /*
     @Override
     public int hashCode() {
@@ -107,6 +70,38 @@ public class Competence_profile implements Serializable {
         return "Model.Competence_profile[ id=" + id + " ]";
     }
     */
+
+    public BigInteger getCompetence_profile_id() {
+        return competence_profile_id;
+    }
+
+    public void setCompetence_profile_id(BigInteger competence_profile_id) {
+        this.competence_profile_id = competence_profile_id;
+    }
+
+    public int getYears_of_experience() {
+        return years_of_experience;
+    }
+
+    public void setYears_of_experience(int years_of_experience) {
+        this.years_of_experience = years_of_experience;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Competence getCompetence() {
+        return competence;
+    }
+
+    public void setCompetence(Competence competence) {
+        this.competence = competence;
+    }
 
    
 }

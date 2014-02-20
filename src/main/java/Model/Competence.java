@@ -11,6 +11,7 @@ import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashSet;
 import static javax.persistence.CascadeType.REMOVE;
+import static javax.persistence.CascadeType.PERSIST;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +32,7 @@ public class Competence implements Serializable {
     private BigInteger competence_id;
     private String name;
        
-    @OneToMany(mappedBy="competence",cascade=REMOVE)
+    @OneToMany(mappedBy="competence",cascade=PERSIST)
     private Collection<Competence_profile> competence_profiles = new HashSet ();
      
    public BigInteger getCompetence_id() {

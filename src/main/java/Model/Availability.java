@@ -8,7 +8,6 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +28,6 @@ public class Availability implements Serializable {
     private BigInteger availability_id;
     private String from_date;
     private String to_date;
-    private BigInteger person_id;
 
     public Availability() {
     }
@@ -42,14 +40,6 @@ public class Availability implements Serializable {
     @ManyToOne
     @JoinColumn(name="person_id", insertable=false, updatable=false)
     private Person person;
-
-        public BigInteger getId() {
-        return availability_id;
-    }
-
-    public void setId(BigInteger id) {
-        this.availability_id = availability_id;
-    }
 
     public String getFrom_date() {
         return from_date;
@@ -67,14 +57,6 @@ public class Availability implements Serializable {
         this.to_date = to_date;
     }
 
-    public BigInteger getPerson_id() {
-        return person_id;
-    }
-
-    public void setPerson_id(BigInteger person_id) {
-        this.person_id = person_id;
-    }
-
     public Person getPerson() {
         return person;
     }
@@ -82,8 +64,7 @@ public class Availability implements Serializable {
     public void setPerson(Person person) {
         this.person = person;
     }
-    
-    
+   
     @Override
     public int hashCode() {
         int hash = 0;
@@ -108,5 +89,4 @@ public class Availability implements Serializable {
     public String toString() {
         return "[[from_date] ~ [to_date]]";
     }
-    
 }

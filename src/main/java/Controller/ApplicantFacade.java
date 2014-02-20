@@ -72,17 +72,15 @@ public class ApplicantFacade {
         person.setRole_id(BigInteger.valueOf (2));
         em.persist(person);
         
-        person_id = (BigInteger)em.createQuery("select max(u.person_id) from Person u").getSingleResult();
+        //person_id = (BigInteger)em.createQuery("select max(u.person_id) from Person u").getSingleResult();
         
         competences = ADTO.getCompetences();
         for(Competence_profile cp : competences){
-            cp.setPerson_id(person_id);
             em.persist(cp);
         }
         
         availabilitys = ADTO.getAvailabilitys();
         for(Availability availability : availabilitys){
-            availability.setPerson_id(person_id);
             em.persist(availability);
         }
     }

@@ -17,6 +17,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.persistence.CascadeType.REMOVE;
+import static javax.persistence.CascadeType.PERSIST;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,8 +53,10 @@ public class Person implements PersonDTO, Serializable {
     @ManyToOne
     @JoinColumn(name = "role_id", insertable = false, updatable = false)
     private Roles role;
-    @OneToMany(mappedBy = "person", cascade = REMOVE)
+    
+    @OneToMany(mappedBy = "person", cascade = PERSIST)
     private Collection<Availability> availabilitys = new HashSet();
+    
     @OneToMany(mappedBy = "person", cascade = REMOVE)
     private Collection<Competence_profile> competence_profiles = new HashSet();
 
