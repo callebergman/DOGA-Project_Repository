@@ -32,7 +32,7 @@
                         <li><button id="opt3">Time periods</button></li>
                         
                         <li><button id="opt4" onclick="window.location.href='faces/review.xhtml'">Finish</button></li>
-                        
+                       
                     </ul>
                 </div>
                 
@@ -40,8 +40,13 @@
                     <h:form>
                         <div id="basicInfo">
                             <h2 class="title" id = "header">Basic information</h2>
+                            <div id="error">
+                                <h:message for="name"/>                                    
+                                <h:message for="lastName"/>                                    
+                                <h:message for="email"/>
+                            </div>
                             <div id="fillin">   
-                                <p>                         
+                                <p>                  
                                     <h:outputLabel for="Input" value="First name:  "/>
                                     <br/>
                                     <h:inputText id="name" value="#{frontManager.name}"/>&nbsp;
@@ -58,7 +63,11 @@
                         </div> 
                         <div id="expertise">
                             <h2 class="title">Area of expertise</h2>
-                            <div id="fillin">                 
+                            <div id="error">
+                                <h:message for="ca"/>
+                                <h:message for="areayears"/>
+                            </div>
+                            <div id="fillin">                        
                                 <p>Choose your area of expertise: 
                                 <br/>
                                 <h:selectOneMenu id="ca" value="#{frontManager.currentArea}">                                           

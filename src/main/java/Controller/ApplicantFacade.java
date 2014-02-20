@@ -122,7 +122,7 @@ public class ApplicantFacade {
             em.persist (c);
         }*/
         
-       */ 
+       
         Query   query = em.createQuery ("SELECT c FROM Competence c");
         return query.getResultList ();
     }

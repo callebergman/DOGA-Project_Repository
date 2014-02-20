@@ -1,6 +1,10 @@
             $( document ).ready(function() {
+                $("basicInfo").show();
                 $("#expertise").hide();
                 $("#periods").hide(); 
+                setCookie("opt1", true, 365);
+                setCookie("opt2", false, 365);
+                setCookie("opt3", false, 365);
                 
                 $("#opt1").click(function(){
                     $("#basicInfo").show();
