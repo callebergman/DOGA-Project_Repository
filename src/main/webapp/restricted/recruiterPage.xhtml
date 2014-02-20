@@ -5,7 +5,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="login-style.css"  />
-        <h:outputStylesheet library="css" name="recruitTable.css"  />
+        <h:outputStylesheet library="css" name="recruitTable.css"  />        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
+        <noscript>Sorry, your browser does not support JavaScript!</noscript>
         <style type ="text/css">
           
         </style>
@@ -26,21 +28,29 @@
                 <h2>Applicant Table</h2>
             </div>
             <fieldset>
+                
+                <h:form>
                 <legend>Filter Options</legend>
+                <h3>Name</h3>
+                <label for="firstname">First name</label>
+                <h:inputText id="firstname" value="#{recruiterManager.firstName}" />
+                <label for="lastname">Last name</label>
+                <h:inputText id="lastname" value="#{recruiterManager.lastName}"/>
                 <h3>Time Period</h3>
-                <label for="firstname">From</label>
-                <input type="text" name="firstname" id="firstname" />
-                <label for="lastname">To</label>
-                <input type="text" name="lastname" id="lastname" />
+                <label for="from">From</label>
+                <h:inputText id="from" value="#{recruiterManager.fromDate}" />
+                <label for="to">To</label>
+                <h:inputText id="to" value="#{recruiterManager.toDate}"/>
                 <br></br>
-                <label for="firstname"><h3>Date of Registration</h3></label>
+                <label for="output"><h3>Date of Registration</h3></label>
                 
-                <input type="text" name="firstname" id="firstname" />
+                <h:inputText id="date" value="#{recruiterManager.regDate}"/>
                 <br></br>
-                <label for="firstname"><h3>Competence</h3></label>
+                <label for="competence"><h3>Competence</h3></label>
                 
-                <input type="text" name="firstname" id="firstname" />
-                <button type="button">Commit</button>
+                <h:inputText id="competence" value="#{recruiterManager.area}"/>
+                 <h:commandButton id="commit" value="Commit" action="#{recruiterManager.commit()}"/>
+                             
                 
             
             <div class="CSSTableGenerator" >
@@ -64,7 +74,7 @@
                             Time Periods
                         </td>
                     </tr>
-                    <ui:repeat var="item" value="#{recruiterManager.applicationsList}">
+                    <ui:repeat var="item" value="#{recruiterManager.filterList}">
                         <tr>
                             <td>#{item.person.name}</td>
                             <td>#{item.person.surname}</td>
@@ -94,12 +104,14 @@
             </div>
              <br></br>
                 <label for="SSN"><h3>Applicant</h3></label>  
-                <input type="text" name="accept" id="#{Person.setSsn()}" />
+                <h:inputText/>
                 <br></br>
                 <button type="button" id="">Accept</button>
                 <button type="button" id="">Deny</button>
+                </h:form>
                 </fieldset>
         </div>
+        
     </h:body>
 </html>
 

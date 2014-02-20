@@ -19,6 +19,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.validation.constraints.*;
 
 /**
  *
@@ -30,16 +31,28 @@ public class FrontManager implements Serializable {
 
     @EJB
     private ApplicantFacade applicantFacade;
+    
+    @NotNull(message="Please enter your name")
     private String name;
-    private String lastName;
+    @NotNull(message="Please enter your last name")
+    private String lastName;    
+    @NotNull(message="Please enter your email")
+    @Pattern(regexp = "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)", message = "Invalid e-mail")
     private String email;
+    
+    @NotNull(message="Please insert a year")
+    @Min(value=1, message="Please insert a year value over 0")
+    @Max(value=100, message="Please insert a year value below 100")    
     private int years;
+    
+    @NotNull(message="Please select at least one area of expertise")
     private String currentArea;
     private String[] areas = new String[10];
-    private String[] apa = new String[5];
+    
     private List<Availability> availabilities;
-    private List<Competence_profile> competence_profiles;
-    private List<Competence> competences;
+    private List<Competence_profile>    competence_profiles;
+    private List<Competence>    competences;
+    
     private String fromDate;
     private String toDate;
     private int toYear;
