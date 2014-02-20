@@ -24,7 +24,7 @@ import javax.faces.bean.SessionScoped;
  *
  * @author Calle
  */
-@ManagedBean(name = "frontManager", eager = true)
+@ManagedBean(name = "frontManager")
 @SessionScoped
 public class FrontManager implements Serializable {
 
