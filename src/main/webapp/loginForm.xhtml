@@ -1,22 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="login-style.css"  />
     </h:head>
     <h:body> 
+
         <div id="wrap">
-            <div id="bar">
-                <div id="content">
-                    <p class="tag"> Create applications or login to browse submissions </p>
-                    <ul class="nav">
-                        <li class="ico">
-                            <a href="loginForm.xhtml">Login / Signup </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>  
+            <ui:include src="header.xhtml"/>
             <div id="login">
                 <form method="post" action="j_security_check">
                     <h1>Recruiter login</h1>
@@ -27,8 +20,14 @@
                     </p> 
                     <input type="submit" value="Login" />
                 </form>
-            </div>
+            </div>          
         </div>
+        <div class="footerLayout">
+            <ui:include src="footer.xhtml"/>
+        </div>
+
+
     </h:body>
+
 </html>
 

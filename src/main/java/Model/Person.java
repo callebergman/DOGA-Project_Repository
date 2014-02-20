@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
@@ -33,10 +32,9 @@ import javax.persistence.OneToOne;
  * @author User
  */
 @Entity
-public class Person implements PersonDTO,Serializable {
-   
+public class Person implements PersonDTO, Serializable {
+
     private static final long serialVersionUID = 1L;
-    
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private BigInteger person_id;
@@ -47,25 +45,21 @@ public class Person implements PersonDTO,Serializable {
     //@Column(length = 32, columnDefinition = "VARCHAR(32)")
     private String password;
     private BigInteger role_id;
-    @Column(unique=true)
+    @Column(unique = true)
     private String username;
-    
-    @OneToOne(mappedBy="person",cascade=REMOVE)
+    @OneToOne(mappedBy = "person", cascade = REMOVE)
     private Person_Groups person_group;
-    
     @ManyToOne
-    @JoinColumn(name="role_id", insertable=false, updatable=false)
+    @JoinColumn(name = "role_id", insertable = false, updatable = false)
     private Roles role;
+    @OneToMany(mappedBy = "person", cascade = REMOVE)
+    private Collection<Availability> availabilitys = new HashSet();
+    @OneToMany(mappedBy = "person", cascade = REMOVE)
+    private Collection<Competence_profile> competence_profiles = new HashSet();
 
-    @OneToMany(mappedBy="person",cascade=REMOVE)
-    private Collection<Availability> availabilitys = new HashSet ();
-    
-    @OneToMany(mappedBy="person",cascade=REMOVE)
-    private Collection<Competence_profile> competence_profiles = new HashSet ();
- 
     public Person() {
     }
-    
+
     public Person(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
@@ -80,7 +74,7 @@ public class Person implements PersonDTO,Serializable {
         this.password = sha256(password);
         this.username = username;
     }
-    
+
     public Collection<Competence_profile> getCompetence_profile() {
         return competence_profiles;
     }
@@ -88,7 +82,7 @@ public class Person implements PersonDTO,Serializable {
     public void setCompetence_profile(Collection<Competence_profile> competence_profile) {
         this.competence_profiles = competence_profile;
     }
-    
+
     public Collection<Availability> getAvailability() {
         return availabilitys;
     }
@@ -96,16 +90,15 @@ public class Person implements PersonDTO,Serializable {
     public void setAvailability(Collection<Availability> availability) {
         this.availabilitys = availability;
     }
-    
-    public Roles getRole()
-    {
+
+    public Roles getRole() {
         return role;
     }
-    void setRole(Roles role)
-    {
-        this.role=role;
+
+    void setRole(Roles role) {
+        this.role = role;
     }
-    
+
     /**
      * @return the person_id
      */
@@ -243,13 +236,13 @@ public class Person implements PersonDTO,Serializable {
         }
         return true;
     }
-    
-    public static String sha256(String base){
+
+    public static String sha256(String base) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(base.getBytes("UTF-8"));
             byte[] digest = md.digest();
-            return (Base64.encode(digest)).toString ();
+            return (Base64.encode(digest)).toString();
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Person.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedEncodingException ex) {

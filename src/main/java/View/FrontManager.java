@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package View;
 
 import Controller.ApplicantFacade;
@@ -26,11 +25,10 @@ import javax.validation.constraints.*;
  *
  * @author Calle
  */
-
-@ManagedBean(name="frontManager", eager=true)
+@ManagedBean(name = "frontManager", eager = true)
 @SessionScoped
-public class FrontManager implements Serializable{
-    
+public class FrontManager implements Serializable {
+
     @EJB
     private ApplicantFacade applicantFacade;
     
@@ -62,32 +60,31 @@ public class FrontManager implements Serializable{
     private int toDay;
     private int fromYear;
     private int fromMonth;
-    private int fromDay;    
-    
+    private int fromDay;
     private String transactionFailure;
-    
-    
+
     @PostConstruct
-    private void init(){
+    private void init() {
         competences = applicantFacade.getCompetences();
-        for(int i = 0; i < competences.size(); i++)
+        for (int i = 0; i < competences.size(); i++) {
             areas[i] = competences.get(i).getName();
+        }
     }
-    
+
     /**
      * Creates a new instance of LoginManager
      */
     public FrontManager() {
         competences = new ArrayList<Competence>();
-        availabilities = new ArrayList<Availability> ();
-        competence_profiles = new ArrayList<Competence_profile> ();
+        availabilities = new ArrayList<Availability>();
+        competence_profiles = new ArrayList<Competence_profile>();
     }
 
-    public void login () {
+    public void login() {
         transactionFailure = "a";
     }
 
-   /**
+    /**
      * @return <code>true</code> if the latest transaction succeeded, otherwise
      * <code>false</code>.
      */
@@ -102,52 +99,54 @@ public class FrontManager implements Serializable{
     public void setTransactionFailure(String transactionFailure) {
         this.transactionFailure = transactionFailure;
     }
-    
-    public void addCompetence()
-    {
+
+    public void addCompetence() {
         competence_profiles.add(new Competence_profile(applicantFacade.getCompetenceID(currentArea), this.years));
     }
-    
-     /**
+
+    /**
      * Adds an availability date
+     *
      * @return jsf22Bugfix();
      */
-    public void addAvailability () {
-       /* Date fDate = null;
-        Date tDate = null;
-        */
-        if(fromMonth < 10 && fromDay < 10)
-            setFromDate(Integer.toString(fromYear)+ "-0" + Integer.toString(fromMonth)+ "-0" + Integer.toString(fromDay));
-        else if(fromMonth < 10 && fromDay > 9)
-            setFromDate(Integer.toString(fromYear)+ "-0" + Integer.toString(fromMonth)+ "-" + Integer.toString(fromDay));
-        else if(fromMonth > 9 && fromDay < 10)
-            setFromDate(Integer.toString(fromYear)+ "-"+ Integer.toString(fromMonth)+ "-0" +Integer.toString(fromDay));
-        else
-            setFromDate(Integer.toString(fromYear)+ "-"+ Integer.toString(fromMonth)+ "-" + Integer.toString(fromDay));
-        
-        if(toMonth < 10 && toDay < 10)
-            setToDate(toYear+ "-0" + Integer.toString(toMonth)+ "-0" + Integer.toString(toDay));
-        else if(toMonth < 10 && toDay > 9)
-            setToDate(toYear+ "-0" + Integer.toString(toMonth)+ "-" + Integer.toString(toDay));
-        else if(toMonth > 9 && toDay < 10)
-            setToDate(toYear+ "-"+ Integer.toString(toMonth)+ "-0" +Integer.toString(toDay));
-        else
-            setToDate(toYear+ "-"+ Integer.toString(toMonth)+ "-" + Integer.toString(toDay));
-        
-        /*
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        
-        try 
-        {
-             fDate = (df.parse(getFromDate()));
-             tDate = (df.parse(getToDate()));
+    public void addAvailability() {
+        /* Date fDate = null;
+         Date tDate = null;
+         */
+        if (fromMonth < 10 && fromDay < 10) {
+            setFromDate(Integer.toString(fromYear) + "-0" + Integer.toString(fromMonth) + "-0" + Integer.toString(fromDay));
+        } else if (fromMonth < 10 && fromDay > 9) {
+            setFromDate(Integer.toString(fromYear) + "-0" + Integer.toString(fromMonth) + "-" + Integer.toString(fromDay));
+        } else if (fromMonth > 9 && fromDay < 10) {
+            setFromDate(Integer.toString(fromYear) + "-" + Integer.toString(fromMonth) + "-0" + Integer.toString(fromDay));
+        } else {
+            setFromDate(Integer.toString(fromYear) + "-" + Integer.toString(fromMonth) + "-" + Integer.toString(fromDay));
         }
-        catch(ParseException e){}        
-        */
+
+        if (toMonth < 10 && toDay < 10) {
+            setToDate(toYear + "-0" + Integer.toString(toMonth) + "-0" + Integer.toString(toDay));
+        } else if (toMonth < 10 && toDay > 9) {
+            setToDate(toYear + "-0" + Integer.toString(toMonth) + "-" + Integer.toString(toDay));
+        } else if (toMonth > 9 && toDay < 10) {
+            setToDate(toYear + "-" + Integer.toString(toMonth) + "-0" + Integer.toString(toDay));
+        } else {
+            setToDate(toYear + "-" + Integer.toString(toMonth) + "-" + Integer.toString(toDay));
+        }
+
+        /*
+         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+         try 
+         {
+         fDate = (df.parse(getFromDate()));
+         tDate = (df.parse(getToDate()));
+         }
+         catch(ParseException e){}        
+         */
         availabilities.add(new Availability(this.fromDate, this.toDate));
         //applicantFacade.testMethod();
     }
-    
+
     public String getName() {
         return name;
     }
@@ -156,30 +155,26 @@ public class FrontManager implements Serializable{
         this.name = newName;
     }
 
-    public int getYears()
-    {
+    public int getYears() {
         return years;
     }
-    
-    public void setYears(int newYears)
-    {
+
+    public void setYears(int newYears) {
         years = newYears;
     }
-    
-    public String[] getAreas(){
+
+    public String[] getAreas() {
         return areas;
     }
-    
-    public String getCurrentArea()
-    {
+
+    public String getCurrentArea() {
         return currentArea;
     }
-    
-    public void setCurrentArea(String newArea)
-    {
+
+    public void setCurrentArea(String newArea) {
         currentArea = newArea;
     }
-    
+
     public String getLastName() {
         return lastName;
     }
@@ -187,7 +182,7 @@ public class FrontManager implements Serializable{
     public void setLastName(String newLast) {
         this.lastName = newLast;
     }
-    
+
     public String getEmail() {
         return email;
     }
@@ -195,17 +190,19 @@ public class FrontManager implements Serializable{
     public void setEmail(String newEmail) {
         this.email = newEmail;
     }
-    
-     /**
+
+    /**
      * Returns the current availabilities
+     *
      * @return the availability
      */
     public List<Availability> getAvailabilities() {
         return availabilities;
     }
-    
-     /**
+
+    /**
      * Returns the current competence_profiles
+     *
      * @return the competence_profiles
      */
     public List<Competence_profile> getCompetence_profiles() {
@@ -323,18 +320,18 @@ public class FrontManager implements Serializable{
     public void setToDate(String toDate) {
         this.toDate = toDate;
     }
-    
-    public void sendApp()
-    {
-        applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name,this.lastName,this.email),
+
+    public void sendApp() {
+        applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email),
                 competence_profiles, availabilities));
     }
-    
-    public String findCompetenceName(BigInteger competence_id)
-    {
-         for(int i = 0; i < competences.size(); i++)
-             if(competences.get(i).getCompetence_id() == competence_id)
-                 return competences.get(i).getName();
-         return " ";
-    }    
+
+    public String findCompetenceName(BigInteger competence_id) {
+        for (int i = 0; i < competences.size(); i++) {
+            if (competences.get(i).getCompetence_id() == competence_id) {
+                return competences.get(i).getName();
+            }
+        }
+        return " ";
+    }
 }
