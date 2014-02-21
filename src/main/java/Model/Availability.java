@@ -8,6 +8,7 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -64,29 +65,28 @@ public class Availability implements Serializable {
     public void setPerson(Person person) {
         this.person = person;
     }
-   
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (availability_id != null ? availability_id.hashCode() : 0);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.availability_id);
         return hash;
     }
     
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Availability)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Availability other = (Availability) object;
-        if ((this.availability_id == null && other.availability_id != null) || (this.availability_id != null && !this.availability_id.equals(other.availability_id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
+        final Availability other = (Availability) obj;
         return true;
     }
 
     @Override
     public String toString() {
-        return "[[from_date] ~ [to_date]]";
+        return "Availability{" + "from_date=" + from_date + ", to_date=" + to_date + '}';
     }
 }

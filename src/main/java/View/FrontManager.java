@@ -69,6 +69,7 @@ public class FrontManager implements Serializable {
         for (int i = 0; i < competences.size(); i++) {
             areas[i] = competences.get(i).getName();
         }
+                //applicantFacade.testMethod();
     }
 
     /**
@@ -78,10 +79,6 @@ public class FrontManager implements Serializable {
         competences = new ArrayList<Competence>();
         availabilities = new ArrayList<Availability>();
         competence_profiles = new ArrayList<Competence_profile>();
-    }
-
-    public void login() {
-        transactionFailure = "a";
     }
 
     /**
@@ -100,8 +97,9 @@ public class FrontManager implements Serializable {
         this.transactionFailure = transactionFailure;
     }
 
-    public void addCompetence() {
-        competence_profiles.add(new Competence_profile(applicantFacade.getCompetenceID(currentArea), this.years));
+    public void addCompetence() 
+    {
+        competence_profiles.add(new Competence_profile(this.years, applicantFacade.getCompetence(currentArea)));
     }
 
     /**
@@ -143,8 +141,7 @@ public class FrontManager implements Serializable {
          }
          catch(ParseException e){}        
          */
-        availabilities.add(new Availability(this.fromDate, this.toDate));
-        //applicantFacade.testMethod();
+        availabilities.add(new Availability (this.fromDate, this.toDate));
     }
 
     public String getName() {

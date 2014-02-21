@@ -9,10 +9,13 @@ package Controller;
 import Model.ApplicationDTO;
 import Model.Availability;
 import Model.Competence;
+import Model.CompetenceDTO;
 import Model.Competence_profile;
 import Model.Person;
-import View.FrontManager;
+import Model.Person_Groups;
+import Model.Roles;
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -28,74 +31,11 @@ public class ApplicantFacade {
     
     @PersistenceContext(unitName = "projectPU")
     private EntityManager em;
-   
-    private BigInteger person_id; 
-    private Person person;
-    private List<Competence_profile> competences;
-    private List<Availability> availabilitys;
-    private FrontManager f;
+
     
-    /*
-    public void addApplicant (String name, String surname, String email){
-        person = new Person (name, surname, email);
-    }
-    
-    public void addCompetenceProfile (String competenceName, int years_of_experience){
-        Competence c = em.find (Competence.class, competenceName);
-        BigInteger  competence_id = c.getCompetence_id();
-        competences.add (new Competence_profile (competence_id, years_of_experience));
-    }
-    
-    public void addAvailability (Date from_date, Date to_date){
-        availabilitys.add (new Availability (from_date, to_date));
-    }
-    
-    public List<Availability> getAvailabilities() {
-        return availabilitys;
-    }
-    
-    public void testMethod (){
-        Person  p = new Person ();
-        p.setPassword("1234");
-        p.setUsername("root");
-        p.setPerson_id(BigInteger.valueOf (1));
-        p.setRole_id(BigInteger.valueOf (1));
-        em.persist(p);
-        Person_Groups   pg = new Person_Groups ();
-        pg.setRolename("Recruiter");
-        pg.setUsername("root");
-        em.persist(pg);
-    }
-    */
-    public void submitApplication (ApplicationDTO ADTO) {
-        person = ADTO.getPerson();
-        person.setRole_id(BigInteger.valueOf (2));
-        em.persist(person);
-        
-        //person_id = (BigInteger)em.createQuery("select max(u.person_id) from Person u").getSingleResult();
-        
-        competences = ADTO.getCompetences();
-        for(Competence_profile cp : competences){
-            em.persist(cp);
-        }
-        
-        availabilitys = ADTO.getAvailabilitys();
-        for(Availability availability : availabilitys){
-            em.persist(availability);
-        }
-    }
-    
-    public BigInteger getCompetenceID(String compName)
+    public void testMethod ()
     {
-        Query   query = em.createQuery ("SELECT c FROM Competence c WHERE c.name=:n");
-        query.setParameter ("n", compName);
-        Competence  tmp = (Competence) query.getSingleResult();
-        return (tmp.getCompetence_id());
-    }
-    
-    public List<Competence> getCompetences ()
-    {
-     /*   
+        /*
         String[] areas = new String[10];
         areas[0] = "Korvgrillning";
         areas[1] = "Karuselldrift";
@@ -108,16 +48,76 @@ public class ApplicantFacade {
         areas[8] = "Taxering";
         areas[9] = "Servicing";
         
-        for (int i=0; i<areas.length; i++){
+        for (int i=0; i<areas.length; i++)
+        {
             Competence c = new Competence ();
             String s = Integer.toString(i);
             c.setCompetence_id(new BigInteger (s));
             c.setName(areas[i]);
             em.persist (c);
-        }*/
+        }
+        */
+        Roles   role = new Roles();
+        role.setName("Recruiter");
+        role.setRole_id(BigInteger.valueOf (1));
         
-       
+        Roles   role2 = new Roles();
+        role2.setName("Applicant");
+        role2.setRole_id(BigInteger.valueOf (2));
+      
+        Person  person = new Person ();
+        person.setPassword("1234");
+        person.setUsername("root");
+        person.setPerson_id(BigInteger.ZERO);
+        
+        role.addPerson(person);
+        
+        Person_Groups   pg = new Person_Groups ();
+        //pg.setPerson(person);
+        //pg.setRole(role);
+        
+        role.addPerson_Group(pg);
+        person.setPerson_group(pg);
+        
+        em.persist(role);
+        em.persist (role2);
+        //em.persist (pg);
+    }
+    
+    public void submitApplication (ApplicationDTO ADTO) 
+    {
+        Roles    role = em.find(Roles.class, BigInteger.valueOf (2));
+        Person  person = ADTO.getPerson();
+        Collection<Person>   list = role.getPersons();
+        list.add(person);
+        
+        List<Competence_profile>  competences = ADTO.getCompetences();
+        person.setCompetence_profiles(competences);
+        
+        List<Availability>  availabilitys = ADTO.getAvailabilitys();
+        person.setAvailabilitys(availabilitys);
+        
+        em.persist(person);
+    }
+    
+    public BigInteger getCompetenceID(String compName)
+    {
+        Query   query = em.createQuery ("SELECT c FROM Competence c WHERE c.name=:n");
+        query.setParameter ("n", compName);
+        Competence  tmp = (Competence) query.getSingleResult();
+        return (tmp.getCompetence_id());
+    }
+    
+    public List<Competence> getCompetences ()
+    {
         Query   query = em.createQuery ("SELECT c FROM Competence c");
         return query.getResultList ();
+    }
+    
+    public Competence   getCompetence (String comp){
+        Query   query = em.createQuery ("SELECT c FROM Competence c WHERE c.name=:n");
+        query.setParameter ("n", comp);
+        Competence   c = (Competence) query.getSingleResult();
+        return c;
     }
 }

@@ -8,16 +8,13 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Collection;
-import java.util.HashSet;
-import static javax.persistence.CascadeType.REMOVE;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -32,44 +29,22 @@ public class Competence_profile implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger competence_profile_id;
     private int years_of_experience;
-   
-   @ManyToOne
+    
+    @ManyToOne
     @JoinColumn(name="person_id", insertable=false, updatable=false)
     private Person person;
-   
-   @ManyToOne
+    
+    @ManyToOne
     @JoinColumn(name="competence_id", insertable=false, updatable=false)
     private Competence competence;
 
     public Competence_profile() {
     }
- 
-          /*
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Competence_profile)) {
-            return false;
-        }
-        Competence_profile other = (Competence_profile) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public Competence_profile(int years_of_experience, Competence competence) {
+        this.years_of_experience = years_of_experience;
+        this.competence = competence;
     }
-
-    @Override
-    public String toString() {
-        return "Model.Competence_profile[ id=" + id + " ]";
-    }
-    */
 
     public BigInteger getCompetence_profile_id() {
         return competence_profile_id;
@@ -103,5 +78,25 @@ public class Competence_profile implements Serializable {
         this.competence = competence;
     }
 
-   
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.competence_profile_id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Competence_profile other = (Competence_profile) obj;
+        if (!Objects.equals(this.competence_profile_id, other.competence_profile_id)) {
+            return false;
+        }
+        return true;
+    }
 }

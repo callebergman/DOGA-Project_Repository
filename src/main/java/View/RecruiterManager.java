@@ -95,7 +95,7 @@ public class RecruiterManager {
                 for(int p=0; p < filterList.get(i).getCompetences().size(); p++)
                 {
                     // If true, means we found the competence in the list
-                    if(recruiterFacade.getCompetenceName(filterList.get(i).getCompetences().get(p).getCompetence_id()).equals(area))
+                    if(recruiterFacade.getCompetenceName(filterList.get(i).getCompetences().get(p).getCompetence_profile_id()).equals(area))
                         p = filterList.get(i).getCompetences().size();
                     // Else, remove the person from the list
                     else if(p == filterList.get(i).getCompetences().size() - 1)

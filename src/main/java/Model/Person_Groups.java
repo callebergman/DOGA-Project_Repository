@@ -9,6 +9,7 @@ package Model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Objects;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -21,40 +22,42 @@ import javax.persistence.OneToOne;
  * @author Hikari
  */
 @Entity
-@IdClass(Person_Groups_CompKey.class)
 public class Person_Groups implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     
-    public static enum ROLE {
- 
-        ADMINISTRATOR, USER, GUEST
-    }
-    
-    @Id
-    private String rolename;
-    @Id
-    private String username;
-
+    @EmbeddedId
+    Person_Groups_CompKey   pk;
+        
     @ManyToOne
     @JoinColumn(name = "rolename", insertable=false, updatable=false, referencedColumnName = "name")
     private Roles    role;
-        
+       
     @OneToOne
     @JoinColumn(name = "username", insertable=false, updatable=false, referencedColumnName = "username")
     private Person person;
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public Roles getRole() {
+        return role;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setRole(Roles role) {
+        this.role = role;
     }
-    
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+  
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.rolename);
+        hash = 23 * hash + Objects.hashCode(this.role);
+        hash = 23 * hash + Objects.hashCode(this.person);
         return hash;
     }
 
@@ -67,14 +70,12 @@ public class Person_Groups implements Serializable {
             return false;
         }
         final Person_Groups other = (Person_Groups) obj;
-        if (!Objects.equals(this.rolename, other.rolename)) {
+        if (!Objects.equals(this.role, other.role)) {
             return false;
         }
-        if (!Objects.equals(this.username, other.username)) {
+        if (!Objects.equals(this.person, other.person)) {
             return false;
         }
         return true;
     }
-    
-    
 }

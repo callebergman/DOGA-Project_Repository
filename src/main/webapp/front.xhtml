@@ -20,8 +20,8 @@
                 <div id="options">
                     <ul>
                         <li><button id="opt1">Basic information</button></li>
-                        <li><button id="opt2">Area of expertise</button></li>
-                        <li><button id="opt3">Time periods</button></li>
+                        <li><button id="opt2" onclick="document.getElementById('formA').submit();">Area of expertise</button></li>
+                        <li><button id="opt3" onclick="document.getElementById('formA').submit();">Time periods</button></li>
                         <li><button id="opt4" onclick="document.getElementById('formA').submit();">Finish</button></li>
                     </ul>
                 </div>
@@ -85,7 +85,7 @@
                                     </tr>
                                     <ui:repeat var="comp" value="#{frontManager.competence_profiles}">
                                         <tr>
-                                            <td>#{frontManager.findCompetenceName(comp.competence_id)}</td>
+                                            <td>#{comp.competence.name}</td>
                                             <td>#{comp.years_of_experience}</td>
                                         </tr>
                                     </ui:repeat>
@@ -192,7 +192,7 @@
                                 </tr>
                                 <ui:repeat var="comp" value="#{frontManager.competence_profiles}">
                                     <tr>
-                                        <td>#{frontManager.findCompetenceName(comp.competence_id)}</td>
+                                        <td>#{comp.competence.name}</td>
                                         <td>#{comp.years_of_experience}</td>
                                     </tr>
                                 </ui:repeat>

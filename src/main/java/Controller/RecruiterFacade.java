@@ -13,7 +13,6 @@ import Model.Roles;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,7 +33,7 @@ public class RecruiterFacade {
         Query   query = em.createQuery ("SELECT c FROM Roles c WHERE c.name=:n");
         query.setParameter ("n", "Applicant");
         Roles   tmp = (Roles) query.getSingleResult();
-        BigInteger  role_id = tmp.getId();
+        BigInteger  role_id = tmp.getRole_id();
         
         List<ApplicationDTO>    list = new ArrayList<ApplicationDTO> ();
         query = em.createQuery ("SELECT c FROM Person c WHERE c.role_id=:ri");
