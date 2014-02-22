@@ -12,7 +12,8 @@ import Model.Competence;
 import Model.CompetenceDTO;
 import Model.Competence_profile;
 import Model.Person;
-import Model.Person_Groups;
+import Model.Authentication_Table;
+import Model.Credential;
 import Model.Roles;
 import java.math.BigInteger;
 import java.util.Collection;
@@ -35,7 +36,7 @@ public class ApplicantFacade {
     
     public void testMethod ()
     {
-        /*
+        
         String[] areas = new String[10];
         areas[0] = "Korvgrillning";
         areas[1] = "Karuselldrift";
@@ -56,32 +57,31 @@ public class ApplicantFacade {
             c.setName(areas[i]);
             em.persist (c);
         }
-        */
+        
         Roles   role = new Roles();
         role.setName("Recruiter");
-        role.setRole_id(BigInteger.valueOf (1));
         
         Roles   role2 = new Roles();
         role2.setName("Applicant");
-        role2.setRole_id(BigInteger.valueOf (2));
       
         Person  person = new Person ();
-        person.setPassword("1234");
-        person.setUsername("root");
-        person.setPerson_id(BigInteger.ZERO);
+        person.setName("Admin");
+        person.setEmail("admin@kth.se");
         
+        Credential  credential  = new Credential ();
+        credential.setPassWord("1234");
+        credential.setUserName("root");
+        
+        Authentication_Table    table = new Authentication_Table ();
+        
+        credential.setAuth_table(table);
+        role.addAuthentication_Table(table);
+        
+        person.setCredential(credential);
         role.addPerson(person);
         
-        Person_Groups   pg = new Person_Groups ();
-        //pg.setPerson(person);
-        //pg.setRole(role);
-        
-        role.addPerson_Group(pg);
-        person.setPerson_group(pg);
-        
         em.persist(role);
-        em.persist (role2);
-        //em.persist (pg);
+        em.persist (role2);         
     }
     
     public void submitApplication (ApplicationDTO ADTO) 

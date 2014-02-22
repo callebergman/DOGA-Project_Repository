@@ -31,11 +31,11 @@ public class Competence_profile implements Serializable {
     private int years_of_experience;
     
     @ManyToOne
-    @JoinColumn(name="person_id", insertable=false, updatable=false)
+    @JoinColumn(name="person_id")
     private Person person;
     
     @ManyToOne
-    @JoinColumn(name="competence_id", insertable=false, updatable=false)
+    @JoinColumn(name="competence_id")
     private Competence competence;
 
     public Competence_profile() {

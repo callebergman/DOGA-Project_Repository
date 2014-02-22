@@ -59,7 +59,11 @@ public class Competence implements Serializable, CompetenceDTO {
     public void setCompetence_profiles(List<Competence_profile> competence_profiles) {
         this.competence_profiles = competence_profiles;
     }
-
+    
+    public void addCompetence_profile (Competence_profile cp) {
+        cp.setCompetence(this);
+        competence_profiles.add (cp);
+    }
     @Override
     public int hashCode() {
         int hash = 5;

@@ -7,12 +7,9 @@
 package Model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Objects;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -22,20 +19,18 @@ import javax.persistence.OneToOne;
  * @author Hikari
  */
 @Entity
-public class Person_Groups implements Serializable {
+public class Authentication_Table implements Serializable {
     
     private static final long serialVersionUID = 1L;
-    
-    @EmbeddedId
-    Person_Groups_CompKey   pk;
         
     @ManyToOne
-    @JoinColumn(name = "rolename", insertable=false, updatable=false, referencedColumnName = "name")
+    @JoinColumn(name = "roleName")
     private Roles    role;
        
     @OneToOne
-    @JoinColumn(name = "username", insertable=false, updatable=false, referencedColumnName = "username")
-    private Person person;
+    @Id
+    @JoinColumn(name = "userName")
+    private Credential credential;
 
     public Roles getRole() {
         return role;
@@ -45,19 +40,19 @@ public class Person_Groups implements Serializable {
         this.role = role;
     }
 
-    public Person getPerson() {
-        return person;
+    public Credential getCredential() {
+        return credential;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setCredential(Credential credential) {
+        this.credential = credential;
     }
   
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 23 * hash + Objects.hashCode(this.role);
-        hash = 23 * hash + Objects.hashCode(this.person);
+        hash = 23 * hash + Objects.hashCode(this.credential);
         return hash;
     }
 
@@ -69,11 +64,11 @@ public class Person_Groups implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Person_Groups other = (Person_Groups) obj;
+        final Authentication_Table other = (Authentication_Table) obj;
         if (!Objects.equals(this.role, other.role)) {
             return false;
         }
-        if (!Objects.equals(this.person, other.person)) {
+        if (!Objects.equals(this.credential, other.credential)) {
             return false;
         }
         return true;

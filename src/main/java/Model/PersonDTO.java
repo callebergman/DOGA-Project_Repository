@@ -11,6 +11,4 @@ package Model;
  */
 public interface PersonDTO {
     
-    String getUsername ();
-    String getPassword ();
 }

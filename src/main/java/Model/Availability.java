@@ -39,7 +39,7 @@ public class Availability implements Serializable {
     }
     
     @ManyToOne
-    @JoinColumn(name="person_id", insertable=false, updatable=false)
+    @JoinColumn(name="person_id")
     private Person person;
 
     public String getFrom_date() {
