@@ -28,6 +28,9 @@ public class RecruiterFacade {
     @PersistenceContext(unitName = "projectPU")
     private EntityManager em;
     
+    /**
+     *@return list 
+     */
     public List<ApplicationDTO> getAllApplications ()
     {   /*
         Query   query = em.createQuery ("SELECT c FROM Roles c WHERE c.name=:n");
@@ -61,7 +64,7 @@ public class RecruiterFacade {
         
         return list;
     }
-    
+   
     public String getCompetenceName (BigInteger competence_id){
         String name;
         Competence  c = em.find (Competence.class, competence_id);

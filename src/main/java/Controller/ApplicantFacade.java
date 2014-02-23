@@ -81,7 +81,10 @@ public class ApplicantFacade {
         em.persist(role);
         em.persist (role2);         
     }
-    
+    /**
+     *@param ADTO
+     * submits a application towards the database
+     */
     public void submitApplication (ApplicationDTO ADTO) 
     {
         Roles    role = em.find(Roles.class, "Applicant");
@@ -100,7 +103,10 @@ public class ApplicantFacade {
         
         em.persist(person);
     }
-    
+    /**
+     * @param compName competencename
+     *@return competences id 
+     */
     public BigInteger getCompetenceID(String compName)
     {
         Query   query = em.createQuery ("SELECT c FROM Competence c WHERE c.name=:n");
@@ -108,13 +114,17 @@ public class ApplicantFacade {
         Competence  tmp = (Competence) query.getSingleResult();
         return (tmp.getCompetence_id());
     }
-    
+    /**
+     *@return competence list
+     */
     public List<Competence> getCompetences ()
     {
         Query   query = em.createQuery ("SELECT c FROM Competence c");
         return query.getResultList ();
     }
-    
+    /**
+     *@return competence
+     */
     public Competence   getCompetence (String comp){
         Query   query = em.createQuery ("SELECT c FROM Competence c WHERE c.name=:n");
         query.setParameter ("n", comp);
