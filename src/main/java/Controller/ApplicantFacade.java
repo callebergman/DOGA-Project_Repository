@@ -9,7 +9,6 @@ package Controller;
 import Model.ApplicationDTO;
 import Model.Availability;
 import Model.Competence;
-import Model.CompetenceDTO;
 import Model.Competence_profile;
 import Model.Person;
 import Model.Authentication_Table;

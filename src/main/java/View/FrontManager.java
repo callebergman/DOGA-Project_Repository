@@ -69,7 +69,8 @@ public class FrontManager implements Serializable {
         for (int i = 0; i < competences.size(); i++) {
             areas[i] = competences.get(i).getName();
         }
-                applicantFacade.testMethod();
+        //HERE!!!
+        //applicantFacade.testMethod(); 
     }
 
     /**
