@@ -65,4 +65,8 @@
             <form-error-page>/faces/loginForm.xhtml</form-error-page>
         </form-login-config>
    </login-config>
+    <context-param>
+       <param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
+       <param-value>true</param-value>
+    </context-param>
 </web-app>
