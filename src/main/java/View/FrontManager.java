@@ -151,47 +151,69 @@ public class FrontManager implements Serializable {
         availabilities.add(new Availability (this.fromDate, this.toDate));
         return jsf22Bugfix();
     }
-
+    /**
+     *@return name 
+     */
     public String getName() {
         return name;
     }
-
+    /**
+     *@param newName sets a new name
+     */
     public void setName(String newName) {
         this.name = newName;
     }
-
+    /****
+     *@return years 
+     */
     public int getYears() {
         return years;
     }
-
+    /****
+     *@param newYears sets a new year
+     */
     public void setYears(int newYears) {
         years = newYears;
     }
-
+    /**
+     *@return areas
+     */
     public String[] getAreas() {
         return areas;
     }
-
+    /**
+     *@return currentArea
+     */
     public String getCurrentArea() {
         return currentArea;
     }
-
+    /**
+     *@param newArea sets a new value to area 
+     */
     public void setCurrentArea(String newArea) {
         currentArea = newArea;
     }
-
+    /**
+     *@return lastName 
+     */
     public String getLastName() {
         return lastName;
     }
-
+    /**
+     *@param newLast sets a new value to newLAst
+     */
     public void setLastName(String newLast) {
         this.lastName = newLast;
     }
-
+    /**
+     *@return email 
+     */
     public String getEmail() {
         return email;
     }
-
+    /**
+     *@param newEmail sets a new Email 
+     */
     public void setEmail(String newEmail) {
         this.email = newEmail;
     }
