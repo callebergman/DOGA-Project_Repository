@@ -102,7 +102,7 @@ public class ApplicantFacade {
         Set<Integer>    tmp = new HashSet ();
         for (Competence_profile cp : competences) {
             BigInteger t = cp.getCompetence().getCompetence_id();
-            if (tmp.add (t.intValue()))
+            if (!tmp.add (t.intValue()))
             {
                 throw new SubmissionException("Duplicate competence submitted");
             }
