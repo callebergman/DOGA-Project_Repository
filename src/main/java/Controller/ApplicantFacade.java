@@ -93,7 +93,7 @@ public class ApplicantFacade {
      *@param ADTO
      * submits a application towards the database
      */
-    public void submitApplication (ApplicationDTO ADTO) 
+    public void submitApplication (ApplicationDTO ADTO) throws SubmissionException 
     {
         Roles    role = em.find(Roles.class, "Applicant");
         Person  person = ADTO.getPerson();
