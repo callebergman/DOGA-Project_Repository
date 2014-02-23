@@ -5,10 +5,14 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
     <navigation-rule>
-        <from-view-id>/login.xhtml</from-view-id>
+        <from-view-id>/front.xhtml</from-view-id>
         <navigation-case>
-            <if>#{loginManager.success}</if>
-            <to-view-id>/recruiterPage.xhtml</to-view-id>
+            <if>#{frontManager.success}</if>
+            <to-view-id>/front.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <if>#{!frontManager.success}</if>
+            <to-view-id>/error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

@@ -11,10 +11,13 @@ import Model.Availability;
 import Model.Competence;
 import Model.Competence_profile;
 import Model.Person;
+import Model.SubmissionException;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -61,7 +64,7 @@ public class FrontManager implements Serializable {
     private int fromYear;
     private int fromMonth;
     private int fromDay;
-    private String transactionFailure;
+    private Exception transactionFailure;
 
     @PostConstruct
     private void init() {
@@ -89,18 +92,21 @@ public class FrontManager implements Serializable {
     public boolean getSuccess() {
         return transactionFailure == null;
     }
-
-    public String getTransactionFailure() {
+    /**
+     * Returns the latest thrown exception.
+     */
+    public Exception getException() {
         return transactionFailure;
     }
-
-    public void setTransactionFailure(String transactionFailure) {
-        this.transactionFailure = transactionFailure;
+    
+    private String jsf22Bugfix() {
+        return "";
     }
-
-    public void addCompetence() 
+    
+    public String addCompetence() 
     {
         competence_profiles.add(new Competence_profile(this.years, applicantFacade.getCompetence(currentArea)));
+        return jsf22Bugfix();
     }
 
     /**
@@ -108,7 +114,7 @@ public class FrontManager implements Serializable {
      *
      * @return jsf22Bugfix();
      */
-    public void addAvailability() {
+    public String addAvailability() {
         /* Date fDate = null;
          Date tDate = null;
          */
@@ -143,6 +149,7 @@ public class FrontManager implements Serializable {
          catch(ParseException e){}        
          */
         availabilities.add(new Availability (this.fromDate, this.toDate));
+        return jsf22Bugfix();
     }
 
     public String getName() {
@@ -319,9 +326,14 @@ public class FrontManager implements Serializable {
         this.toDate = toDate;
     }
 
-    public void sendApp() {
-        applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email),
-                competence_profiles, availabilities));
+    public String sendApp() {
+        try {
+            applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email),
+                    competence_profiles, availabilities));
+        } catch (SubmissionException e) {
+            transactionFailure = e;
+        }
+        return jsf22Bugfix();
     }
 
     public String findCompetenceName(BigInteger competence_id) {
