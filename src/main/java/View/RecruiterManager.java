@@ -45,7 +45,9 @@ public class RecruiterManager {
         applicationsList = recruiterFacade.getAllApplications();
         setFilterList(applicationsList);
     }
-    
+    /****
+     *Creates a new Arraylist 
+     */
     public RecruiterManager()
     {
         applicationsList = new ArrayList<ApplicationDTO>();
@@ -201,7 +203,7 @@ public class RecruiterManager {
     }
 
     /**
-     * @param filterList the filterList to set
+     * @param newfilterList set the filterList to a new value
      */
     public void setFilterList(List<ApplicationDTO> newFilterList) {
         this.filterList = newFilterList;
