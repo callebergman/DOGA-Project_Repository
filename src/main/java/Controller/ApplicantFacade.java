@@ -14,10 +14,17 @@ import Model.Person;
 import Model.Authentication_Table;
 import Model.Credential;
 import Model.Roles;
+import Model.SubmissionException;
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -27,6 +34,7 @@ import javax.persistence.Query;
  * @author Hikari
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class ApplicantFacade {
     
     @PersistenceContext(unitName = "projectPU")
@@ -92,7 +100,14 @@ public class ApplicantFacade {
         role.addPerson(person);
         
         List<Competence_profile>  competences = ADTO.getCompetences();
+        
+        Set<Integer>    tmp = new HashSet ();
         for (Competence_profile cp : competences) {
+            BigInteger t = cp.getCompetence().getCompetence_id();
+            if (!tmp.add (t.intValue()))
+            {
+                throw new SubmissionException("Duplicate competence submitted");
+            }
             person.addCompetence_profiles(cp);
 	}
         
@@ -100,8 +115,6 @@ public class ApplicantFacade {
         for (Availability a : availabilitys) {
             person.addAvailability(a);
 	}
-        
-        em.persist(person);
     }
     /**
      * @param compName competencename
