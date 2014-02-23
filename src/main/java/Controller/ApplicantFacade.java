@@ -35,7 +35,6 @@ public class ApplicantFacade {
     
     public void testMethod ()
     {
-        
         String[] areas = new String[10];
         areas[0] = "Korvgrillning";
         areas[1] = "Karuselldrift";
