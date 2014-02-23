@@ -84,16 +84,19 @@ public class ApplicantFacade {
     
     public void submitApplication (ApplicationDTO ADTO) 
     {
-        Roles    role = em.find(Roles.class, BigInteger.valueOf (2));
+        Roles    role = em.find(Roles.class, "Applicant");
         Person  person = ADTO.getPerson();
-        Collection<Person>   list = role.getPersons();
-        list.add(person);
+        role.addPerson(person);
         
         List<Competence_profile>  competences = ADTO.getCompetences();
-        person.setCompetence_profiles(competences);
+        for (Competence_profile cp : competences) {
+            person.addCompetence_profiles(cp);
+	}
         
         List<Availability>  availabilitys = ADTO.getAvailabilitys();
-        person.setAvailabilitys(availabilitys);
+        for (Availability a : availabilitys) {
+            person.addAvailability(a);
+	}
         
         em.persist(person);
     }
