@@ -11,15 +11,12 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -54,7 +51,7 @@ public class Credential implements Serializable {
     }
 
     public void setPassWord(String passWord) {
-        this.passWord = passWord;
+        this.passWord = sha256(passWord);
     }
 
     public Authentication_Table getAuth_table() {
