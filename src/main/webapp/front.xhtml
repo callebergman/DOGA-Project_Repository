@@ -163,39 +163,39 @@
                             </div>
                         </div>
                     </h:form>
-                    
+
                     <h:form>
                         <div id="preview">
                             <h2 class="title" id = "header">Basic information</h2>
                             <div id="fillin">   
-                            <p>                         
-                                <h:outputLabel for="Input" value="First name:  "/>
-                                <br/>
-                                <h:outputLabel for="Input" value="#{frontManager.name}"/>
-                                <br/>
-                                <h:outputLabel for="Output" value="Last name: "/>
-                                <br/>
-                                <h:outputLabel for="Input" value="#{frontManager.lastName}"/>
-                                <br/>
-                                <h:outputLabel for="Output" value="Email: "/>
-                                <br/>
-                                <h:outputLabel for="Input" value="#{frontManager.email}"/>
-                            </p> 
+                                <p>                         
+                                    <h:outputLabel for="Input" value="First name:  "/>
+                                    <br/>
+                                    <h:outputLabel for="Input" value="#{frontManager.name}"/>
+                                    <br/>
+                                    <h:outputLabel for="Output" value="Last name: "/>
+                                    <br/>
+                                    <h:outputLabel for="Input" value="#{frontManager.lastName}"/>
+                                    <br/>
+                                    <h:outputLabel for="Output" value="Email: "/>
+                                    <br/>
+                                    <h:outputLabel for="Input" value="#{frontManager.email}"/>
+                                </p> 
                             </div>  
-                            
+
                             <h2 class="title" id = "header">Areas of Expertise</h2>
                             <div class ="CSSTableGenerator">
                                 <table border="1">
-                                <tr>
-                                    <th>Area of expertise</th>
-                                    <th>Years</th>
-                                </tr>
-                                <ui:repeat var="comp" value="#{frontManager.competence_profiles}">
                                     <tr>
-                                        <td>#{comp.competence.name}</td>
-                                        <td>#{comp.years_of_experience}</td>
+                                        <th>Area of expertise</th>
+                                        <th>Years</th>
                                     </tr>
-                                </ui:repeat>
+                                    <ui:repeat var="comp" value="#{frontManager.competence_profiles}">
+                                        <tr>
+                                            <td>#{comp.competence.name}</td>
+                                            <td>#{comp.years_of_experience}</td>
+                                        </tr>
+                                    </ui:repeat>
                                 </table>
                             </div>
                             <br/>
@@ -221,11 +221,15 @@
                         </div>                          
                     </h:form>
                 </div>
-            </div>                       
-        </div>
-        <div class="footerLayout">
+
+            </div> 
             <ui:include src="footer.xhtml"/>
+            
         </div>
+
+
+
+
     </h:body>
 </html>
 

@@ -1,6 +1,7 @@
             $( document ).ready(function() {
                 $("#expertise").hide();
-                $("#periods").hide(); 
+                $("#periods").hide();
+                
                 
                 $("#opt1").click(function(){
                     $("#basicInfo").show();

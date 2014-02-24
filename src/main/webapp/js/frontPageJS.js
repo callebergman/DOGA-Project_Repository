@@ -1,10 +1,6 @@
             $( document ).ready(function() 
              {
-                $("#expertise").hide();
-                $("#periods").hide(); 
-                $("#preview").hide(); 
-                
-                $("#opt1").click(function(){
+                 $("#opt1").click(function(){
                     $("#basicInfo").show();
                     $("#expertise").hide();
                     $("#periods").hide();
@@ -13,7 +9,14 @@
                     setCookie("opt2", false, 365);
                     setCookie("opt3", false, 365);
                     setCookie("opt4", false, 365);
+                $("#expertise").hide();
+                $("#periods").hide(); 
+                $("#preview").hide(); 
+                 
+                
+             
                 });
+               
                 
                 $("#opt2").click(function(){
                     $("#expertise").show();
@@ -48,19 +51,19 @@
                     setCookie("opt4", true, 365);
                 });
                 
-                if(getCookie("opt2") == "true"){
+                if(getCookie("opt2") === "true"){
                     $("#expertise").show();
                     $("#periods").hide();
                     $("#basicInfo").hide();
                     $("#preview").hide();
                 }
-                else if(getCookie("opt3") == "true"){
+                else if(getCookie("opt3") === "true"){
                     $("#periods").show();
                     $("#basicInfo").hide();
                     $("#expertise").hide();
                     $("#preview").hide();
                 }
-                else if(getCookie("opt4") == "true"){
+                else if(getCookie("opt4") === "true"){
                     $("#preview").show();
                     $("#periods").hide();
                     $("#basicInfo").hide();
