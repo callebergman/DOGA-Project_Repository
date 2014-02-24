@@ -9,9 +9,7 @@
                     setCookie("opt2", false, 365);
                     setCookie("opt3", false, 365);
                     setCookie("opt4", false, 365);
-                $("#expertise").hide();
-                $("#periods").hide(); 
-                $("#preview").hide(); 
+               
                  
                 
              
@@ -50,8 +48,13 @@
                     setCookie("opt3", false, 365);
                     setCookie("opt4", true, 365);
                 });
-                
-                if(getCookie("opt2") === "true"){
+                if(getCookie("opt1") === "true"){
+                    $("#expertise").hide();
+                    $("#periods").hide();
+                    $("#basicInfo").show();
+                    $("#preview").hide();
+                }
+                else if(getCookie("opt2") === "true"){
                     $("#expertise").show();
                     $("#periods").hide();
                     $("#basicInfo").hide();
@@ -83,8 +86,10 @@
                     x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
                     y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
                     x = x.replace(/^\s+|\s+$/g, "");
-                    if (x == c_name) {
+                    if (x === c_name) {
                         return unescape(y);
                     }
                 }
+               
             }
+             
