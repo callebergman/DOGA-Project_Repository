@@ -16,13 +16,14 @@ import Model.Credential;
 import Model.Roles;
 import Model.SubmissionException;
 import java.math.BigInteger;
-import java.util.Collection;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
@@ -93,7 +94,7 @@ public class ApplicantFacade {
      *@param ADTO
      * submits a application towards the database
      */
-    public void submitApplication (ApplicationDTO ADTO) throws SubmissionException 
+    public void submitApplication (ApplicationDTO ADTO) throws SubmissionException, ParseException 
     {
         Roles    role = em.find(Roles.class, "Applicant");
         Person  person = ADTO.getPerson();
@@ -102,7 +103,8 @@ public class ApplicantFacade {
         List<Competence_profile>  competences = ADTO.getCompetences();
         
         Set<Integer>    tmp = new HashSet ();
-        for (Competence_profile cp : competences) {
+        for (Competence_profile cp : competences) 
+        {
             BigInteger t = cp.getCompetence().getCompetence_id();
             if (!tmp.add (t.intValue()))
             {
@@ -111,8 +113,17 @@ public class ApplicantFacade {
             person.addCompetence_profiles(cp);
 	}
         
+        DateFormat formatter = new SimpleDateFormat("MM-dd-yy");
+        Date fromDate;
+        Date toDate;
         List<Availability>  availabilitys = ADTO.getAvailabilitys();
-        for (Availability a : availabilitys) {
+        
+        for (Availability a : availabilitys) 
+        {
+            fromDate = (formatter.parse(a.getFrom_date()));
+            toDate = (formatter.parse(a.getTo_date()));
+            if (!fromDate.before(toDate))
+                throw new SubmissionException("Date submitted was incorrect");
             person.addAvailability(a);
 	}
     }
