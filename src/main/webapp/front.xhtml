@@ -19,9 +19,9 @@
             <div id="main">
                 <div id="options">
                     <ul>
-                        <li><button id="opt1">Basic information</button></li>
-                        <li><button id="opt2" onclick="document.getElementById('formA').submit();">Area of expertise</button></li>
-                        <li><button id="opt3" onclick="document.getElementById('formA').submit();">Time periods</button></li>
+                        <li><button id="opt1" onclick="document.getElementById('formA').submit();">Basic information</button></li>
+                        <li><button id="opt2" onclick="document.getElementById('formB').submit();">Area of expertise</button></li>
+                        <li><button id="opt3" onclick="document.getElementById('formC').submit();">Time periods</button></li>
                         <li><button id="opt4" onclick="document.getElementById('formA').submit();">Finish</button></li>
                     </ul>
                 </div>
@@ -52,7 +52,7 @@
                             </div>  
                         </div> 
                     </h:form>
-                    <h:form>
+                    <h:form id="formB">
                         <div id="expertise">
                             <h2 class="title">Area of expertise</h2>
                             <div id="error">
@@ -164,7 +164,7 @@
                         </div>
                     </h:form>
 
-                    <h:form>
+                    <h:form id="formC">
                         <div id="preview">
                             <h2 class="title" id = "header">Basic information</h2>
                             <div id="fillin">   
@@ -217,7 +217,7 @@
                                 </table>
                             </div>
                             <br/>
-                            <h:commandButton value="Submit Application" action="#{frontManager.sendApp()}"/>     
+                            <h:commandButton  value="Submit Application" action="#{frontManager.sendApp()}"/>     
                         </div>                          
                     </h:form>
                 </div>
