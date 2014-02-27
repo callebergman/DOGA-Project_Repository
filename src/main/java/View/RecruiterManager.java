@@ -8,7 +8,10 @@ package View;
 
 import Controller.RecruiterFacade;
 import Model.ApplicationDTO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -35,7 +38,6 @@ public class RecruiterManager {
     private String lastName;
     private String fromDate;
     private String toDate;
-    private String regDate;
     private String area;
     
     
@@ -89,7 +91,31 @@ public class RecruiterManager {
                 if(!filterList.get(i).getPerson().getSurname().equals(lastName))
                     checkList[i] = true;
             //Time periods
-            //Registration Date
+            if(checkList[i] == false && !toDate.equals("") && !fromDate.equals(""))
+            {
+                for(int p = 0; p < filterList.get(i).getAvailabilitys().size(); p++)
+                {                    
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    try
+                    {
+                    Date fdate = dateFormat.parse(filterList.get(i).getAvailabilitys().get(p).getFrom_date());
+                    Date tdate = dateFormat.parse(filterList.get(i).getAvailabilitys().get(p).getTo_date());
+                    
+                    Date filterToDate = dateFormat.parse(toDate);
+                    Date filterFromDate = dateFormat.parse(fromDate);
+                    
+                    if(fdate.before(filterFromDate) && tdate.after(filterToDate))
+                        p = filterList.get(i).getAvailabilitys().size();
+                    else if(p == filterList.get(i).getAvailabilitys().size() - 1)
+                        checkList[i] = true;
+                    
+                    }
+                    catch(ParseException e)
+                    {
+                        
+                    }
+                }
+            }
             
             //Area of expertise
             if(!area.equals("") && checkList[i] == false)
@@ -165,20 +191,6 @@ public class RecruiterManager {
      */
     public void setToDate(String toDate) {
         this.toDate = toDate;
-    }
-
-    /**
-     * @return the regDate
-     */
-    public String getRegDate() {
-        return regDate;
-    }
-
-    /**
-     * @param regDate the regDate to set
-     */
-    public void setRegDate(String regDate) {
-        this.regDate = regDate;
     }
 
     /**
