@@ -14,10 +14,9 @@ import Model.Person;
 import Model.SubmissionException;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -348,7 +347,7 @@ public class FrontManager implements Serializable {
         this.toDate = toDate;
     }
 
-    public String sendApp() {
+    public String sendApp() throws ParseException {
         try {
             applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email),
                     competence_profiles, availabilities));
