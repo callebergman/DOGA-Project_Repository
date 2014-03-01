@@ -19,10 +19,15 @@ div{
     display: block;
 }
 
-#fillin
+#preview.title
 {    
     font-weight: bold;
     color: GREY;
+}
+#preview.text
+{
+    font-weight: bold;
+    color: #000000;
 }
 
 iframe{
@@ -89,7 +94,7 @@ iframe{
     font-size: 12px;
 }
 
-#error {
+.error {
     
     color : RED;
 }

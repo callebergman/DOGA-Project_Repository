@@ -32,12 +32,7 @@ public class RecruiterFacade {
      *@return list 
      */
     public List<ApplicationDTO> getAllApplications ()
-    {   /*
-        Query   query = em.createQuery ("SELECT c FROM Roles c WHERE c.name=:n");
-        query.setParameter ("n", "Applicant");
-        Roles   tmp = (Roles) query.getSingleResult();
-        BigInteger  role_id = tmp.getRole_id();
-        */
+    {   
         List<ApplicationDTO>    list = new ArrayList<ApplicationDTO> ();
         Query   query = em.createQuery ("SELECT c FROM Person c WHERE c.role.name=:n");
         query.setParameter ("n", "Applicant");

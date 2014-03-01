@@ -34,9 +34,9 @@ public class FrontManager implements Serializable {
     @EJB
     private ApplicantFacade applicantFacade;
     
-    @NotNull(message="Please enter your name")
+    @Size(min=1, message="Please enter your name!")
     private String name;
-    @NotNull(message="Please enter your last name")
+    @Size(min=1, message="Please enter your last name!")
     private String lastName;    
     @NotNull(message="Please enter your email")
     @Pattern(regexp = "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)", message = "Invalid e-mail")
@@ -114,9 +114,7 @@ public class FrontManager implements Serializable {
      * @return jsf22Bugfix();
      */
     public String addAvailability() {
-        /* Date fDate = null;
-         Date tDate = null;
-         */
+
         if (fromMonth < 10 && fromDay < 10) {
             setFromDate(Integer.toString(fromYear) + "-0" + Integer.toString(fromMonth) + "-0" + Integer.toString(fromDay));
         } else if (fromMonth < 10 && fromDay > 9) {
@@ -137,16 +135,6 @@ public class FrontManager implements Serializable {
             setToDate(toYear + "-" + Integer.toString(toMonth) + "-" + Integer.toString(toDay));
         }
 
-        /*
-         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        
-         try 
-         {
-         fDate = (df.parse(getFromDate()));
-         tDate = (df.parse(getToDate()));
-         }
-         catch(ParseException e){}        
-         */
         availabilities.add(new Availability (this.fromDate, this.toDate));
         return jsf22Bugfix();
     }

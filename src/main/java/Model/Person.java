@@ -137,7 +137,7 @@ public class Person implements PersonDTO, Serializable {
         availabilitys.add (a);
     }
     
-        public void addCompetence_profiles (Competence_profile   cp) {
+    public void addCompetence_profiles (Competence_profile   cp) {
         cp.setPerson(this);
         competence_profiles.add (cp);
     }

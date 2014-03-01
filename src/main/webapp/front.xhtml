@@ -19,9 +19,9 @@
             <div id="main">
                 <div id="options">
                     <ul>
-                        <li><button id="opt1" onclick="document.getElementById('formA').submit();">Basic information</button></li>
-                        <li><button id="opt2" onclick="document.getElementById('formB').submit();">Area of expertise</button></li>
-                        <li><button id="opt3" onclick="document.getElementById('formC').submit();">Time periods</button></li>
+                        <li><button id="opt1">Basic information</button></li>
+                        <li><button id="opt2">Area of expertise</button></li>
+                        <li><button id="opt3">Time periods</button></li>
                         <li><button id="opt4" onclick="document.getElementById('formA').submit();">Finish</button></li>
                     </ul>
                 </div>
@@ -30,24 +30,19 @@
                     <h:form id="formA"> 
                         <div id="basicInfo">
                             <h2 class="title" id = "header">Basic information</h2>
-                            <div id="error">
-                                <h:message for="name"/>                                    
-                                <h:message for="lastName"/>                                    
-                                <h:message for="email"/>
-                            </div>
                             <div id="fillin">   
-                                <p>                  
-                                    <h:outputLabel for="Input" value="First name:  "/>
-                                    <br/>
-                                    <h:inputText id="name" value="#{frontManager.name}"/>&nbsp;
-                                    <br/>
-                                    <h:outputLabel for="Output" value="Last name: "/>
-                                    <br/>
+                                <p>  
+                                    <h:outputLabel for="Input" value="First name:  "/><br/>
+                                    <h:inputText id="name" value="#{frontManager.name}"/>
+                                    <h:message class ="error" for="name"/><br/>
+                                     
+                                    <h:outputLabel for="Output" value="Last name: "/><br/>
                                     <h:inputText id="lastName" value="#{frontManager.lastName}"/>
-                                    <br/>
-                                    <h:outputLabel for="Output" value="Email: "/>
-                                    <br/>
+                                    <h:message class ="error" for="lastName"/><br/>
+ 
+                                    <h:outputLabel for="Output" value="Email: "/><br/>
                                     <h:inputText id="email" value="#{frontManager.email}"/>
+                                    <h:message class ="error" for="email"/><br/>
                                 </p> 
                             </div>  
                         </div> 
@@ -55,10 +50,6 @@
                     <h:form id="formB">
                         <div id="expertise">
                             <h2 class="title">Area of expertise</h2>
-                            <div id="error">
-                                <h:message for="ca"/>
-                                <h:message for="areayears"/>
-                            </div>
                             <div id="fillin">                        
                                 <p>Choose your area of expertise: 
                                     <br/>
@@ -72,6 +63,7 @@
                                     <h:outputLabel for="Output" value="Years of expertise: "/>
                                     <br/>
                                     <h:inputText id="areayears" value="#{frontManager.years}"/>
+                                    <h:message class="error" for="areayears"/>
                                     <br/>    
                                     <br/>
                                     <h:commandButton id="opt7" value="Add entry" action="#{frontManager.addCompetence()}"/>             
@@ -91,7 +83,10 @@
                                     </ui:repeat>
                                 </table>
                             </div>
-                        </div> 
+                        </div>
+                    </h:form>
+                    
+                    <h:form id="formC">
                         <div id="periods">
                             <h2 class="title">Time periods</h2>
                             <div id="fillin">                 
@@ -164,24 +159,22 @@
                         </div>
                     </h:form>
 
-                    <h:form id="formC">
+                    <h:form id="formD">
                         <div id="preview">
                             <h2 class="title" id = "header">Basic information</h2>
-                            <div id="fillin">   
-                                <p>                         
-                                    <h:outputLabel for="Input" value="First name:  "/>
-                                    <br/>
-                                    <h:outputLabel for="Input" value="#{frontManager.name}"/>
-                                    <br/>
-                                    <h:outputLabel for="Output" value="Last name: "/>
-                                    <br/>
-                                    <h:outputLabel for="Input" value="#{frontManager.lastName}"/>
-                                    <br/>
-                                    <h:outputLabel for="Output" value="Email: "/>
-                                    <br/>
-                                    <h:outputLabel for="Input" value="#{frontManager.email}"/>
-                                </p> 
-                            </div>  
+                            <p>                         
+                                <h:outputLabel class ="title" for="Input" value="First name:  "/>
+                                <br/>
+                                <h:outputLabel class ="text" for="Input" value="#{frontManager.name}"/>
+                                <br/>
+                                <h:outputLabel class ="title" for="Output" value="Last name: "/>
+                                <br/>
+                                <h:outputLabel class ="text" for="Input" value="#{frontManager.lastName}"/>
+                                <br/>
+                                <h:outputLabel class ="title" for="Output" value="Email: "/>
+                                <br/>
+                                <h:outputLabel class ="text" for="Input" value="#{frontManager.email}"/>
+                            </p>
 
                             <h2 class="title" id = "header">Areas of Expertise</h2>
                             <div class ="CSSTableGenerator">
