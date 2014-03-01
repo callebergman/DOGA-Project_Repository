@@ -15,6 +15,7 @@ import Model.Authentication_Table;
 import Model.Credential;
 import Model.Roles;
 import Model.SubmissionException;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -40,7 +41,7 @@ public class ApplicantFacade {
     
     @PersistenceContext(unitName = "projectPU")
     private EntityManager em;
-
+    private Log log;
     
     public void testMethod ()
     {
@@ -94,8 +95,9 @@ public class ApplicantFacade {
      *@param ADTO
      * submits a application towards the database
      */
-    public void submitApplication (ApplicationDTO ADTO) throws SubmissionException, ParseException 
+    public void submitApplication (ApplicationDTO ADTO) throws SubmissionException, ParseException, IOException 
     {
+       log.writetofile("Fredrik","submits application");
         Roles    role = em.find(Roles.class, "Applicant");
         Person  person = ADTO.getPerson();
         role.addPerson(person);
@@ -126,6 +128,7 @@ public class ApplicantFacade {
                 throw new SubmissionException("Date submitted was incorrect");
             person.addAvailability(a);
 	}
+        
     }
     /**
      * @param compName competencename

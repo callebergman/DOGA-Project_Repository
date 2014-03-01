@@ -12,6 +12,7 @@ import Model.Competence;
 import Model.Competence_profile;
 import Model.Person;
 import Model.SubmissionException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.text.ParseException;
@@ -33,6 +34,7 @@ public class FrontManager implements Serializable {
 
     @EJB
     private ApplicantFacade applicantFacade;
+    
     
     @Size(min=1, message="Please enter your name!")
     private String name;
@@ -335,7 +337,7 @@ public class FrontManager implements Serializable {
         this.toDate = toDate;
     }
 
-    public String sendApp() throws ParseException {
+    public String sendApp() throws ParseException, IOException {
         try {
             applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email),
                     competence_profiles, availabilities));
