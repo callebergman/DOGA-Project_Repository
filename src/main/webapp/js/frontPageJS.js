@@ -10,11 +10,11 @@ $(document).ready(function()
         $("#periods").hide();
         $("#preview").hide();
         $("#basicInfo").show();
-
-        setCookie("opt1", true, null);
-        setCookie("opt2", false, null);
-        setCookie("opt3", false, null);
-        setCookie("opt4", false, null);
+        
+        $.cookie("opt1", true);
+        $.cookie("opt2", false);
+        $.cookie("opt3", false);
+        $.cookie("opt4", false);
     });
 
     $("#opt2").click(function() {
@@ -22,10 +22,10 @@ $(document).ready(function()
         $("#basicInfo").hide();
         $("#preview").hide();
         $("#expertise").show();
-        setCookie("opt1", false, null);
-        setCookie("opt2", true, null);
-        setCookie("opt3", false, null);
-        setCookie("opt4", false, null);
+        $.cookie("opt1", false);
+        $.cookie("opt2", true);
+        $.cookie("opt3", false);
+        $.cookie("opt4", false);
         document.getElementById('formA').submit();
     });
 
@@ -35,10 +35,10 @@ $(document).ready(function()
         $("#expertise").hide();
         $("#preview").hide();
         $("#periods").show();
-        setCookie("opt1", false, null);
-        setCookie("opt2", false, null);
-        setCookie("opt3", true, null);
-        setCookie("opt4", false, null);
+        $.cookie("opt1", false);
+        $.cookie("opt2", false);
+        $.cookie("opt3", true);
+        $.cookie("opt4", false);
         document.getElementById('formA').submit();
     });
 
@@ -48,17 +48,16 @@ $(document).ready(function()
         $("#expertise").hide();
         $("#periods").hide();
         $("#preview").show();
-        setCookie("opt1", false, null);
-        setCookie("opt2", false, null);
-        setCookie("opt3", false, null);
-        setCookie("opt4", true, null);
+        $.cookie("opt1", false);
+        $.cookie("opt2", false);
+        $.cookie("opt3", false);
+        $.cookie("opt4", true);
         document.getElementById('formA').submit();
     });
     if (getCookie("opt1") === "true") {
          
         $("#expertise").hide();
         $("#periods").hide();
-       
         $("#preview").hide();
          $("#basicInfo").show();
     }
@@ -89,7 +88,7 @@ function setCookie(c_name, value, exdays) {
     var exdate = new Date();
     exdate.setDate(exdate.getDate() + exdays);
     var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
-    document.cookie = c_name + "=" + c_value;
+    document.cookie = c_name;
 }
 function getCookie(c_name) {
     var i, x, y, ARRcookies = document.cookie.split(";");
