@@ -22,7 +22,7 @@
                         <li><button id="opt1">Basic information</button></li>
                         <li><button id="opt2">Area of expertise</button></li>
                         <li><button id="opt3">Time periods</button></li>
-                        <li><button id="opt4" onclick="document.getElementById('formA').submit();">Finish</button></li>
+                        <li><button id="opt4">Finish</button></li>
                     </ul>
                 </div>
 
@@ -163,15 +163,15 @@
                         <div id="preview">
                             <h2 class="title" id = "header">Basic information</h2>
                             <p>                         
-                                <h:outputLabel class ="title" for="Input" value="First name:  "/>
+                                <h:outputLabel for="Input" value="First name:  "/>
                                 <br/>
                                 <h:outputLabel class ="text" for="Input" value="#{frontManager.name}"/>
                                 <br/>
-                                <h:outputLabel class ="title" for="Output" value="Last name: "/>
+                                <h:outputLabel for="Output" value="Last name: "/>
                                 <br/>
                                 <h:outputLabel class ="text" for="Input" value="#{frontManager.lastName}"/>
                                 <br/>
-                                <h:outputLabel class ="title" for="Output" value="Email: "/>
+                                <h:outputLabel for="Output" value="Email: "/>
                                 <br/>
                                 <h:outputLabel class ="text" for="Input" value="#{frontManager.email}"/>
                             </p>

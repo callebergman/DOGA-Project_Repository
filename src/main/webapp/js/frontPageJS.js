@@ -1,32 +1,32 @@
 $(document).ready(function()
 {
+    $("#expertise").hide();
+    $("#periods").hide();
+    $("#preview").hide();
+    $("#basicInfo").show();
+    
     $("#opt1").click(function() {
         $("#expertise").hide();
         $("#periods").hide();
         $("#preview").hide();
         $("#basicInfo").show();
 
-        setCookie("opt1", true, 365);
-        setCookie("opt2", false, 365);
-        setCookie("opt3", false, 365);
-        setCookie("opt4", false, 365);
-
-
-
-
+        setCookie("opt1", true, null);
+        setCookie("opt2", false, null);
+        setCookie("opt3", false, null);
+        setCookie("opt4", false, null);
     });
 
-
     $("#opt2").click(function() {
-
         $("#periods").hide();
         $("#basicInfo").hide();
         $("#preview").hide();
         $("#expertise").show();
-        setCookie("opt1", false, 365);
-        setCookie("opt2", true, 365);
-        setCookie("opt3", false, 365);
-        setCookie("opt4", false, 365);
+        setCookie("opt1", false, null);
+        setCookie("opt2", true, null);
+        setCookie("opt3", false, null);
+        setCookie("opt4", false, null);
+        document.getElementById('formA').submit();
     });
 
     $("#opt3").click(function() {
@@ -35,10 +35,11 @@ $(document).ready(function()
         $("#expertise").hide();
         $("#preview").hide();
         $("#periods").show();
-        setCookie("opt1", false, 365);
-        setCookie("opt2", false, 365);
-        setCookie("opt3", true, 365);
-        setCookie("opt4", false, 365);
+        setCookie("opt1", false, null);
+        setCookie("opt2", false, null);
+        setCookie("opt3", true, null);
+        setCookie("opt4", false, null);
+        document.getElementById('formA').submit();
     });
 
     $("#opt4").click(function() {
@@ -47,10 +48,11 @@ $(document).ready(function()
         $("#expertise").hide();
         $("#periods").hide();
         $("#preview").show();
-        setCookie("opt1", false, 365);
-        setCookie("opt2", false, 365);
-        setCookie("opt3", false, 365);
-        setCookie("opt4", true, 365);
+        setCookie("opt1", false, null);
+        setCookie("opt2", false, null);
+        setCookie("opt3", false, null);
+        setCookie("opt4", true, null);
+        document.getElementById('formA').submit();
     });
     if (getCookie("opt1") === "true") {
          

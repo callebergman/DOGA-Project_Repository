@@ -19,12 +19,12 @@ div{
     display: block;
 }
 
-#preview.title
+label
 {    
     font-weight: bold;
     color: GREY;
 }
-#preview.text
+label.text
 {
     font-weight: bold;
     color: #000000;
