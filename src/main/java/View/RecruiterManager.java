@@ -225,7 +225,8 @@ public class RecruiterManager {
     /**
      * Invalidates the current session
      */
-    public void logout (){
+    public String logout (){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "faces/front.xhtml/logout?faces-redirect=true";
     } 
 }

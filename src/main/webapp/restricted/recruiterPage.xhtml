@@ -4,13 +4,11 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <h:outputStylesheet library="css" name="login-style.css"  />
+        <h:outputStylesheet library="css" name="recruiter-style.css"  />
         <h:outputStylesheet library="css" name="recruitTable.css"  />        
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
         <noscript>Sorry, your browser does not support JavaScript!</noscript>
-        <style type ="text/css">
-          
-        </style>
+        <style type ="text/css"/>
     </h:head>
     <h:body> 
         <div id="wrap">
@@ -19,7 +17,7 @@
                     <p class="tag"> Recruiter Login Page</p>
                     <ul class="nav">
                         <li class="ico">
-                            <a href="front.xhtml" value="#{recruiterManager.logout()}">Logout </a>
+                            <a href="../faces/front.xhtml" value="#{recruiterManager.logout()}">Logout </a>
                         </li>
                     </ul>
                 </div>
@@ -27,8 +25,7 @@
             <div>
                 <h2>Applicant Table</h2>
             </div>
-            <fieldset>
-                
+            <fieldset>                
                 <h:form>
                 <legend>Filter Options</legend>
                 <h3>Name</h3>
@@ -48,14 +45,12 @@
                 <h:inputText id="competence" value="#{recruiterManager.area}"/>
                  <h:commandButton id="commit" value="Commit" action="#{recruiterManager.commit()}"/>
                 <br></br>    
-                
-            
+   
             <div class="CSSTableGenerator" >
                 <table >
                     <tr>
                         <td>
                             Name
-                        
                         </td>
                         <td >
                             Last Name
@@ -91,13 +86,8 @@
                                  </ui:repeat>
                            </td>
                         </tr>
-                    </ui:repeat>
-                    
-                    
-                </table>
-                
- 
-                
+                    </ui:repeat>  
+                </table>   
             </div>
              <br></br>
                 <label for="SSN"><h3>Applicant</h3></label>  
@@ -108,8 +98,7 @@
                 </h:form>
                 </fieldset>
              <ui:include src="/footer.xhtml"/>
-        </div>
-        
+        </div> 
     </h:body>
 </html>
 

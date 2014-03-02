@@ -4,11 +4,15 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <h:outputStylesheet library="css" name="login-style.css"  />
+        <h:outputStylesheet library="css" name="recruiter-style.css"  />
     </h:head>
     <h:body> 
         <div id="wrap">
-            <ui:include src="header.xhtml"/>
+            <div id="bar">
+                <div id="content">
+                    <p class="tag"> Create applications or login to browse submissions </p>
+                </div>
+            </div>
             <div id="login">
                 <form method="post" action="j_security_check">
                     <h1>Recruiter login</h1>
