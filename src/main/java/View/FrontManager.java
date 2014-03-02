@@ -17,11 +17,17 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
 
 /**
@@ -73,6 +79,22 @@ public class FrontManager implements Serializable {
         for (int i = 0; i < competences.size(); i++) {
             areas[i] = competences.get(i).getName();
         }
+        /*
+        FacesContext context = FacesContext.getCurrentInstance();
+        Map cookies = context.getExternalContext().getRequestCookieMap();
+        
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+        
+        for (Cookie cookie: request.getCookies()) {
+            if (("opt2").equals(cookie.getName())||("opt3").equals(cookie.getName())||("opt4").equals(cookie.getName())) 
+            {
+                cookie.setMaxAge(0);
+                cookie.setValue("");
+                response.addCookie(cookie);
+            }
+        }
+        */
         //HERE!!!
         //applicantFacade.testMethod(); 
     }
