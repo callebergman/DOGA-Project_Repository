@@ -8,11 +8,11 @@
     <h:head>
         <h:outputStylesheet library="css" name="front-style.css"  />
         <h:outputStylesheet library="css" name="basicInfo.css"  />
-        <noscript>Sorry, your browser does not support JavaScript!</noscript>
-    </h:head>
+        <noscript>Sorry, your browser does not support JavaScript!</noscript> 
+   </h:head>
     <h:body>
+        <h:outputScript name="frontPageJS.js" target="head" />
         <div id="wrap">
-            <h:outputScript library="js" name="frontPageJS.js" />
             <ui:include src="header.xhtml"/>
             <div id="main">
                 <div id="options">
