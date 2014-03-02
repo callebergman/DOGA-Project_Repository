@@ -18,15 +18,10 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
 
 /**
@@ -39,7 +34,6 @@ public class FrontManager implements Serializable {
 
     @EJB
     private ApplicantFacade applicantFacade;
-    
     
     @Size(min=1, message="Please enter your name!")
     private String name;
@@ -79,7 +73,7 @@ public class FrontManager implements Serializable {
         for (int i = 0; i < competences.size(); i++) {
             areas[i] = competences.get(i).getName();
         }
-        
+        /*
         FacesContext    context = FacesContext.getCurrentInstance();
         
         //Reset cookies for all tabs
@@ -94,7 +88,7 @@ public class FrontManager implements Serializable {
                 response.addCookie(cookie);
             }
         }
-        
+        */
         //HERE!!!
         //applicantFacade.testMethod(); 
     }
