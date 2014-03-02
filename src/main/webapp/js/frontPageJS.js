@@ -28,7 +28,6 @@ $(document).ready(function()
         setCookie("opt2", true, 365);
         setCookie("opt3", false, 365);
         setCookie("opt4", false, 365);
-        $( "#formA" ).submit();
     });
 
     $("#opt3").click(function() {
@@ -41,7 +40,6 @@ $(document).ready(function()
         setCookie("opt2", false, 365);
         setCookie("opt3", true, 365);
         setCookie("opt4", false, 365);
-        $( "#formA" ).submit();
     });
 
     $("#opt4").click(function() {
@@ -54,7 +52,6 @@ $(document).ready(function()
         setCookie("opt2", false, 365);
         setCookie("opt3", false, 365);
         setCookie("opt4", true, 365);
-        $( "#formA" ).submit();
     });
 
     if (getCookie("opt1") === "true") {
@@ -104,21 +101,3 @@ function getCookie(c_name) {
         }
     }
 }
-
-    function opt5Cookie() 
-    {
-        setCookie("opt1", false, 365);
-        setCookie("opt2", true, 365);
-        setCookie("opt3", false, 365);
-        setCookie("opt4", false, 365);
-        return true;
-    }
-    
-    function opt6Cookie() 
-    {
-        setCookie("opt1", false, 365);
-        setCookie("opt2", false, 365);
-        setCookie("opt3", true, 365);
-        setCookie("opt4", false, 365);
-        return true;
-    }

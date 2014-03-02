@@ -82,6 +82,7 @@ public class FrontManager implements Serializable {
         
         FacesContext    context = FacesContext.getCurrentInstance();
         
+        //Reset cookies for all tabs
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         HttpServletResponse  response = (HttpServletResponse) context.getExternalContext().getResponse();
         

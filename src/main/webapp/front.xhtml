@@ -11,7 +11,6 @@
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
         <script src="#{request.contextPath}/js/frontPageJS.js"></script>
-        <script src="#{request.contextPath}/js/jquery.cookie.js"></script>
         <noscript>Sorry, your browser does not support JavaScript!</noscript>
     </h:head>
     <h:body>
@@ -34,15 +33,15 @@
                             <div id="fillin">   
                                 <p>  
                                     <h:outputLabel for="Input" value="First name:  "/><br/>
-                                    <h:inputText id="name" value="#{frontManager.name}"/>
+                                    <h:inputText id="name" value="#{frontManager.name}" onchange="submit();"/>
                                     <h:message class ="error" for="name"/><br/>
                                      
                                     <h:outputLabel for="Output" value="Last name: "/><br/>
-                                    <h:inputText id="lastName" value="#{frontManager.lastName}"/>
+                                    <h:inputText id="lastName" value="#{frontManager.lastName}" onchange="submit();"/>
                                     <h:message class ="error" for="lastName"/><br/>
  
                                     <h:outputLabel for="Output" value="Email: "/><br/>
-                                    <h:inputText id="email" value="#{frontManager.email}"/>
+                                    <h:inputText id="email" value="#{frontManager.email}" onchange="submit();"/>
                                     <h:message class ="error" for="email"/><br/>
                                 </p> 
                             </div>  
@@ -67,7 +66,7 @@
                                     <h:message class="error" for="areayears"/>
                                     <br/>    
                                     <br/>
-                                    <h:commandButton id="opt5" value="Add entry" onclick="javascript:opt5Cookie ();" action="#{frontManager.addCompetence()}"/>             
+                                    <h:commandButton id="opt5" value="Add entry" action="#{frontManager.addCompetence()}"/>             
                                 </p>
                             </div>
                             <div class="CSSTableGenerator">
@@ -138,7 +137,7 @@
                                     </h:selectOneMenu>
                                     <br/>
                                     <br/>    
-                                    <h:commandButton id="opt6" value="Add time period" onclick="javascript:opt6Cookie ();" action="#{frontManager.addAvailability()}"/>
+                                    <h:commandButton id="opt6" value="Add time period" action="#{frontManager.addAvailability()}"/>
                                 </p>        
                                 <div class="CSSTableGenerator">
                                     <table border="1">
@@ -215,15 +214,9 @@
                         </div>                          
                     </h:form>
                 </div>
-
             </div> 
-            <ui:include src="footer.xhtml"/>
-            
+            <ui:include src="footer.xhtml"/>      
         </div>
-
-
-
-
     </h:body>
 </html>
 
