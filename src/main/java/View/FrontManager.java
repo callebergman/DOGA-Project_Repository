@@ -17,7 +17,6 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -74,17 +73,17 @@ public class FrontManager implements Serializable {
     private Exception transactionFailure;
 
     @PostConstruct
-    private void init() {
+    private void init() 
+    {
         competences = applicantFacade.getCompetences();
         for (int i = 0; i < competences.size(); i++) {
             areas[i] = competences.get(i).getName();
         }
-        /*
-        FacesContext context = FacesContext.getCurrentInstance();
-        Map cookies = context.getExternalContext().getRequestCookieMap();
+        
+        FacesContext    context = FacesContext.getCurrentInstance();
         
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-        HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+        HttpServletResponse  response = (HttpServletResponse) context.getExternalContext().getResponse();
         
         for (Cookie cookie: request.getCookies()) {
             if (("opt2").equals(cookie.getName())||("opt3").equals(cookie.getName())||("opt4").equals(cookie.getName())) 
@@ -94,11 +93,11 @@ public class FrontManager implements Serializable {
                 response.addCookie(cookie);
             }
         }
-        */
+        
         //HERE!!!
         //applicantFacade.testMethod(); 
     }
-
+    
     /**
      * Creates a new instance of LoginManager
      */
@@ -160,6 +159,7 @@ public class FrontManager implements Serializable {
         }
 
         availabilities.add(new Availability (this.fromDate, this.toDate));
+
         return jsf22Bugfix();
     }
     /**

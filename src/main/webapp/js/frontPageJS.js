@@ -1,20 +1,21 @@
+
 $(document).ready(function()
 {
     $("#expertise").hide();
     $("#periods").hide();
     $("#preview").hide();
     $("#basicInfo").show();
-    
-     $("#opt1").click(function() {
+        
+    $("#opt1").click(function() {
         $("#expertise").hide();
         $("#periods").hide();
         $("#preview").hide();
         $("#basicInfo").show();
-        
-        $.cookie("opt1", true);
-        $.cookie("opt2", false);
-        $.cookie("opt3", false);
-        $.cookie("opt4", false);
+
+        setCookie("opt1", true, 365);
+        setCookie("opt2", false, 365);
+        setCookie("opt3", false, 365);
+        setCookie("opt4", false, 365);
     });
 
     $("#opt2").click(function() {
@@ -23,10 +24,10 @@ $(document).ready(function()
         $("#basicInfo").hide();
         $("#preview").hide();
         $("#expertise").show();
-        $.cookie("opt1", false);
-        $.cookie("opt2", true);
-        $.cookie("opt3", false);
-        $.cookie("opt4", false);
+        setCookie("opt1", false, 365);
+        setCookie("opt2", true, 365);
+        setCookie("opt3", false, 365);
+        setCookie("opt4", false, 365);
         $( "#formA" ).submit();
     });
 
@@ -36,10 +37,10 @@ $(document).ready(function()
         $("#expertise").hide();
         $("#preview").hide();
         $("#periods").show();
-        $.cookie("opt1", false);
-        $.cookie("opt2", false);
-        $.cookie("opt3", true);
-        $.cookie("opt4", false);
+        setCookie("opt1", false, 365);
+        setCookie("opt2", false, 365);
+        setCookie("opt3", true, 365);
+        setCookie("opt4", false, 365);
         $( "#formA" ).submit();
     });
 
@@ -49,35 +50,35 @@ $(document).ready(function()
         $("#expertise").hide();
         $("#periods").hide();
         $("#preview").show();
-        $.cookie("opt1", false);
-        $.cookie("opt2", false);
-        $.cookie("opt3", false);
-        $.cookie("opt4", true);
+        setCookie("opt1", false, 365);
+        setCookie("opt2", false, 365);
+        setCookie("opt3", false, 365);
+        setCookie("opt4", true, 365);
         $( "#formA" ).submit();
     });
 
-    if ($.cookie("opt1") === "true") {
+    if (getCookie("opt1") === "true") {
          
         $("#expertise").hide();
         $("#periods").hide();
         $("#preview").hide();
-         $("#basicInfo").show();
+        $("#basicInfo").show();
     }
-    else if ($.cookie("opt2") === "true") {
+    else if (getCookie("opt2") === "true") {
         
         $("#periods").hide();
         $("#basicInfo").hide();
         $("#preview").hide();
         $("#expertise").show();
     }
-    else if ($.cookie("opt3") === "true") {
+    else if (getCookie("opt3") === "true") {
          
         $("#basicInfo").hide();
         $("#expertise").hide();
         $("#preview").hide();
         $("#periods").show();
     }
-    else if ($.cookie("opt4") === "true") {
+    else if (getCookie("opt4") === "true") {
       
         $("#periods").hide();
         $("#basicInfo").hide();
@@ -86,121 +87,38 @@ $(document).ready(function()
     }
 });
 
+function setCookie(c_name, value, exdays) {
+    var exdate = new Date();
+    exdate.setTime(exdate.getTime() + 4000);
+    var expires = "; expires="+exdate.toGMTString();
+    document.cookie = c_name+"="+value+expires+"; path=/";
+}
+function getCookie(c_name) {
+    var i, x, y, ARRcookies = document.cookie.split(";");
+    for (i = 0; i < ARRcookies.length; i++) {
+        x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+        y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+        x = x.replace(/^\s+|\s+$/g, "");
+        if (x === c_name) {
+            return unescape(y);
+        }
+    }
+}
 
-/*!
- * jQuery Cookie Plugin v1.4.0
- * https://github.com/carhartl/jquery-cookie
- *
- * Copyright 2013 Klaus Hartl
- * Released under the MIT license
- */
-(function (factory) {
-	if (typeof define === 'function' && define.amd) {
-		// AMD
-		define(['jquery'], factory);
-	} else if (typeof exports === 'object') {
-		// CommonJS
-		factory(require('jquery'));
-	} else {
-		// Browser globals
-		factory(jQuery);
-	}
-}(function ($) {
-
-	var pluses = /\+/g;
-
-	function encode(s) {
-		return config.raw ? s : encodeURIComponent(s);
-	}
-
-	function decode(s) {
-		return config.raw ? s : decodeURIComponent(s);
-	}
-
-	function stringifyCookieValue(value) {
-		return encode(config.json ? JSON.stringify(value) : String(value));
-	}
-
-	function parseCookieValue(s) {
-		if (s.indexOf('"') === 0) {
-			// This is a quoted cookie as according to RFC2068, unescape...
-			s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
-		}
-
-		try {
-			// Replace server-side written pluses with spaces.
-			// If we can't decode the cookie, ignore it, it's unusable.
-			// If we can't parse the cookie, ignore it, it's unusable.
-			s = decodeURIComponent(s.replace(pluses, ' '));
-			return config.json ? JSON.parse(s) : s;
-		} catch(e) {}
-	}
-
-	function read(s, converter) {
-		var value = config.raw ? s : parseCookieValue(s);
-		return $.isFunction(converter) ? converter(value) : value;
-	}
-
-	var config = $.cookie = function (key, value, options) {
-
-		// Write
-
-		if (value !== undefined && !$.isFunction(value)) {
-			options = $.extend({}, config.defaults, options);
-
-			if (typeof options.expires === 'number') {
-				var days = options.expires, t = options.expires = new Date();
-				t.setTime(+t + days * 864e+5);
-			}
-
-			return (document.cookie = [
-				encode(key), '=', stringifyCookieValue(value),
-				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-				options.path    ? '; path=' + options.path : '',
-				options.domain  ? '; domain=' + options.domain : '',
-				options.secure  ? '; secure' : ''
-			].join(''));
-		}
-
-		// Read
-
-		var result = key ? undefined : {};
-
-		// To prevent the for loop in the first place assign an empty array
-		// in case there are no cookies at all. Also prevents odd result when
-		// calling $.cookie().
-		var cookies = document.cookie ? document.cookie.split('; ') : [];
-
-		for (var i = 0, l = cookies.length; i < l; i++) {
-			var parts = cookies[i].split('=');
-			var name = decode(parts.shift());
-			var cookie = parts.join('=');
-
-			if (key && key === name) {
-				// If second argument (value) is a function it's a converter...
-				result = read(cookie, value);
-				break;
-			}
-
-			// Prevent storing a cookie that we couldn't decode.
-			if (!key && (cookie = read(cookie)) !== undefined) {
-				result[name] = cookie;
-			}
-		}
-
-		return result;
-	};
-
-	config.defaults = {};
-
-	$.removeCookie = function (key, options) {
-		if ($.cookie(key) === undefined) {
-			return false;
-		}
-
-		// Must not alter options, thus extending a fresh object...
-		$.cookie(key, '', $.extend({}, options, { expires: -1 }));
-		return !$.cookie(key);
-	};
-
-}));
+    function opt5Cookie() 
+    {
+        setCookie("opt1", false, 365);
+        setCookie("opt2", true, 365);
+        setCookie("opt3", false, 365);
+        setCookie("opt4", false, 365);
+        return true;
+    }
+    
+    function opt6Cookie() 
+    {
+        setCookie("opt1", false, 365);
+        setCookie("opt2", false, 365);
+        setCookie("opt3", true, 365);
+        setCookie("opt4", false, 365);
+        return true;
+    }

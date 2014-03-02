@@ -17,6 +17,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -221,4 +222,10 @@ public class RecruiterManager {
         this.filterList = newFilterList;
     }
     
+    /**
+     * Invalidates the current session
+     */
+    public void logout (){
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    } 
 }
