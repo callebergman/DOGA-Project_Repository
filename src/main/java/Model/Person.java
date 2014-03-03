@@ -24,7 +24,7 @@ import javax.persistence.OneToOne;
  * @author User
  */
 @Entity
-public class Person implements PersonDTO, Serializable {
+public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
     

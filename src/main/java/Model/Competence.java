@@ -9,7 +9,6 @@ package Model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import static javax.persistence.CascadeType.ALL;
@@ -21,7 +20,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author User
+ * @author Hikari
  */
 @Entity
 public class Competence implements Serializable, CompetenceDTO {
@@ -44,6 +43,7 @@ public class Competence implements Serializable, CompetenceDTO {
         this.competence_id = competence_id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -52,6 +52,7 @@ public class Competence implements Serializable, CompetenceDTO {
         this.name = name;
     }
 
+    @Override
     public Collection<Competence_profile> getCompetence_profiles() {
         return competence_profiles;
     }

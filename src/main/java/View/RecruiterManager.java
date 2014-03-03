@@ -8,6 +8,7 @@ package View;
 
 import Controller.RecruiterFacade;
 import Model.ApplicationDTO;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -225,7 +227,11 @@ public class RecruiterManager {
     /**
      * Invalidates the current session
      */
-    public void logout (){
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    public String logout () throws IOException{
+        FacesContext    context = FacesContext.getCurrentInstance();
+        HttpServletResponse  response = (HttpServletResponse) context.getExternalContext().getResponse();
+        response.sendRedirect("http://localhost:8080/DOGA-Project_Repository/faces/front.xhtml");
+        //FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "success";   
     } 
 }

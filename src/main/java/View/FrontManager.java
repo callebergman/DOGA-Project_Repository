@@ -9,6 +9,7 @@ import Controller.ApplicantFacade;
 import Model.ApplicationDTO;
 import Model.Availability;
 import Model.Competence;
+import Model.CompetenceDTO;
 import Model.Competence_profile;
 import Model.Person;
 import Model.SubmissionException;
@@ -54,7 +55,7 @@ public class FrontManager implements Serializable {
     
     private List<Availability> availabilities;
     private List<Competence_profile>    competence_profiles;
-    private List<Competence>    competences;
+    private List<CompetenceDTO>    competences;
     
     private String fromDate;
     private String toDate;
@@ -97,7 +98,7 @@ public class FrontManager implements Serializable {
      * Creates a new instance of LoginManager
      */
     public FrontManager() {
-        competences = new ArrayList<Competence>();
+        competences = new ArrayList<CompetenceDTO>();
         availabilities = new ArrayList<Availability>();
         competence_profiles = new ArrayList<Competence_profile>();
     }
@@ -122,7 +123,7 @@ public class FrontManager implements Serializable {
     
     public String addCompetence() 
     {
-        competence_profiles.add(new Competence_profile(this.years, applicantFacade.getCompetence(currentArea)));
+        competence_profiles.add(new Competence_profile(this.years, (Competence) applicantFacade.getCompetence(currentArea)));
         return jsf22Bugfix();
     }
 

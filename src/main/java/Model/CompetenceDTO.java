@@ -5,11 +5,18 @@
  */
 package Model;
 
+import java.math.BigInteger;
+import java.util.Collection;
+
 /**
  *
  * @author Hikari
  */
 public interface CompetenceDTO 
 {
+    String getName();
     
+    BigInteger getCompetence_id();
+        
+    Collection<Competence_profile> getCompetence_profiles();
 }

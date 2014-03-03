@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <h:outputStylesheet library="css" name="recruiter-style.css"  />
+        <h:outputStylesheet library="css" name="recruiterPage-style.css"  />
         <h:outputStylesheet library="css" name="recruitTable.css"  />        
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
         <noscript>Sorry, your browser does not support JavaScript!</noscript>
@@ -17,8 +17,10 @@
                     <p class="tag"> Recruiter Login Page</p>
                     <ul class="nav">
                         <li class="ico">
-                            <a href="#{request.contextPath}/" value="#{recruiterManager.logout()}">Logout </a>
-                        </li>
+                            <h:form>
+                                <h:commandLink action="#{recruiterManager.logout()}">Logout </h:commandLink>
+                            </h:form>
+                        </li>   
                     </ul>
                 </div>
             </div>

@@ -12,6 +12,7 @@ import Model.Competence;
 import Model.Competence_profile;
 import Model.Person;
 import Model.Authentication_Table;
+import Model.CompetenceDTO;
 import Model.Credential;
 import Model.Roles;
 import Model.SubmissionException;
@@ -91,6 +92,7 @@ public class ApplicantFacade {
         em.persist(role);
         em.persist (role2);         
     }
+    
     /**
      *@param ADTO
      * submits a application towards the database
@@ -128,31 +130,21 @@ public class ApplicantFacade {
                 throw new SubmissionException("Date submitted was incorrect");
             person.addAvailability(a);
 	}
-        
     }
-    /**
-     * @param compName competencename
-     *@return competences id 
-     */
-    public BigInteger getCompetenceID(String compName)
-    {
-        Query   query = em.createQuery ("SELECT c FROM Competence c WHERE c.name=:n");
-        query.setParameter ("n", compName);
-        Competence  tmp = (Competence) query.getSingleResult();
-        return (tmp.getCompetence_id());
-    }
+    
     /**
      *@return competence list
      */
-    public List<Competence> getCompetences ()
+    public List<CompetenceDTO> getCompetences ()
     {
         Query   query = em.createQuery ("SELECT c FROM Competence c");
         return query.getResultList ();
     }
+    
     /**
      *@return competence
      */
-    public Competence   getCompetence (String comp){
+    public CompetenceDTO   getCompetence (String comp){
         Query   query = em.createQuery ("SELECT c FROM Competence c WHERE c.name=:n");
         query.setParameter ("n", comp);
         Competence   c = (Competence) query.getSingleResult();
