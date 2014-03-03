@@ -20,20 +20,21 @@ public class Log
 {
     /****
      *@param id is an identifier to see who wrote what.
-     * @param content shows what the person did.
+     * @param content shows the action that the person did.
      */
     public void writetofile(String id, String content) throws IOException
     {
-        File file = new File("filelog.txt");
-        String text = id+": "+content;
-        
-        if(!file.exists())
+       try {
+            
+            FileWriter fstream = new FileWriter("logfile.txt",true);
+            BufferedWriter out = new BufferedWriter(fstream);
+            out.write(id+" "+ content);
+            out.newLine();
+            out.close();
+        } 
+        catch (Exception e)
         {
-            file.createNewFile();
+            System.out.println(e.getMessage());
         }
-        FileWriter filewriter = new FileWriter(file.getAbsoluteFile());
-        BufferedWriter buff=new BufferedWriter(filewriter);
-        buff.write(text);
-        buff.close();
     }
 }

@@ -106,10 +106,11 @@ public class ApplicantFacade {
      */
     public void submitApplication (ApplicationDTO ADTO) throws SubmissionException, ParseException, IOException 
     {
-       log.writetofile("Fredrik","submits application");
+       
         Roles    role = em.find(Roles.class, "Applicant");
         Person  person = ADTO.getPerson();
         role.addPerson(person);
+        log.writetofile(person.getName(),"submits application");
         
         List<Competence_profile>  competences = ADTO.getCompetences();
         
