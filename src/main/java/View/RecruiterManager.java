@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author Hikari
+ * RecruiterManager class handles everything on the recruiter side of the webpage
  */
 
 @ManagedBean(name="recruiterManager", eager=true)

@@ -21,6 +21,8 @@ import javax.persistence.Query;
 /**
  *
  * @author Hikari
+ *The RecruiterFacade class Handles the retrieval of Applications
+ *from the database
  */
 @Stateless
 public class RecruiterFacade {
@@ -29,7 +31,7 @@ public class RecruiterFacade {
     private EntityManager em;
     
     /**
-     *@return list 
+     *@return list with all the applicants 
      */
     public List<ApplicationDTO> getAllApplications ()
     {   

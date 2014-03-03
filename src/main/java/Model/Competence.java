@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 /**
  *
  * @author Hikari
+ * A Entity Class
  */
 @Entity
 public class Competence implements Serializable, CompetenceDTO {

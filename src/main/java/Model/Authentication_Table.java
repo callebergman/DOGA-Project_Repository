@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 /**
  *
  * @author Hikari
+ * A Entity class
  */
 @Entity
 public class Authentication_Table implements Serializable {

@@ -35,6 +35,8 @@ import javax.persistence.Query;
 /**
  * 
  * @author Hikari
+ * The ApplicantFacade class handles the creation of competences, 
+ * a recruiter account and to submit a application
  */
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -43,7 +45,10 @@ public class ApplicantFacade {
     @PersistenceContext(unitName = "projectPU")
     private EntityManager em;
     private Log log;
-    
+    /***
+     *testMethod is used to insert the competence data in the database
+     * and making a recruiter account with a password and username
+     */
     public void testMethod ()
     {
         String[] areas = new String[10];
@@ -94,8 +99,10 @@ public class ApplicantFacade {
     }
     
     /**
-     *@param ADTO
+     *@param ADTO holds a DTO object with information regarding
+     * the applicant that is submiting a application
      * submits a application towards the database
+     * 
      */
     public void submitApplication (ApplicationDTO ADTO) throws SubmissionException, ParseException, IOException 
     {

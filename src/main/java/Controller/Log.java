@@ -14,13 +14,18 @@ import java.io.IOException;
 /**
  *
  * @author Fredrik
+ * Log class handles the log writing to a file
  */
 public class Log
 {
-    public void writetofile(String name, String content) throws IOException
+    /****
+     *@param id is an identifier to see who wrote what.
+     * @param content shows what the person did.
+     */
+    public void writetofile(String id, String content) throws IOException
     {
         File file = new File("filelog.txt");
-        String text = name+": "+content;
+        String text = id+": "+content;
         
         if(!file.exists())
         {

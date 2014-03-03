@@ -28,6 +28,8 @@ import javax.validation.constraints.*;
 /**
  *
  * @author Calle
+ * The FrontManager Class handles the exception messages that are being showed
+ * when no input is made into the application field.
  */
 @ManagedBean(name = "frontManager")
 @SessionScoped
@@ -68,6 +70,9 @@ public class FrontManager implements Serializable {
     private Exception transactionFailure;
 
     @PostConstruct
+    /***
+     *
+     */
     private void init() 
     {
         competences = applicantFacade.getCompetences();
@@ -116,11 +121,16 @@ public class FrontManager implements Serializable {
     public Exception getException() {
         return transactionFailure;
     }
-    
+    /****
+     *Handles bugfixes
+     */
     private String jsf22Bugfix() {
         return "";
     }
-    
+    /***
+     * adds a competence
+     *@return jsf22Bugfix  
+     */
     public String addCompetence() 
     {
         competence_profiles.add(new Competence_profile(this.years, (Competence) applicantFacade.getCompetence(currentArea)));

@@ -9,6 +9,7 @@ import java.util.List;
 /**
  *
  * @author Fredrik
+ * DTO class which handles a application
  */
 
 public class ApplicationDTO

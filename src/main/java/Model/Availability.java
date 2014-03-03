@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 /**
  *
  * @author User
+ * A Entity Class
  */
 @Entity
 public class Availability implements Serializable {
