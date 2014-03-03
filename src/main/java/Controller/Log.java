@@ -10,6 +10,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  *
@@ -26,9 +29,11 @@ public class Log
     {
        try {
             
-            FileWriter fstream = new FileWriter("logfile.txt",true);
+             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Calendar cal = Calendar.getInstance();
+            FileWriter fstream = new FileWriter("logfile.txt", true);
             BufferedWriter out = new BufferedWriter(fstream);
-            out.write(id+" "+ content);
+            out.write(dateFormat.format(cal.getTime()) + " " + id + " " + content);
             out.newLine();
             out.close();
         } 
