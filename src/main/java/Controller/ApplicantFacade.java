@@ -109,10 +109,16 @@ public class ApplicantFacade {
        
         Roles    role = em.find(Roles.class, "Applicant");
         Person  person = ADTO.getPerson();
+        
+        if ((person.getName()== null || person.getName().trim().length() > 0)|| (person.getSurname()== null || person.getSurname().trim().length() > 0) || (person.getEmail()== null || person.getEmail().trim().length() > 0))
+            throw new SubmissionException("Name and email is mandatory");
+            
         role.addPerson(person);
-        log.writetofile(person.getName(),"submits application");
+        //log.writetofile(person.getName(),"submits application");
         
         List<Competence_profile>  competences = ADTO.getCompetences();
+        if (competences.size() == 0)
+            throw new SubmissionException("No competence submitted");
         
         Set<Integer>    tmp = new HashSet ();
         for (Competence_profile cp : competences) 
@@ -130,12 +136,18 @@ public class ApplicantFacade {
         Date toDate;
         List<Availability>  availabilitys = ADTO.getAvailabilitys();
         
+        if (availabilitys.size() == 0)
+            throw new SubmissionException("No availability submitted");
+        
         for (Availability a : availabilitys) 
         {
             fromDate = (formatter.parse(a.getFrom_date()));
             toDate = (formatter.parse(a.getTo_date()));
+            
+            if (fromDate.equals(toDate))
+                throw new SubmissionException("Start date cannot be same as end date");
             if (!fromDate.before(toDate))
-                throw new SubmissionException("Date submitted was incorrect");
+                throw new SubmissionException("Start date cannot be earlier thant end date");
             person.addAvailability(a);
 	}
     }

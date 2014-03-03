@@ -9,7 +9,6 @@ package Controller;
 import Model.ApplicationDTO;
 import Model.Competence;
 import Model.Person;
-import Model.Roles;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
