@@ -5,54 +5,6 @@ $(document).ready(function()
     $("#periods").hide();
     $("#preview").hide();
     $("#basicInfo").show();
-        
-    $("#opt1").click(function() {
-        $("#expertise").hide();
-        $("#periods").hide();
-        $("#preview").hide();
-        $("#basicInfo").show();
-
-        setCookie("opt1", true, 365);
-        setCookie("opt2", false, 365);
-        setCookie("opt3", false, 365);
-        setCookie("opt4", false, 365);
-    });
-
-    $("#opt2").click(function() {
-
-        $("#periods").hide();
-        $("#basicInfo").hide();
-        $("#preview").hide();
-        $("#expertise").show();
-        setCookie("opt1", false, 365);
-        setCookie("opt2", true, 365);
-        setCookie("opt3", false, 365);
-        setCookie("opt4", false, 365);
-    });
-
-    $("#opt3").click(function() {
-
-        $("#basicInfo").hide();
-        $("#expertise").hide();
-        $("#preview").hide();
-        $("#periods").show();
-        setCookie("opt1", false, 365);
-        setCookie("opt2", false, 365);
-        setCookie("opt3", true, 365);
-        setCookie("opt4", false, 365);
-    });
-
-    $("#opt4").click(function() {
-        
-        $("#basicInfo").hide();
-        $("#expertise").hide();
-        $("#periods").hide();
-        $("#preview").show();
-        setCookie("opt1", false, 365);
-        setCookie("opt2", false, 365);
-        setCookie("opt3", false, 365);
-        setCookie("opt4", true, 365);
-    });
 
     if (getCookie("opt1") === "true") {
          
@@ -82,11 +34,63 @@ $(document).ready(function()
         $("#expertise").hide();
         $("#preview").show();
     }
+    
+    
+    
+    
+    
+    $("#opt1").click(function() {
+        $("#expertise").hide();
+        $("#periods").hide();
+        $("#preview").hide();
+        $("#basicInfo").show();
+
+        setCookie("opt1", true, 4);
+        setCookie("opt2", false, 4);
+        setCookie("opt3", false, 4);
+        setCookie("opt4", false, 4);
+    });
+
+    $("#opt2").click(function() {
+
+        $("#periods").hide();
+        $("#basicInfo").hide();
+        $("#preview").hide();
+        $("#expertise").show();
+        setCookie("opt1", false, 4);
+        setCookie("opt2", true, 4);
+        setCookie("opt3", false, 4);
+        setCookie("opt4", false, 4);
+    });
+
+    $("#opt3").click(function() {
+
+        $("#basicInfo").hide();
+        $("#expertise").hide();
+        $("#preview").hide();
+        $("#periods").show();
+        setCookie("opt1", false, 4);
+        setCookie("opt2", false, 4);
+        setCookie("opt3", true, 4);
+        setCookie("opt4", false, 4);
+    });
+
+    $("#opt4").click(function() {
+        
+        $("#basicInfo").hide();
+        $("#expertise").hide();
+        $("#periods").hide();
+        $("#preview").show();
+        setCookie("opt1", false, 4);
+        setCookie("opt2", false, 4);
+        setCookie("opt3", false, 4);
+        setCookie("opt4", true, 4);
+    });
 });
 
-function setCookie(c_name, value, exdays) {
+function setCookie(c_name, value, sec) {
     var exdate = new Date();
-    exdate.setTime(exdate.getTime() + 4000);
+    exdate.setTime(exdate.getTime() + (sec*1000));
     var expires = "; expires="+exdate.toGMTString();
     document.cookie = c_name+"="+value+expires+"; path=/";
 }
@@ -101,3 +105,27 @@ function getCookie(c_name) {
         }
     }
 }
+    
+function formBSetCookie() {
+
+        setCookie("opt1", false, 4);
+        setCookie("opt2", true, 4);
+        setCookie("opt3", false, 4);
+        setCookie("opt4", false, 4);
+    }
+    
+function formCSetCookie() {
+
+        setCookie("opt1", false, 4);
+        setCookie("opt2", false, 4);
+        setCookie("opt3", true, 4);
+        setCookie("opt4", false, 4);
+    }
+    
+function formDSetCookie() {
+
+        setCookie("opt1", false, 15);
+        setCookie("opt2", false, 15);
+        setCookie("opt3", false, 15);
+        setCookie("opt4", true, 15);
+    }

@@ -67,7 +67,7 @@
                                     <h:message class="error" for="areayears"/>
                                     <br/>    
                                     <br/>
-                                    <h:commandButton id="opt5" value="Add entry" action="#{frontManager.addCompetence()}"/>             
+                                    <h:commandButton id="opt5" value="Add entry" action="#{frontManager.addCompetence()}" onfocus=" formBSetCookie ()"/>             
                                 </p>
                             </div>
                             <div class="CSSTableGenerator">
@@ -138,7 +138,7 @@
                                     </h:selectOneMenu>
                                     <br/>
                                     <br/>    
-                                    <h:commandButton id="opt6" value="Add time period" action="#{frontManager.addAvailability()}"/>
+                                    <h:commandButton id="opt6" value="Add time period" action="#{frontManager.addAvailability()}" onfocus="formCSetCookie ()"/>
                                 </p>        
                                 <div class="CSSTableGenerator">
                                     <table border="1">
@@ -211,7 +211,7 @@
                                 </table>
                             </div>
                             <br/>
-                            <h:commandButton id ="submit_app" value="Submit Application" action="#{frontManager.sendApp()}"/>     
+                            <h:commandButton id ="opt7" value="Submit Application" action="#{frontManager.sendApp()}" onfocus="formDSetCookie ()"/>     
                         </div>                          
                     </h:form>
                 </div>
