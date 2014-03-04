@@ -78,6 +78,20 @@ public class RecruiterManager {
     }
     
     /**
+     * Returns the latest thrown exception.
+     */
+    public Exception getException() {
+        return transactionFailure;
+    }
+    
+    /****
+     *Handles bugfixes
+     */
+    private String jsf22Bugfix() {
+        return "";
+    }
+    
+    /**
      * @return the applicationsList
      */
     public List<ApplicationDTO> getApplicationsList() {
@@ -93,8 +107,9 @@ public class RecruiterManager {
     
     /**
      * Filters the list of applications after the preffered details
+     * @return jsf22Bugfix ()
      */
-    public void commit() {
+    public String commit() {
         try {
             filterList = new ArrayList<ApplicationDTO>();
             filterList = recruiterFacade.getAllApplications();
@@ -133,10 +148,7 @@ public class RecruiterManager {
                             checkList[i] = true;
 
                         }
-                        catch(ParseException e)
-                        {
-
-                        }
+                        catch(ParseException e){}
                     }
                 }
 
@@ -146,7 +158,7 @@ public class RecruiterManager {
                     for(int p=0; p < filterList.get(i).getCompetences().size(); p++)
                     {
                         // If true, means we found the competence in the list
-                        if(recruiterFacade.getCompetenceName(filterList.get(i).getCompetences().get(p).getCompetence_profile_id()).equals(area))
+                        if(recruiterFacade.getCompetenceName(filterList.get(i).getCompetences().get(p).getCompetence().getCompetence_id()).equals((area).trim()))
                             p = filterList.get(i).getCompetences().size();
                         // Else, remove the person from the list
                         else if(p == filterList.get(i).getCompetences().size() - 1)
@@ -160,6 +172,8 @@ public class RecruiterManager {
         }catch (SubmissionException e) {
             transactionFailure = e;
         }
+        
+        return jsf22Bugfix();
     }
 
     /**

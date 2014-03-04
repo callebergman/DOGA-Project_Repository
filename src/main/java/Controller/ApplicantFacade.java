@@ -16,7 +16,6 @@ import Model.CompetenceDTO;
 import Model.Credential;
 import Model.Roles;
 import Model.SubmissionException;
-import java.io.IOException;
 import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -29,11 +28,9 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
-import org.eclipse.persistence.exceptions.DatabaseException;
 
 /**
  * 
@@ -155,7 +152,7 @@ public class ApplicantFacade {
                 person.addAvailability(a);
             }
         }
-        catch (RuntimeException   e){
+        catch (Exception   e){
             throw new SubmissionException(getRootMsg (e));  
         }
     }
@@ -199,11 +196,14 @@ public class ApplicantFacade {
     private String getRootMsg (Exception e){
         Throwable t = e.getCause();
         if (t != null){
+            /*
             while (t.getCause() != null)
                 t = t.getCause();
+                    */
             return t.getMessage();
         }
         else
             return e.getMessage();
         }
     }
+

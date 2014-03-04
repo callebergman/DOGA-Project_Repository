@@ -23,6 +23,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
 
 /**
@@ -82,9 +84,6 @@ public class FrontManager implements Serializable {
                 for (int i = 0; i < competences.size(); i++) {
                     areas[i] = competences.get(i).getName();
                 }
-            
-            else 
-                areas[0] = "TEST";
             //HERE!!!
             //applicantFacade.testMethod(); 
         }
@@ -133,6 +132,7 @@ public class FrontManager implements Serializable {
 
     /**
      * Returns the latest thrown exception.
+     * @return 
      */
     public Exception getException() {
         return transactionFailure;
@@ -389,9 +389,19 @@ public class FrontManager implements Serializable {
         try {
             applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email),
                     competence_profiles, availabilities));
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         } catch (SubmissionException e) {
             transactionFailure = e;
         }
-        return jsf22Bugfix();
+        return "complete";
+    }
+    
+    public String findCompetenceName(BigInteger competence_id) {
+        for (int i = 0; i < competences.size(); i++) {
+            if (competences.get(i).getCompetence_id() == competence_id) {
+                return competences.get(i).getName();
+            }
+        }
+        return " ";
     }
 }

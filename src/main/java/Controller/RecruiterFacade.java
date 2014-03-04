@@ -36,8 +36,8 @@ public class RecruiterFacade {
      */
     public List<ApplicationDTO> getAllApplications ()
     {   
+        List<ApplicationDTO>    list = new ArrayList<ApplicationDTO> ();
         try{
-            List<ApplicationDTO>    list = new ArrayList<ApplicationDTO> ();
             Query   query = em.createQuery ("SELECT c FROM Person c WHERE c.role.name=:n");
             query.setParameter ("n", "Applicant");
             List<Person>    plist = query.getResultList ();
@@ -60,23 +60,24 @@ public class RecruiterFacade {
 
                 list.add (dto);
             }
-
-            return list;
         }
         catch (PersistenceException   e){
             throw new SubmissionException(getRootMsg (e));  
         }
+        return list;
     }
    
     public String getCompetenceName (BigInteger competence_id){
+        Competence  c;
         try{
-            String name;
-            Competence  c = em.find (Competence.class, competence_id);
-            return (c.getName());
+            Query   query = em.createQuery ("SELECT c FROM Competence c WHERE c.competence_id=:i");
+            query.setParameter ("i", competence_id);
+            c = (Competence) query.getSingleResult();
         }
-        catch (RuntimeException   e){
+        catch (PersistenceException   e){
             throw new SubmissionException(getRootMsg (e));  
         }
+        return (c.getName());
     }
     
     /**
@@ -88,8 +89,10 @@ public class RecruiterFacade {
     private String getRootMsg (Exception e){
         Throwable t = e.getCause();
         if (t != null){
+            /*
             while (t.getCause() != null)
                 t = t.getCause();
+                    */
             return t.getMessage();
         }
         else
