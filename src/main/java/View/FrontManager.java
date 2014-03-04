@@ -68,6 +68,7 @@ public class FrontManager implements Serializable {
     private int fromMonth;
     private int fromDay;
     private Exception transactionFailure;
+    private Exception OldTransactionFailure;
 
     @PostConstruct
     /***
@@ -75,9 +76,17 @@ public class FrontManager implements Serializable {
      */
     private void init() 
     {
-        competences = applicantFacade.getCompetences();
-        for (int i = 0; i < competences.size(); i++) {
-            areas[i] = competences.get(i).getName();
+        try{
+            competences = applicantFacade.getCompetences();
+            if (competences.size() > 0)
+                for (int i = 0; i < competences.size(); i++) {
+                    areas[i] = competences.get(i).getName();
+                }
+            
+            else 
+                areas[0] = "TEST";
+            //HERE!!!
+            //applicantFacade.testMethod(); 
         }
         /*
         FacesContext    context = FacesContext.getCurrentInstance();
@@ -95,8 +104,10 @@ public class FrontManager implements Serializable {
             }
         }
         */
-        //HERE!!!
-        //applicantFacade.testMethod(); 
+        
+        catch (SubmissionException e) {
+            transactionFailure = e;
+        }
     }
     
     /**
@@ -113,8 +124,13 @@ public class FrontManager implements Serializable {
      * <code>false</code>.
      */
     public boolean getSuccess() {
+        if (OldTransactionFailure == transactionFailure)
+            transactionFailure = null;
+        else 
+            OldTransactionFailure = transactionFailure;
         return transactionFailure == null;
     }
+
     /**
      * Returns the latest thrown exception.
      */
@@ -133,7 +149,12 @@ public class FrontManager implements Serializable {
      */
     public String addCompetence() 
     {
-        competence_profiles.add(new Competence_profile(this.years, (Competence) applicantFacade.getCompetence(currentArea)));
+        try{
+            competence_profiles.add(new Competence_profile(this.years, (Competence) applicantFacade.getCompetence(currentArea)));
+        }
+        catch (SubmissionException e) {
+            transactionFailure = e;
+        }
         return jsf22Bugfix();
     }
 
@@ -143,7 +164,6 @@ public class FrontManager implements Serializable {
      * @return jsf22Bugfix();
      */
     public String addAvailability() {
-
         if (fromMonth < 10 && fromDay < 10) {
             setFromDate(Integer.toString(fromYear) + "-0" + Integer.toString(fromMonth) + "-0" + Integer.toString(fromDay));
         } else if (fromMonth < 10 && fromDay > 9) {
@@ -373,14 +393,5 @@ public class FrontManager implements Serializable {
             transactionFailure = e;
         }
         return jsf22Bugfix();
-    }
-
-    public String findCompetenceName(BigInteger competence_id) {
-        for (int i = 0; i < competences.size(); i++) {
-            if (competences.get(i).getCompetence_id() == competence_id) {
-                return competences.get(i).getName();
-            }
-        }
-        return " ";
     }
 }

@@ -8,6 +8,7 @@ package View;
 
 import Controller.RecruiterFacade;
 import Model.ApplicationDTO;
+import Model.SubmissionException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,13 +44,18 @@ public class RecruiterManager {
     private String fromDate;
     private String toDate;
     private String area;
-    
+    private Exception transactionFailure;
+    private Exception OldTransactionFailure;
     
     @PostConstruct
     public void init()
     {
-        applicationsList = recruiterFacade.getAllApplications();
-        setFilterList(applicationsList);
+        try{
+            applicationsList = recruiterFacade.getAllApplications();
+            setFilterList(applicationsList);
+        }catch (SubmissionException e) {
+            transactionFailure = e;
+        }
     }
     /****
      *Creates a new Arraylist 
@@ -57,6 +63,18 @@ public class RecruiterManager {
     public RecruiterManager()
     {
         applicationsList = new ArrayList<ApplicationDTO>();
+    }
+    
+    /**
+     * @return <code>true</code> if the latest transaction succeeded, otherwise
+     * <code>false</code>.
+     */
+    public boolean getSuccess() {
+        if (OldTransactionFailure == transactionFailure)
+            transactionFailure = null;
+        else 
+            OldTransactionFailure = transactionFailure;
+        return transactionFailure == null;
     }
     
     /**
@@ -77,68 +95,71 @@ public class RecruiterManager {
      * Filters the list of applications after the preffered details
      */
     public void commit() {
-        filterList = new ArrayList<ApplicationDTO>();
-        filterList = recruiterFacade.getAllApplications();
-        
-        // Checklist for if an application should be filtered or not
-        // True = Should not be in the list, False = should be in the list
-        boolean[] checkList = new boolean[filterList.size()];
-        for(int i=0; i<filterList.size(); i++)
-        {
-            // First name
-            checkList[i] = false;
-            if(!firstName.equals(""))            
-                if(!filterList.get(i).getPerson().getName().equals(firstName))
-                    checkList[i] = true;
-            // Last name
-            if(!lastName.equals("") && checkList[i] == false)            
-                if(!filterList.get(i).getPerson().getSurname().equals(lastName))
-                    checkList[i] = true;
-            //Time periods
-            if(checkList[i] == false && !toDate.equals("") && !fromDate.equals(""))
+        try {
+            filterList = new ArrayList<ApplicationDTO>();
+            filterList = recruiterFacade.getAllApplications();
+
+            // Checklist for if an application should be filtered or not
+            // True = Should not be in the list, False = should be in the list
+            boolean[] checkList = new boolean[filterList.size()];
+            for(int i=0; i<filterList.size(); i++)
             {
-                for(int p = 0; p < filterList.get(i).getAvailabilitys().size(); p++)
-                {                    
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    try
-                    {
-                    Date fdate = dateFormat.parse(filterList.get(i).getAvailabilitys().get(p).getFrom_date());
-                    Date tdate = dateFormat.parse(filterList.get(i).getAvailabilitys().get(p).getTo_date());
-                    
-                    Date filterToDate = dateFormat.parse(toDate);
-                    Date filterFromDate = dateFormat.parse(fromDate);
-                    
-                    if(fdate.before(filterFromDate) && tdate.after(filterToDate))
-                        p = filterList.get(i).getAvailabilitys().size();
-                    else if(p == filterList.get(i).getAvailabilitys().size() - 1)
+                // First name
+                checkList[i] = false;
+                if(!firstName.equals(""))            
+                    if(!filterList.get(i).getPerson().getName().equals(firstName))
                         checkList[i] = true;
-                    
-                    }
-                    catch(ParseException e)
-                    {
-                        
-                    }
-                }
-            }
-            
-            //Area of expertise
-            if(!area.equals("") && checkList[i] == false)
-            {
-                for(int p=0; p < filterList.get(i).getCompetences().size(); p++)
+                // Last name
+                if(!lastName.equals("") && checkList[i] == false)            
+                    if(!filterList.get(i).getPerson().getSurname().equals(lastName))
+                        checkList[i] = true;
+                //Time periods
+                if(checkList[i] == false && !toDate.equals("") && !fromDate.equals(""))
                 {
-                    // If true, means we found the competence in the list
-                    if(recruiterFacade.getCompetenceName(filterList.get(i).getCompetences().get(p).getCompetence_profile_id()).equals(area))
-                        p = filterList.get(i).getCompetences().size();
-                    // Else, remove the person from the list
-                    else if(p == filterList.get(i).getCompetences().size() - 1)
-                        checkList[i] = true;                  
+                    for(int p = 0; p < filterList.get(i).getAvailabilitys().size(); p++)
+                    {                    
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        try
+                        {
+                        Date fdate = dateFormat.parse(filterList.get(i).getAvailabilitys().get(p).getFrom_date());
+                        Date tdate = dateFormat.parse(filterList.get(i).getAvailabilitys().get(p).getTo_date());
+
+                        Date filterToDate = dateFormat.parse(toDate);
+                        Date filterFromDate = dateFormat.parse(fromDate);
+
+                        if(fdate.before(filterFromDate) && tdate.after(filterToDate))
+                            p = filterList.get(i).getAvailabilitys().size();
+                        else if(p == filterList.get(i).getAvailabilitys().size() - 1)
+                            checkList[i] = true;
+
+                        }
+                        catch(ParseException e)
+                        {
+
+                        }
+                    }
                 }
-            }               
+
+                //Area of expertise
+                if(!area.equals("") && checkList[i] == false)
+                {
+                    for(int p=0; p < filterList.get(i).getCompetences().size(); p++)
+                    {
+                        // If true, means we found the competence in the list
+                        if(recruiterFacade.getCompetenceName(filterList.get(i).getCompetences().get(p).getCompetence_profile_id()).equals(area))
+                            p = filterList.get(i).getCompetences().size();
+                        // Else, remove the person from the list
+                        else if(p == filterList.get(i).getCompetences().size() - 1)
+                            checkList[i] = true;                  
+                    }
+                }               
+            }
+            for(int i=checkList.length - 1; i>=0; i--)
+                if(checkList[i] == true)
+                    filterList.remove(i);        
+        }catch (SubmissionException e) {
+            transactionFailure = e;
         }
-        for(int i=checkList.length - 1; i>=0; i--)
-            if(checkList[i] == true)
-                filterList.remove(i);              
-        
     }
 
     /**
