@@ -29,6 +29,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
@@ -202,6 +203,7 @@ public class ApplicantFacade {
             if (tmp !=null)
                 throw new SubmissionException("Email is already in use"); 
         }
+        catch (NoResultException  e) {}
         catch (Exception    e){
             throw new SubmissionException(getRootMsg (e));  
         }
