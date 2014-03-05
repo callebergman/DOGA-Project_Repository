@@ -24,6 +24,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
 
@@ -84,7 +85,6 @@ public class FrontManager implements Serializable {
                 for (int i = 0; i < competences.size(); i++) {
                     areas[i] = competences.get(i).getName();
                 }
-            areas[9] = "TESTY";
             //HERE!!!
             //applicantFacade.testMethod(); 
         }
@@ -387,11 +387,13 @@ public class FrontManager implements Serializable {
     }
 
     public String sendApp() throws ParseException, IOException {
-        try {
-            applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email),
-                    competence_profiles, availabilities));
+       try{
+           applicantFacade.validateEmail(this.email);
+
+           applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email), competence_profiles, availabilities));
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        } catch (SubmissionException e) {
+        } 
+        catch (SubmissionException e) {
             transactionFailure = e;
         }
         return "complete";

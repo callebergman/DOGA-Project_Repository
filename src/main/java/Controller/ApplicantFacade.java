@@ -187,7 +187,25 @@ public class ApplicantFacade {
             throw new SubmissionException(getRootMsg (e));  
         }
     }
-    
+    /**
+     * 
+     * @param email 
+     * Just throw submissionException if there is a Person with 
+     * given email 
+     */
+    public void validateEmail (String email)
+    {
+        try{
+            Query   query = em.createQuery ("SELECT c FROM Person c WHERE c.email=:n");
+            query.setParameter ("n", email);
+            Person   tmp = (Person) query.getSingleResult();
+            if (tmp !=null)
+                throw new SubmissionException("Email is already in use"); 
+        }
+        catch (Exception    e){
+            throw new SubmissionException(getRootMsg (e));  
+        }
+    }
     /**
      * 
      * @param e
