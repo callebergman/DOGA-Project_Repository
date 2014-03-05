@@ -73,7 +73,7 @@ public class FrontManager implements Serializable {
     private int fromDay;
     private Exception transactionFailure;
     private Exception OldTransactionFailure;
-    public Log log;
+    public Log log = new Log();
     @PostConstruct
     /***
      *
