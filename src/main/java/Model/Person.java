@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import static javax.persistence.CascadeType.ALL;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,6 +36,7 @@ public class Person implements Serializable {
     private String name;
     private String surname;
     private String ssn;
+    @Column(unique=true)
     private String email;
     
     @OneToOne(mappedBy = "person", cascade = ALL)

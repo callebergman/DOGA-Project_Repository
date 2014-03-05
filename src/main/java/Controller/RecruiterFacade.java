@@ -13,6 +13,7 @@ import Model.SubmissionException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -61,7 +62,7 @@ public class RecruiterFacade {
                 list.add (dto);
             }
         }
-        catch (PersistenceException   e){
+        catch (Exception    e){
             throw new SubmissionException(getRootMsg (e));  
         }
         return list;
@@ -74,7 +75,7 @@ public class RecruiterFacade {
             query.setParameter ("i", competence_id);
             c = (Competence) query.getSingleResult();
         }
-        catch (PersistenceException   e){
+        catch (Exception    e){
             throw new SubmissionException(getRootMsg (e));  
         }
         return (c.getName());
@@ -87,15 +88,16 @@ public class RecruiterFacade {
      * Returns the most inner internal exceptions message
      */
     private String getRootMsg (Exception e){
+        if(e.getClass().isInstance(new SubmissionException ()))
+            return e.getMessage();
+        
         Throwable t = e.getCause();
         if (t != null){
-            /*
             while (t.getCause() != null)
                 t = t.getCause();
-                    */
-            return t.getMessage();
+            return t.getClass().getName() + " "+ t.getMessage();
         }
         else
-            return e.getMessage();
+            return e.getClass().getName() + " "+  e.getMessage();
         }
     }

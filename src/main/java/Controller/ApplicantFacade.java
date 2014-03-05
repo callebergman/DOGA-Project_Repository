@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -166,7 +167,7 @@ public class ApplicantFacade {
             Query   query = em.createQuery ("SELECT c FROM Competence c");
             return query.getResultList ();
         }
-        catch (PersistenceException   e){
+        catch (Exception    e){
             throw new SubmissionException(getRootMsg (e));  
         }
     }
@@ -182,7 +183,7 @@ public class ApplicantFacade {
             Competence   c = (Competence) query.getSingleResult();
             return c;
         }
-        catch (PersistenceException   e){
+        catch (Exception    e){
             throw new SubmissionException(getRootMsg (e));  
         }
     }
@@ -194,16 +195,17 @@ public class ApplicantFacade {
      * Returns the most inner internal exceptions message
      */
     private String getRootMsg (Exception e){
+        if(e.getClass().isInstance(new SubmissionException ()))
+            return e.getMessage();
+        
         Throwable t = e.getCause();
         if (t != null){
-            /*
             while (t.getCause() != null)
                 t = t.getCause();
-                    */
-            return t.getMessage();
+            return t.getClass().getName() + " "+ t.getMessage();
         }
         else
-            return e.getMessage();
+            return e.getClass().getName() + " "+  e.getMessage();
         }
     }
 
