@@ -6,6 +6,7 @@
 
 package View;
 
+import Controller.Log;
 import Controller.RecruiterFacade;
 import Model.ApplicationDTO;
 import Model.SubmissionException;
@@ -46,7 +47,7 @@ public class RecruiterManager {
     private String area;
     private Exception transactionFailure;
     private Exception OldTransactionFailure;
-    
+    public Log log = new Log();
     @PostConstruct
     public void init()
     {
@@ -109,7 +110,7 @@ public class RecruiterManager {
      * Filters the list of applications after the preffered details
      * @return jsf22Bugfix ()
      */
-    public String commit() {
+    public String commit() throws IOException {
         try {
             filterList = new ArrayList<ApplicationDTO>();
             filterList = recruiterFacade.getAllApplications();
@@ -124,10 +125,12 @@ public class RecruiterManager {
                 if(!firstName.equals(""))            
                     if(!filterList.get(i).getPerson().getName().equals(firstName))
                         checkList[i] = true;
+                        log.writetofile("Recruiter","Filtered by first name");
                 // Last name
                 if(!lastName.equals("") && checkList[i] == false)            
                     if(!filterList.get(i).getPerson().getSurname().equals(lastName))
                         checkList[i] = true;
+                         log.writetofile("Recruiter","Filtered by last name");
                 //Time periods
                 if(checkList[i] == false && !toDate.equals("") && !fromDate.equals(""))
                 {
@@ -143,7 +146,10 @@ public class RecruiterManager {
                         Date filterFromDate = dateFormat.parse(fromDate);
 
                         if(fdate.before(filterFromDate) && tdate.after(filterToDate))
+                        {
                             p = filterList.get(i).getAvailabilitys().size();
+                            log.writetofile("Recruiter","Filtered by Date");
+                        }
                         else if(p == filterList.get(i).getAvailabilitys().size() - 1)
                             checkList[i] = true;
 
@@ -159,7 +165,10 @@ public class RecruiterManager {
                     {
                         // If true, means we found the competence in the list
                         if(recruiterFacade.getCompetenceName(filterList.get(i).getCompetences().get(p).getCompetence().getCompetence_id()).equals((area).trim()))
+                        {
                             p = filterList.get(i).getCompetences().size();
+                            log.writetofile("Recruiter","Filtered by expertise");
+                        }
                         // Else, remove the person from the list
                         else if(p == filterList.get(i).getCompetences().size() - 1)
                             checkList[i] = true;                  
