@@ -25,6 +25,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
 
@@ -392,14 +393,13 @@ public class FrontManager implements Serializable {
      * @throws java.io.IOException
      */
     public String sendApp() throws ParseException, IOException {
-        
-        try {
-            
-            applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email),
-                    competence_profiles, availabilities));
+       try{
+           applicantFacade.validateEmail(this.email);
+
+           applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email), competence_profiles, availabilities));
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-            
-        } catch (SubmissionException e) {
+        } 
+        catch (SubmissionException e) {
             transactionFailure = e;
         }
         log.writetofile(this.name,"submits application");

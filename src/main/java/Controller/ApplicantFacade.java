@@ -24,10 +24,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
@@ -166,7 +168,7 @@ public class ApplicantFacade {
             Query   query = em.createQuery ("SELECT c FROM Competence c");
             return query.getResultList ();
         }
-        catch (PersistenceException   e){
+        catch (Exception    e){
             throw new SubmissionException(getRootMsg (e));  
         }
     }
@@ -182,11 +184,30 @@ public class ApplicantFacade {
             Competence   c = (Competence) query.getSingleResult();
             return c;
         }
-        catch (PersistenceException   e){
+        catch (Exception    e){
             throw new SubmissionException(getRootMsg (e));  
         }
     }
-    
+    /**
+     * 
+     * @param email 
+     * Just throw submissionException if there is a Person with 
+     * given email 
+     */
+    public void validateEmail (String email)
+    {
+        try{
+            Query   query = em.createQuery ("SELECT c FROM Person c WHERE c.email=:n");
+            query.setParameter ("n", email);
+            Person   tmp = (Person) query.getSingleResult();
+            if (tmp !=null)
+                throw new SubmissionException("Email is already in use"); 
+        }
+        catch (NoResultException  e) {}
+        catch (Exception    e){
+            throw new SubmissionException(getRootMsg (e));  
+        }
+    }
     /**
      * 
      * @param e
@@ -194,16 +215,17 @@ public class ApplicantFacade {
      * Returns the most inner internal exceptions message
      */
     private String getRootMsg (Exception e){
+        if(e.getClass().isInstance(new SubmissionException ()))
+            return e.getMessage();
+        
         Throwable t = e.getCause();
         if (t != null){
-            /*
             while (t.getCause() != null)
                 t = t.getCause();
-                    */
-            return t.getMessage();
+            return t.getClass().getName() + " "+ t.getMessage();
         }
         else
-            return e.getMessage();
+            return e.getClass().getName() + " "+  e.getMessage();
         }
     }
 
