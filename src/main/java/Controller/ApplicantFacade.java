@@ -115,7 +115,7 @@ public class ApplicantFacade {
                 throw new SubmissionException("Name and email is mandatory");
 
             role.addPerson(person);
-            //log.writetofile(person.getName(),"submits application");
+            
 
             List<Competence_profile>  competences = ADTO.getCompetences();
             if (competences.isEmpty())

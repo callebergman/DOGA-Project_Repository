@@ -6,6 +6,7 @@
 package View;
 
 import Controller.ApplicantFacade;
+import Controller.Log;
 import Model.ApplicationDTO;
 import Model.Availability;
 import Model.Competence;
@@ -71,7 +72,7 @@ public class FrontManager implements Serializable {
     private int fromDay;
     private Exception transactionFailure;
     private Exception OldTransactionFailure;
-
+    public Log log;
     @PostConstruct
     /***
      *
@@ -384,18 +385,29 @@ public class FrontManager implements Serializable {
     public void setToDate(String toDate) {
         this.toDate = toDate;
     }
-
+    /***
+     *sends a application 
+     * @return "complete"
+     * @throws java.text.ParseException
+     * @throws java.io.IOException
+     */
     public String sendApp() throws ParseException, IOException {
+        
         try {
+            
             applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email),
                     competence_profiles, availabilities));
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+            
         } catch (SubmissionException e) {
             transactionFailure = e;
         }
+        log.writetofile(this.name,"submits application");
         return "complete";
     }
-    
+    /***
+     *retrives competence name 
+     */
     public String findCompetenceName(BigInteger competence_id) {
         for (int i = 0; i < competences.size(); i++) {
             if (competences.get(i).getCompetence_id() == competence_id) {

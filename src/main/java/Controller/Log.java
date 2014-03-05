@@ -24,6 +24,7 @@ public class Log
     /****
      *@param id is an identifier to see who wrote what.
      * @param content shows the action that the person did.
+     * @throws java.io.IOException
      */
     public void writetofile(String id, String content) throws IOException
     {
