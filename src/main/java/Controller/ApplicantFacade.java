@@ -115,10 +115,7 @@ public class ApplicantFacade {
 
             if ((person.getName()== null || person.getName().trim().length() == 0)|| (person.getSurname()== null || person.getSurname().trim().length() == 0) || (person.getEmail()== null || person.getEmail().trim().length() == 0))
                 throw new SubmissionException("Name and email is mandatory");
-
-            role.addPerson(person);
             
-
             List<Competence_profile>  competences = ADTO.getCompetences();
             if (competences.isEmpty())
                 throw new SubmissionException("No competence submitted");
@@ -153,7 +150,9 @@ public class ApplicantFacade {
                     throw new SubmissionException("Start date cannot be earlier thant end date");
                 person.addAvailability(a);
             }
+            role.addPerson(person);
         }
+        
         catch (Exception   e){
             throw new SubmissionException(getRootMsg (e));  
         }

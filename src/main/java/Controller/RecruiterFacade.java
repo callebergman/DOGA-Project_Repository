@@ -51,13 +51,9 @@ public class RecruiterFacade {
                 p = plist.get(i);
                 dto.setPerson(p);
 
-                query = em.createQuery ("SELECT c FROM Competence_profile c WHERE c.person.person_id=:n");
-                query.setParameter ("n", p.getPerson_id());
-                dto.setCompetences(query.getResultList());
-
-                query = em.createQuery ("SELECT c FROM Availability c WHERE c.person.person_id=:n");
-                query.setParameter ("n", p.getPerson_id());
-                dto.setAvailabilitys(query.getResultList());
+                dto.setCompetences(p.getCompetence_profiles());
+                
+                dto.setAvailabilitys(p.getAvailabilitys());
 
                 list.add (dto);
             }
