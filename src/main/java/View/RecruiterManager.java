@@ -48,6 +48,7 @@ public class RecruiterManager {
     private Exception transactionFailure;
     private Exception OldTransactionFailure;
     public Log log = new Log();
+    
     @PostConstruct
     public void init()
     {
@@ -109,6 +110,7 @@ public class RecruiterManager {
     /**
      * Filters the list of applications after the preffered details
      * @return jsf22Bugfix ()
+     * @throws java.io.IOException
      */
     public String commit() throws IOException {
         try {
@@ -271,6 +273,8 @@ public class RecruiterManager {
     
     /**
      * Invalidates the current session
+     * @return 
+     * @throws java.io.IOException
      */
     public String logout () throws IOException{
         FacesContext    context = FacesContext.getCurrentInstance();
