@@ -16,7 +16,6 @@ import Model.Person;
 import Model.SubmissionException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +24,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.PersistenceException;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.*;
 
 /**
@@ -57,7 +54,10 @@ public class FrontManager implements Serializable {
     
     @NotNull(message="Please select at least one area of expertise")
     private String currentArea;
-    private String[] areas = new String[10];
+    
+    private String[]    eng_areas;
+    private String[]    newLanguage_areas;
+    public String language = "English";
     
     private List<Availability> availabilities;
     private List<Competence_profile>    competence_profiles;
@@ -73,38 +73,29 @@ public class FrontManager implements Serializable {
     private int fromDay;
     private Exception transactionFailure;
     private Exception OldTransactionFailure;
+    
     public Log log = new Log();
+    
     @PostConstruct
-    /***
-     *
+    /**
+     * This method is called directly after the constructor
+     * Initiates competence list
      */
     private void init() 
     {
         try{
             competences = applicantFacade.getCompetences();
+            eng_areas = new String[competences.size ()];
+            newLanguage_areas = new String[competences.size ()];
+            
             if (competences.size() > 0)
                 for (int i = 0; i < competences.size(); i++) {
-                    areas[i] = competences.get(i).getName();
+                    eng_areas[i] = competences.get(i).getEng_name();
+                    newLanguage_areas[i] = competences.get(i).getEng_name();
                 }
             //HERE!!!
             //applicantFacade.testMethod(); 
         }
-        /*
-        FacesContext    context = FacesContext.getCurrentInstance();
-        
-        //Reset cookies for all tabs
-        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-        HttpServletResponse  response = (HttpServletResponse) context.getExternalContext().getResponse();
-        
-        for (Cookie cookie: request.getCookies()) {
-            if (("opt2").equals(cookie.getName())||("opt3").equals(cookie.getName())||("opt4").equals(cookie.getName())) 
-            {
-                cookie.setMaxAge(0);
-                cookie.setValue("");
-                response.addCookie(cookie);
-            }
-        }
-        */
         
         catch (SubmissionException e) {
             transactionFailure = e;
@@ -112,12 +103,12 @@ public class FrontManager implements Serializable {
     }
     
     /**
-     * Creates a new instance of LoginManager
+     *Constructor
      */
     public FrontManager() {
-        competences = new ArrayList<CompetenceDTO>();
-        availabilities = new ArrayList<Availability>();
-        competence_profiles = new ArrayList<Competence_profile>();
+        competences = new ArrayList<>();
+        availabilities = new ArrayList<>();
+        competence_profiles = new ArrayList<>();
     }
 
     /**
@@ -133,20 +124,25 @@ public class FrontManager implements Serializable {
     }
 
     /**
-     * Returns the latest thrown exception.
-     * @return 
+     * @return latest thrown exception
      */
     public Exception getException() {
         return transactionFailure;
     }
-    /****
-     *Handles bugfixes
+    
+    /**
+     * @return empty string
      */
     private String jsf22Bugfix() {
         return "";
     }
+    
+    public String getLanguage (){
+        return language;
+    }
+    
     /***
-     * adds a competence
+     * adds a competence_profile to the current list
      *@return jsf22Bugfix  
      */
     public String addCompetence() 
@@ -190,6 +186,7 @@ public class FrontManager implements Serializable {
 
         return jsf22Bugfix();
     }
+    
     /**
      *@return name 
      */
@@ -215,11 +212,21 @@ public class FrontManager implements Serializable {
         years = newYears;
     }
     /**
-     *@return areas
+     *@return areas in english
      */
-    public String[] getAreas() {
-        return areas;
+    public String[] getEng_areas() {
+        return eng_areas;
     }
+    
+    /**
+     * 
+     *@return areas in a diffent language
+     */
+    public String[] getNewLanguage_areas() {
+        return newLanguage_areas;
+    }
+    
+    /**
     /**
      *@return currentArea
      */
@@ -227,10 +234,24 @@ public class FrontManager implements Serializable {
         return currentArea;
     }
     /**
-     *@param newArea sets a new value to area 
+     * Sets the variable currentArea to newArea
+     *@param newArea
      */
     public void setCurrentArea(String newArea) {
-        currentArea = newArea;
+        
+        boolean contains = false;
+        int i;
+        for (i=0; i<newLanguage_areas.length; i++)
+            if (newLanguage_areas[i].equals (newArea)){
+                contains = true;
+                break;
+            }
+        
+        if (contains = false){
+            currentArea = eng_areas[i];
+        }
+        else
+            currentArea = newArea;
     }
     /**
      *@return lastName 
@@ -405,15 +426,16 @@ public class FrontManager implements Serializable {
         log.writetofile(this.name,"submits application");
         return "complete";
     }
-    /***
-     *retrives competence name 
+    
+    
+    /**
+     * Loads the area list with swedish names
      */
-    public String findCompetenceName(BigInteger competence_id) {
-        for (int i = 0; i < competences.size(); i++) {
-            if (competences.get(i).getCompetence_id() == competence_id) {
-                return competences.get(i).getName();
-            }
-        }
-        return " ";
+    public void changeToSwedish () {
+        if (competences.size() > 0)
+                for (int i = 0; i < competences.size(); i++) {
+                    newLanguage_areas[i] = competences.get(i).getSwe_name();
+                }
+        language = "Swedish";
     }
 }

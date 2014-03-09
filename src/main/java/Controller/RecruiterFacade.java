@@ -13,11 +13,11 @@ import Model.SubmissionException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJBException;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 /**
@@ -27,6 +27,7 @@ import javax.persistence.Query;
  *from the database
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class RecruiterFacade {
     
     @PersistenceContext(unitName = "projectPU")
@@ -74,7 +75,7 @@ public class RecruiterFacade {
         catch (Exception    e){
             throw new SubmissionException(getRootMsg (e));  
         }
-        return (c.getName());
+        return (c.getEng_name());
     }
     
     /**

@@ -5,10 +5,28 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
     <navigation-rule>
-        <from-view-id>/front.xhtml</from-view-id>
+        <from-view-id>/English/front.xhtml</from-view-id>
         <navigation-case>
             <if>#{!frontManager.success}</if>
-            <to-view-id>/front-error.xhtml</to-view-id>
+            <to-view-id>/English/front-error.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{frontManager.language}</from-action>
+            <from-outcome>Swedish</from-outcome>
+            <to-view-id>/Swedish/front.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/Swedish/front.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{!frontManager.success}</if>
+            <to-view-id>/Swedish/front-error.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{frontManager.language}</from-action>
+            <from-outcome>English</from-outcome>
+            <to-view-id>/English/front.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     

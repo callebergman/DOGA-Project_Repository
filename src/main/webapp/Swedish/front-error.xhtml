@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="front-style.css"  />
+        <title>Transaction Failed</title>
+    </h:head>
+    <h:body>
+        <div id="wrap">
+            <ui:include src="../header.xhtml"/>
+            <div id="bar">
+                <div id="content">
+                    <p class="tag"> Skicka ett ansökan eller logga in för att kolla på mottagna </p>
+                    <ul class="nav">
+                        <li class="ico">
+                            <a href="#{request.contextPath}/faces/restricted/recruiterPage.xhtml">Logga in / Registrera </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <h1>Transaction Failed</h1>
+            <c:choose>
+                <c:when test="#{frontManager.exception.cause != null}">
+                    <h3><h:outputText value="#{frontManager.exception.cause.message}"/></h3>
+                </c:when>
+                <c:otherwise>
+                    <h3><h:outputText value="#{frontManager.exception.message}"/></h3>
+                </c:otherwise>
+            </c:choose>
+            <a href="front.xhtml">Back to main page</a>
+            <ui:include src="footer.xhtml"/>
+        </div>
+    </h:body>
+</html>
+

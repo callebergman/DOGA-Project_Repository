@@ -9,7 +9,17 @@
         <title>Transaction Complete</title>
     </h:head>
     <h:body>
-        <div id="wrap">
+            <ui:include src="../header.xhtml"/>
+            <div id="bar">
+                <div id="content">
+                    <p class="tag"> Skicka ett ansökan eller logga in för att kolla på mottagna </p>
+                    <ul class="nav">
+                        <li class="ico">
+                            <a href="#{request.contextPath}/faces/restricted/recruiterPage.xhtml">Logga in / Registrera </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <ui:include src="header.xhtml"/>
             <h1>Transaction Complete</h1>
             <br/>

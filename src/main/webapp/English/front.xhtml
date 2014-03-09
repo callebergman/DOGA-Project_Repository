@@ -27,7 +27,7 @@
 
                 <div id="applicationForm">
                     <div id="basicInfo">
-                            <h2 class="title" id = "header">Basic information</h2>
+                        <h2 class="title" id = "header">Basic information</h2>
                             <div id="fillin">   
                                 <p> 
                                     <h:form id="formA1">
@@ -55,7 +55,7 @@
                                 <p>Choose your area of expertise: 
                                     <br/>
                                     <h:selectOneMenu id="ca" value="#{frontManager.currentArea}">                                           
-                                        <c:forEach items="#{frontManager.areas.stream().map(b->b).distinct().toList()}" var="area">
+                                        <c:forEach items="#{frontManager.eng_areas.stream().map(b->b).distinct().toList()}" var="area">
                                             <f:selectItem itemValue="#{area}" itemLabel="#{area}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>

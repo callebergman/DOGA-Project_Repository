@@ -24,14 +24,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 /**
@@ -53,24 +51,37 @@ public class ApplicantFacade {
      */
     public void testMethod ()
     {
-        String[] areas = new String[10];
-        areas[0] = "Korvgrillning";
-        areas[1] = "Karuselldrift";
-        areas[2] = "Diskotering";
-        areas[3] = "Programmering";
-        areas[4] = "Guiding";
-        areas[5] = "Maskin reparering";
-        areas[6] = "Bakning";
-        areas[7] = "Servering";
-        areas[8] = "Taxering";
-        areas[9] = "Servicing";
+        String[] areas_eng = new String[10];
+        areas_eng[0] = "Sausage";
+        areas_eng[1] = "Carousel Operation";
+        areas_eng[2] = "Disco";
+        areas_eng[3] = "Programming";
+        areas_eng[4] = "Guiding";
+        areas_eng[5] = "Maskin reparation";
+        areas_eng[6] = "Baking";
+        areas_eng[7] = "Serving";
+        areas_eng[8] = "Taxation";
+        areas_eng[9] = "Servicing";
         
-        for (int i=0; i<areas.length; i++)
+        String[] areas_swe = new String[10];
+        areas_swe[0] = "Korvgrillning";
+        areas_swe[1] = "Karuselldrift";
+        areas_swe[2] = "Diskotering";
+        areas_swe[3] = "Programmering";
+        areas_swe[4] = "Guiding";
+        areas_swe[5] = "Maskin reparering";
+        areas_swe[6] = "Bakning";
+        areas_swe[7] = "Servering";
+        areas_swe[8] = "Taxering";
+        areas_swe[9] = "Servicing";
+        
+        for (int i=0; i<areas_swe.length; i++)
         {
             Competence c = new Competence ();
             String s = Integer.toString(i);
             c.setCompetence_id(new BigInteger (s));
-            c.setName(areas[i]);
+            c.setEng_name(areas_eng[i]);
+            c.setSwe_name(areas_swe[i]);
             em.persist (c);
         }
         
@@ -173,8 +184,8 @@ public class ApplicantFacade {
     }
     
     /**
-     * @param name
-     *@return competence
+     *@param name of the competence you want
+     *@return The found Comepetence
      */
     public CompetenceDTO    getCompetence (String name){
         try{
@@ -209,9 +220,8 @@ public class ApplicantFacade {
     }
     /**
      * 
-     * @param e
-     * @return message
-     * Returns the most inner internal exceptions message
+     * @param Exception e
+     * @return Message of the most inner cause
      */
     private String getRootMsg (Exception e){
         if(e.getClass().isInstance(new SubmissionException ()))

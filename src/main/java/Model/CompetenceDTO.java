@@ -14,7 +14,9 @@ import java.util.Collection;
  */
 public interface CompetenceDTO 
 {
-    String getName();
+    String getEng_name ();
+    
+    String getSwe_name ();
     
     BigInteger getCompetence_id();
         

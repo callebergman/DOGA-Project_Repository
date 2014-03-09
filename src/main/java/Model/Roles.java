@@ -7,16 +7,10 @@
 package Model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import static javax.persistence.CascadeType.ALL;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 

@@ -6,26 +6,26 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="front-style.css"  />
-        <title>Transaction Failed</title>
+        <title>Transaction Complete</title>
     </h:head>
     <h:body>
         <div id="wrap">
+            <ui:include src="../header.xhtml"/>
             <div id="bar">
                 <div id="content">
                     <p class="tag"> Create applications or login to browse submissions </p>
+                    <ul class="nav">
+                        <li class="ico">
+                            <a href="#{request.contextPath}/faces/restricted/recruiterPage.xhtml">Login / Signup </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <h1>Transaction Failed</h1>
-            <c:choose>
-                <c:when test="#{recruiterManager.exception.cause != null}">
-                    <h3><h:outputText value="#{recruiterManager.exception.cause.message}"/></h3>
-                </c:when>
-                <c:otherwise>
-                    <h3><h:outputText value="#{recruiterManager.exception.message}"/></h3>
-                </c:otherwise>
-            </c:choose>
-            <a href="recruiterPage.xhtml">Back to main page</a>
-            <ui:include src="/English/footer.xhtml"/>
+            <h1>Transaction Complete</h1>
+            <br/>
+            <h2>Thank you for your submission</h2>
+            <a href="front.xhtml">Back to main page</a>
+            <ui:include src="footer.xhtml"/>
         </div>
     </h:body>
 </html>
