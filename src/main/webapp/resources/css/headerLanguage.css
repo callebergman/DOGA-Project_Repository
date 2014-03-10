@@ -7,21 +7,22 @@ background: #2f2f2f url('../images/flags.png') no-repeat;
 font-size: 11px;
 color: #ccc;
 border: 0;
-width: 120px;
-padding: 0 0 0 20px;
+
+width: 75px;
+
 -webkit-appearance: none;
 }
 #bar .language {
 background: #2f2f2f url('../images/drop.png') no-repeat 86px 9px;
 margin: -2px 10px 0 0;
 color: #ccc;
-border-radius: 3px;
+border-radius: 4px;
 border: 1px solid #888;
 float: right;
 overflow: hidden;
-margin-left: 10px;
-width: 100px;
-padding-top: 5px;
+margin-left: 5px;
+width: 65px;
+
 }
 select {
 
@@ -38,13 +39,14 @@ cursor: default;
 }
 div {
 display: block;
+padding-top: 7px;
 }
 #bar {
 font-size: 11px;
 }
 body {
 font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial;
-line-height: 20px;
+line-height: 12px;
 }
 select {
 margin: 0em;
