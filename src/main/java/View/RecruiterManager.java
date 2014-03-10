@@ -72,18 +72,16 @@ public class RecruiterManager {
      * <code>false</code>.
      */
     public boolean getSuccess() {
-        if (OldTransactionFailure == transactionFailure)
-            transactionFailure = null;
-        else 
-            OldTransactionFailure = transactionFailure;
-        return transactionFailure == null;
+        OldTransactionFailure = transactionFailure;
+        transactionFailure = null;
+        return OldTransactionFailure == null;
     }
     
     /**
      * Returns the latest thrown exception.
      */
     public Exception getException() {
-        return transactionFailure;
+        return OldTransactionFailure;
     }
     
     /****

@@ -9,7 +9,7 @@ package Controller;
 import Model.ApplicationDTO;
 import Model.Competence;
 import Model.Person;
-import Model.SubmissionException;
+import Model.RetrievalException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,7 @@ public class RecruiterFacade {
             }
         }
         catch (Exception    e){
-            throw new SubmissionException(getRootMsg (e));  
+            throw new RetrievalException(getRootMsg (e));  
         }
         return list;
     }
@@ -73,7 +73,7 @@ public class RecruiterFacade {
             c = (Competence) query.getSingleResult();
         }
         catch (Exception    e){
-            throw new SubmissionException(getRootMsg (e));  
+            throw new RetrievalException(getRootMsg (e));  
         }
         return (c.getName());
     }
@@ -85,7 +85,7 @@ public class RecruiterFacade {
      * Returns the most inner internal exceptions message
      */
     private String getRootMsg (Exception e){
-        if(e.getClass().isInstance(new SubmissionException ()))
+        if(e.getClass().isInstance(new RetrievalException ()))
             return e.getMessage();
         
         Throwable t = e.getCause();

@@ -75,7 +75,7 @@
                             <td>#{item.person.email}</td>
                             <td>
                                 <ui:repeat var="comp" value="#{item.competences}">
-                                    #{frontManager.findCompetenceName(comp.competence.competence_id)} 
+                                    #{comp.competence.name} 
                                 #{comp.years_of_experience} years
                                 <br/>
                                  </ui:repeat>

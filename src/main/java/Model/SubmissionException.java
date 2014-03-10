@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.regex.Pattern;
 import javax.ejb.ApplicationException;
 
 /**
@@ -15,5 +16,13 @@ public class SubmissionException extends RuntimeException
     }
 
     public SubmissionException() {
+    }
+
+    public String getMessage(int i) {
+        String msg = super.getMessage();
+        String[] tokens = msg.split(Pattern.quote("||"));
+        if (tokens.length == 1)
+            i = 0;    
+        return tokens[i]; 
     }
 }

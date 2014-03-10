@@ -17,7 +17,7 @@
                     <h3><h:outputText value="#{frontManager.exception.cause.message}"/></h3>
                 </c:when>
                 <c:otherwise>
-                    <h3><h:outputText value="#{frontManager.exception.message}"/></h3>
+                    <h3><h:outputText value="#{frontManager.exception.getMessage(1)}"/></h3>
                 </c:otherwise>
             </c:choose>
             <a href="front.xhtml">Tillbacks till första sidan</a>

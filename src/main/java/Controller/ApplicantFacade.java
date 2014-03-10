@@ -125,11 +125,11 @@ public class ApplicantFacade {
             Person  person = ADTO.getPerson();
 
             if ((person.getName()== null || person.getName().trim().length() == 0)|| (person.getSurname()== null || person.getSurname().trim().length() == 0) || (person.getEmail()== null || person.getEmail().trim().length() == 0))
-                throw new SubmissionException("Name and email is mandatory");
+                throw new SubmissionException("Name and email is mandatory || Namn och email är obligatoriskt");
             
             List<Competence_profile>  competences = ADTO.getCompetences();
             if (competences.isEmpty())
-                throw new SubmissionException("No competence submitted");
+                throw new SubmissionException("No competence submitted | Ingen kvalifikation tillgat" );
 
             Set<Integer>    tmp = new HashSet ();
             for (Competence_profile cp : competences) 
@@ -137,7 +137,7 @@ public class ApplicantFacade {
                 BigInteger t = cp.getCompetence().getCompetence_id();
                 if (!tmp.add (t.intValue()))
                 {
-                    throw new SubmissionException("Duplicate competence submitted");
+                    throw new SubmissionException("Duplicate competence submitted || Fler av samma kvalifikation tillgat");
                 }
                 person.addCompetence_profiles(cp);
             }
@@ -148,7 +148,7 @@ public class ApplicantFacade {
             List<Availability>  availabilitys = ADTO.getAvailabilitys();
 
             if (availabilitys.isEmpty())
-                throw new SubmissionException("No availability submitted");
+                throw new SubmissionException("No availability submitted || Ingen tillgänglighet tillgat");
 
             for (Availability a : availabilitys) 
             {
@@ -156,14 +156,13 @@ public class ApplicantFacade {
                 toDate = (formatter.parse(a.getTo_date()));
 
                 if (fromDate.equals(toDate))
-                    throw new SubmissionException("Start date cannot be same as end date");
+                    throw new SubmissionException("Start date cannot be same as end date || Start datum kan inte vara samma som slutdatum");
                 if (!fromDate.before(toDate))
-                    throw new SubmissionException("Start date cannot be earlier thant end date");
+                    throw new SubmissionException("End date cannot be earlier thant start date || Slut datum kan inte vara innan start datum");
                 person.addAvailability(a);
             }
             role.addPerson(person);
         }
-        
         catch (Exception   e){
             throw new SubmissionException(getRootMsg (e));  
         }
@@ -211,10 +210,10 @@ public class ApplicantFacade {
             query.setParameter ("n", email);
             Person   tmp = (Person) query.getSingleResult();
             if (tmp !=null)
-                throw new SubmissionException("Email is already in use"); 
+                throw new SubmissionException("Email is already in use || Email används redan"); 
         }
-        catch (NoResultException  e) {}
-        catch (Exception    e){
+        catch (NoResultException e) {}
+        catch (SubmissionException    e){
             throw new SubmissionException(getRootMsg (e));  
         }
     }

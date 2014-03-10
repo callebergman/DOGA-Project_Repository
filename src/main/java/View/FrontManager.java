@@ -67,8 +67,8 @@ public class FrontManager implements Serializable {
     private int fromYear;
     private int fromMonth;
     private int fromDay;
-    private Exception transactionFailure;
-    private Exception OldTransactionFailure;
+    private SubmissionException transactionFailure;
+    private SubmissionException OldTransactionFailure;
     
     public Log log = new Log();
     
@@ -77,18 +77,16 @@ public class FrontManager implements Serializable {
      * <code>false</code>.
      */
     public boolean getSuccess() {
-        if (OldTransactionFailure == transactionFailure)
-            transactionFailure = null;
-        else 
-            OldTransactionFailure = transactionFailure;
-        return transactionFailure == null;
+        OldTransactionFailure = transactionFailure;
+        transactionFailure = null;
+        return OldTransactionFailure == null;
     }
 
     /**
      * @return latest thrown exception
      */
-    public Exception getException() {
-        return transactionFailure;
+    public SubmissionException getException() {
+        return OldTransactionFailure;
     }
     
     /**

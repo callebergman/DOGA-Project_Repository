@@ -35,8 +35,8 @@ public class LangManager {
     @ManagedProperty(value="#{frontManager}") 
     FrontManager frontManager;
     
-    private Exception transactionFailure;
-    private Exception OldTransactionFailure;
+    private SubmissionException transactionFailure;
+    private SubmissionException OldTransactionFailure;
     
     private List<CompetenceDTO>    competences = new ArrayList<>();
     private List<String>    competence_names_eng = new ArrayList<>();
@@ -102,21 +102,19 @@ public class LangManager {
     
     /**
      * @return <code>true</code> if the latest transaction succeeded, otherwise
-     * <code>false</code>.
+     * <code>false</code>.  
      */
     public boolean getSuccess() {
-        if (OldTransactionFailure == transactionFailure)
-            transactionFailure = null;
-        else 
-            OldTransactionFailure = transactionFailure;
-        return transactionFailure == null;
+        OldTransactionFailure = transactionFailure;
+        transactionFailure = null;
+        return OldTransactionFailure == null;
     }
 
     /**
      * @return latest thrown exception
      */
-    public Exception getException() {
-        return transactionFailure;
+    public SubmissionException getException() {
+        return OldTransactionFailure;
     }
     
     public List<CompetenceDTO> getCompetences() {
