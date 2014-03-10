@@ -193,7 +193,7 @@ public class ApplicantFacade {
             Competence   c = (Competence) query.getSingleResult();
             return c;
         }
-        catch (Exception    e){
+        catch (RuntimeException    e){
             throw new SubmissionException(getRootMsg (e));  
         }
     }
@@ -212,8 +212,8 @@ public class ApplicantFacade {
             if (tmp !=null)
                 throw new SubmissionException("Email is already in use || Email används redan"); 
         }
-        catch (NoResultException e) {}
-        catch (SubmissionException    e){
+        catch (NoResultException  e){ }
+        catch (RuntimeException    e){
             throw new SubmissionException(getRootMsg (e));  
         }
     }

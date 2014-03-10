@@ -15,6 +15,7 @@
             <to-view-id>/English/front-error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+
     
     <navigation-rule>
         <from-view-id>/Swedish/front.xhtml</from-view-id>
@@ -27,6 +28,7 @@
             <to-view-id>/Swedish/front-error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+
     
     <navigation-rule>
         <from-view-id>/restricted/recruiterPage.xhtml</from-view-id>
