@@ -129,7 +129,7 @@ public class ApplicantFacade {
             
             List<Competence_profile>  competences = ADTO.getCompetences();
             if (competences.isEmpty())
-                throw new SubmissionException("No competence submitted | Ingen kvalifikation tillgat" );
+                throw new SubmissionException("No competence submitted || Ingen kvalifikation tillgat" );
 
             Set<Integer>    tmp = new HashSet ();
             for (Competence_profile cp : competences) 
@@ -171,7 +171,7 @@ public class ApplicantFacade {
     /**
      *@return competence list
      */
-    public List<CompetenceDTO> getCompetences () throws SubmissionException
+    public List<CompetenceDTO> getCompetences ()
     {
         try{
             Query   query = em.createQuery ("SELECT c FROM Competence c");
