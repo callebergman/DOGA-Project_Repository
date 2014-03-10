@@ -80,7 +80,7 @@ public class ApplicantFacade {
             Competence c = new Competence ();
             String s = Integer.toString(i);
             c.setCompetence_id(new BigInteger (s));
-            c.setEng_name(areas_eng[i]);
+            c.setName (areas_eng[i]);
             c.setSwe_name(areas_swe[i]);
             em.persist (c);
         }

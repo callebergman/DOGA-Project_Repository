@@ -55,7 +55,7 @@
                                 <p>Choose your area of expertise: 
                                     <br/>
                                     <h:selectOneMenu id="ca" value="#{frontManager.currentArea}">                                           
-                                        <c:forEach items="#{frontManager.eng_areas.stream().map(b->b).distinct().toList()}" var="area">
+                                        <c:forEach items="#{frontManager.competence_names.stream().map(b->b).distinct().toList()}" var="area">
                                             <f:selectItem itemValue="#{area}" itemLabel="#{area}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>

@@ -6,25 +6,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="front-style.css"  />
-        <title>Transaction Complete</title>
+        <title>Transaktionen slutförd</title>
     </h:head>
     <h:body>
-            <ui:include src="../header.xhtml"/>
-            <div id="bar">
-                <div id="content">
-                    <p class="tag"> Skicka ett ansökan eller logga in för att kolla på mottagna </p>
-                    <ul class="nav">
-                        <li class="ico">
-                            <a href="#{request.contextPath}/faces/restricted/recruiterPage.xhtml">Logga in / Registrera </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div id="wrap">
             <ui:include src="header.xhtml"/>
-            <h1>Transaction Complete</h1>
+            <h1>Transaktionen slutförd</h1>
             <br/>
-            <h2>Thank you for your submission</h2>
-            <a href="front.xhtml">Back to main page</a>
+            <h2>Tack för din ansökan</h2>
+            <a href="../English/front.xhtml">Tillbacks till första sidan</a>
             <ui:include src="footer.xhtml"/>
         </div>
     </h:body>

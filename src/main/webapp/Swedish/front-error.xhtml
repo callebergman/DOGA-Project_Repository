@@ -6,22 +6,12 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="front-style.css"  />
-        <title>Transaction Failed</title>
+        <title>Något gick snett</title>
     </h:head>
     <h:body>
         <div id="wrap">
-            <ui:include src="../header.xhtml"/>
-            <div id="bar">
-                <div id="content">
-                    <p class="tag"> Skicka ett ansökan eller logga in för att kolla på mottagna </p>
-                    <ul class="nav">
-                        <li class="ico">
-                            <a href="#{request.contextPath}/faces/restricted/recruiterPage.xhtml">Logga in / Registrera </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <h1>Transaction Failed</h1>
+            <ui:include src="header.xhtml"/>
+            <h1>Något gick snett</h1>
             <c:choose>
                 <c:when test="#{frontManager.exception.cause != null}">
                     <h3><h:outputText value="#{frontManager.exception.cause.message}"/></h3>
@@ -30,7 +20,7 @@
                     <h3><h:outputText value="#{frontManager.exception.message}"/></h3>
                 </c:otherwise>
             </c:choose>
-            <a href="front.xhtml">Back to main page</a>
+            <a href="front.xhtml">Tillbacks till första sidan</a>
             <ui:include src="footer.xhtml"/>
         </div>
     </h:body>

@@ -75,7 +75,7 @@ public class RecruiterFacade {
         catch (Exception    e){
             throw new SubmissionException(getRootMsg (e));  
         }
-        return (c.getEng_name());
+        return (c.getName());
     }
     
     /**

@@ -31,7 +31,7 @@ public class Competence implements Serializable, CompetenceDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger competence_id;
-    private String eng_name;
+    private String name;
     private String swe_name;
        
     @OneToMany(mappedBy="competence",cascade=ALL)
@@ -45,12 +45,12 @@ public class Competence implements Serializable, CompetenceDTO {
         this.competence_id = competence_id;
     }
 
-    public String getEng_name() {
-        return eng_name;
+    public String getName() {
+        return name;
     }
 
-    public void setEng_name(String eng_name) {
-        this.eng_name = eng_name;
+    public void setName (String name) {
+        this.name = name;
     }
 
     public String getSwe_name() {

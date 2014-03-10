@@ -11,9 +11,8 @@
             <to-view-id>/English/front-error.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-action>#{frontManager.language}</from-action>
-            <from-outcome>Swedish</from-outcome>
-            <to-view-id>/Swedish/front.xhtml</to-view-id>
+            <if>#{!langManager.success}</if>
+            <to-view-id>/English/front-error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
@@ -24,9 +23,8 @@
             <to-view-id>/Swedish/front-error.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-action>#{frontManager.language}</from-action>
-            <from-outcome>English</from-outcome>
-            <to-view-id>/English/front.xhtml</to-view-id>
+            <if>#{!langManager.success}</if>
+            <to-view-id>/Swedish/front-error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     

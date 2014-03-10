@@ -10,26 +10,16 @@
         <h:outputStylesheet library="css" name="basicInfo.css"  />
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
         <h:outputScript name="js/frontPageJS.js" />
-        <noscript>Sorry, your browser does not support JavaScript!</noscript> 
+        <noscript>Ledsen men ditt broswer har inte support för JavaScript!</noscript> 
    </h:head>
     <h:body>
         <div id="wrap">
-            <ui:include src="../header.xhtml"/>
-            <div id="bar">
-                <div id="content">
-                    <p class="tag"> Skicka ett ansökan eller logga in för att kolla på mottagna </p>
-                    <ul class="nav">
-                        <li class="ico">
-                            <a href="#{request.contextPath}/faces/restricted/recruiterPage.xhtml">Logga in / Registrera </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <ui:include src="header.xhtml"/>
             <div id="main">
                 <div id="options">
                     <ul>
-                        <li><button id="opt1">Bas information</button></li>
-                        <li><button id="opt2">Område av erfarenhet</button></li>
+                        <li><button id="opt1">Grundläggande information</button></li>
+                        <li><button id="opt2">Kvalifikationer</button></li>
                         <li><button id="opt3">Tillgänglighet</button></li>
                         <li><button id="opt4">Avsluta</button></li>
                     </ul>
@@ -37,16 +27,16 @@
 
                 <div id="applicationForm">
                     <div id="basicInfo">
-                            <h2 class="title" id = "header">Basic information</h2>
+                        <h2 class="title" id = "header">Grundläggande information</h2>
                             <div id="fillin">   
                                 <p> 
                                     <h:form id="formA1">
-                                    <h:outputLabel for="Input" value="First name:  "/><br/>
+                                    <h:outputLabel for="Input" value="Förnamn  "/><br/>
                                     <h:inputText id="name" value="#{frontManager.name}" onchange="submit();"/>
                                     <h:message class ="error" for="name"/><br/>
                                     </h:form>
                                     <h:form id="formA2"> 
-                                    <h:outputLabel for="Output" value="Last name: "/><br/>
+                                    <h:outputLabel for="Output" value="Efternamn: "/><br/>
                                     <h:inputText id="lastName" value="#{frontManager.lastName}" onchange="submit();"/>
                                     <h:message class ="error" for="lastName"/><br/>
                                     </h:form>
@@ -60,35 +50,35 @@
                         </div> 
                     <h:form id="formB">
                         <div id="expertise">
-                            <h2 class="title">Area of expertise</h2>
+                            <h2 class="title">Kvalifikationer</h2>
                             <div id="fillin">                        
-                                <p>Choose your area of expertise: 
+                                <p>Välj ett område: 
                                     <br/>
                                     <h:selectOneMenu id="ca" value="#{frontManager.currentArea}">                                           
-                                        <c:forEach items="#{frontManager.areas.stream().map(b->b).distinct().toList()}" var="area">
+                                        <c:forEach items="#{frontManager.competence_names.stream().map(b->b).distinct().toList()}" var="area">
                                             <f:selectItem itemValue="#{area}" itemLabel="#{area}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
                                     <br/>
                                     <br/>
-                                    <h:outputLabel for="Output" value="Years of expertise: "/>
+                                    <h:outputLabel for="Output" value="Antal år: "/>
                                     <br/>
                                     <h:inputText id="areayears" value="#{frontManager.years}"/>
                                     <h:message class="error" for="areayears"/>
                                     <br/>    
                                     <br/>
-                                    <h:commandButton id="opt5" value="Add entry" action="#{frontManager.addCompetence()}" onfocus=" formBSetCookie ()"/>             
+                                    <h:commandButton id="opt5" value="Lägg till" action="#{frontManager.addCompetence()}" onfocus=" formBSetCookie ()"/>             
                                 </p>
                             </div>
                             <div class="CSSTableGenerator">
                                 <table border="1">
                                     <tr>
-                                        <th>Area of expertise</th>
-                                        <th>Years</th>
+                                        <th>Område</th>
+                                        <th>Antal år</th>
                                     </tr>
                                     <ui:repeat var="comp" value="#{frontManager.competence_profiles}">
                                         <tr>
-                                            <td>#{comp.competence.name}</td>
+                                            <td>#{comp.competence.swe_name}</td>
                                             <td>#{comp.years_of_experience}</td>
                                         </tr>
                                     </ui:repeat>
@@ -99,26 +89,26 @@
                     
                     <h:form id="formC">
                         <div id="periods">
-                            <h2 class="title">Time periods</h2>
+                            <h2 class="title">Tillgänglighet</h2>
                             <div id="fillin">                 
                                 <p>Choose the time you'll be available:
                                     <br/>
                                     <br/>
                                     <h:outputLabel for="Output" value="From: "/>
                                     <br/>
-                                    Year:
+                                    År:
                                     <h:selectOneMenu id="time" value="#{frontManager.fromYear}">                                           
                                         <c:forEach begin="2014" end="2030" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
-                                    Month:
+                                    Månad:
                                     <h:selectOneMenu id="time1" value="#{frontManager.fromMonth}">                                           
                                         <c:forEach begin="1" end="12" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
-                                    Day:
+                                    Dag:
                                     <h:selectOneMenu id="time2" value="#{frontManager.fromDay}">                                           
                                         <c:forEach begin="1" end="32" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
@@ -128,19 +118,19 @@
                                     <br/>
                                     <h:outputLabel for="Output" value="To: "/>
                                     <br/>
-                                    Year:
+                                    År:
                                     <h:selectOneMenu id="time3" value="#{frontManager.toYear}">                                           
                                         <c:forEach begin="2014" end="2030" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
-                                    Month:
+                                    Månad:
                                     <h:selectOneMenu id="time4" value="#{frontManager.toMonth}">                                           
                                         <c:forEach begin="1" end="12" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
-                                    Day:
+                                    Dag:
                                     <h:selectOneMenu id="time5" value="#{frontManager.toDay}">                                           
                                         <c:forEach begin="1" end="32" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
@@ -148,7 +138,7 @@
                                     </h:selectOneMenu>
                                     <br/>
                                     <br/>    
-                                    <h:commandButton id="opt6" value="Add time period" action="#{frontManager.addAvailability()}" onfocus="formCSetCookie ()"/>
+                                    <h:commandButton id="opt6" value="Lägg till" action="#{frontManager.addAvailability()}" onfocus="formCSetCookie ()"/>
                                 </p>        
                                 <div class="CSSTableGenerator">
                                     <table border="1">
@@ -172,13 +162,13 @@
 
                     <h:form id="formD">
                         <div id="preview">
-                            <h2 class="title" id = "header">Basic information</h2>
+                            <h2 class="title" id = "header">Grundläggande information</h2>
                             <p>                         
-                                <h:outputLabel for="Input" value="First name:  "/>
+                                <h:outputLabel for="Input" value="Förnamn:  "/>
                                 <br/>
                                 <h:outputLabel class ="text" for="Input" value="#{frontManager.name}"/>
                                 <br/>
-                                <h:outputLabel for="Output" value="Last name: "/>
+                                <h:outputLabel for="Output" value="Efternamn "/>
                                 <br/>
                                 <h:outputLabel class ="text" for="Input" value="#{frontManager.lastName}"/>
                                 <br/>
@@ -187,12 +177,12 @@
                                 <h:outputLabel class ="text" for="Input" value="#{frontManager.email}"/>
                             </p>
 
-                            <h2 class="title" id = "header">Areas of Expertise</h2>
+                            <h2 class="title" id = "header">Kvalifikationer</h2>
                             <div class ="CSSTableGenerator">
                                 <table border="1">
                                     <tr>
-                                        <th>Area of expertise</th>
-                                        <th>Years</th>
+                                        <th>Område</th>
+                                        <th>Antal år</th>
                                     </tr>
                                     <ui:repeat var="comp" value="#{frontManager.competence_profiles}">
                                         <tr>
@@ -203,12 +193,12 @@
                                 </table>
                             </div>
                             <br/>
-                            <h2 class="title" id = "header">Time Periods</h2>
+                            <h2 class="title" id = "header">Tillgänglighet</h2>
                             <div class="CSSTableGenerator">
                                 <table border="1">
                                     <tr>
-                                        <th>From date</th>
-                                        <th>To date</th>
+                                        <th>Start datum</th>
+                                        <th>Slut datum</th>
                                     </tr>
 
                                     <ui:repeat var="a" value="#{frontManager.availabilities}">
@@ -221,7 +211,7 @@
                                 </table>
                             </div>
                             <br/>
-                            <h:commandButton id ="opt7" value="Submit Application" action="#{frontManager.sendApp()}" onfocus="formDSetCookie ()"/>     
+                            <h:commandButton id ="opt7" value="Skicka in" action="#{frontManager.sendApp()}" onfocus="formDSetCookie ()"/>     
                         </div>                          
                     </h:form>
                 </div>
