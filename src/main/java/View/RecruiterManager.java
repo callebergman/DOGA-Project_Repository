@@ -9,6 +9,7 @@ package View;
 import Controller.Log;
 import Controller.RecruiterFacade;
 import Model.ApplicationDTO;
+import Model.RetrievalException;
 import Model.SubmissionException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -178,7 +179,7 @@ public class RecruiterManager {
             for(int i=checkList.length - 1; i>=0; i--)
                 if(checkList[i] == true)
                     filterList.remove(i);        
-        }catch (SubmissionException e) {
+        }catch (RetrievalException e) {
             transactionFailure = e;
         }
         

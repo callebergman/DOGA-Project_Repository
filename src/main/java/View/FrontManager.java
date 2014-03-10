@@ -162,7 +162,9 @@ public class FrontManager implements Serializable {
         return "complete";
     }
 
-    
+    public void login () throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DOGA-Project_Repository/faces/restricted/recruiterPage.xhtml");
+    }
     
     /**
      *@return name 
