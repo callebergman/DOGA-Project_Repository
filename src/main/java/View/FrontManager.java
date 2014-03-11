@@ -152,7 +152,8 @@ public class FrontManager implements Serializable {
        try{
            applicantFacade.validateEmail(this.email);
 
-           applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email), competence_profiles, availabilities));
+           applicantFacade.submitApplication(new ApplicationDTO(new Person(this.name, this.lastName, this.email), 
+                   competence_profiles, availabilities));
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         } 
         catch (SubmissionException e) {

@@ -13,20 +13,23 @@ and open the template in the editor.
     <header>
         <div id="bar">
             <div id="content">
-                <p class="tag"> Skapa en ansökan eller logga in för att se inskicade </p>
+                <p class="tag"> Skapa en ansökan eller logga in för att se inskickade </p>
                 <ul class="nav">
                     <li class="ico">
                         <a href="http://localhost:8080/DOGA-Project_Repository/faces/restricted/recruiterPage.xhtml">Login / Signup </a>
                     </li>
                 </ul>
-                <h:form>
-                    <h:selectOneMenu value="#{langManager.active_language}" valueChangeListener="#{langManager.changeLanguage}" onchange="submit()">                                           
+                <div class="language"> 
+                    <h:form>
+                    <h:selectOneMenu id="language" class="sv" value="#{langManager.active_language}" valueChangeListener="#{langManager.changeLanguage}" onchange="submit()">                                           
                         <c:forEach items="#{langManager.language_options.stream().map(b->b).distinct().toList()}" var="lang">
                             <f:selectItem itemValue="#{lang}" itemLabel="#{lang}"/>
                         </c:forEach>   
                     </h:selectOneMenu>
-                </h:form>
+                        <h:form>
+                </div>
             </div>
+        </div>
         </div>
     </header>
 </html>
