@@ -10,6 +10,7 @@ import Model.ApplicationDTO;
 import Model.Competence;
 import Model.Person;
 import Model.RetrievalException;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -78,6 +80,25 @@ public class RecruiterFacade {
         return (c.getName());
     }
     
+    /*
+    Removes the selected application from the database
+    @param applicantName, the name of the applicant
+    */
+    public void removeApplication(String applicantName) throws IOException
+    {        
+        try
+        {
+            Person p;
+            Query   query = em.createQuery ("SELECT c FROM Person c WHERE c.name=:i");
+            query.setParameter ("i", applicantName);
+            p = (Person) query.getSingleResult();
+            em.remove(p);                       
+        }
+        catch (NoResultException e)
+        {
+              
+        }
+    }
     /**
      * 
      * @param e

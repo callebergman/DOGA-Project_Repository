@@ -46,6 +46,7 @@ public class RecruiterManager {
     private String fromDate;
     private String toDate;
     private String area;
+    private String applicantName;
     private Exception transactionFailure;
     private Exception OldTransactionFailure;
     public Log log = new Log();
@@ -281,5 +282,34 @@ public class RecruiterManager {
         response.sendRedirect("http://localhost:8080/DOGA-Project_Repository/faces/English/front.xhtml");
         //FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "success";   
-    } 
+    }
+    /*
+    Accepts the selected application
+    */
+    public void accept()
+    {
+        recruiterFacade.removeApplication(applicantName);
+    }
+    
+     /*
+    Denies the selected application
+    */
+    public void deny()
+    {
+        recruiterFacade.removeApplication(applicantName);
+    }
+
+    /**
+     * @return the applicantName
+     */
+    public String getApplicantName() {
+        return applicantName;
+    }
+
+    /**
+     * @param applicantName the applicantName to set
+     */
+    public void setApplicantName(String applicantName) {
+        this.applicantName = applicantName;
+    }
 }

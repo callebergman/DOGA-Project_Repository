@@ -93,10 +93,10 @@
             </div>
              <br></br>
                 <label for="SSN"><h3>Applicant</h3></label>  
-                <h:inputText/>
+                <h:inputText id="appname" value="#{recruiterManager.applicantName}" />
                 <br></br>
-                <button type="button" id="">Accept</button>
-                <button type="button" id="">Deny</button>
+                <h:commandButton id="accept" value="Accept" action="#{recruiterManager.accept()}"/>
+                <h:commandButton id="deny" value="Deny" action="#{recruiterManager.deny()}"/>
                 </h:form>
                 </fieldset>
              <ui:include src="/English/footer.xhtml"/>
