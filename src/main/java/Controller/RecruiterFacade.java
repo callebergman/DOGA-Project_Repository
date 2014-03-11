@@ -84,7 +84,7 @@ public class RecruiterFacade {
     Removes the selected application from the database
     @param applicantName, the name of the applicant
     */
-    public void removeApplication(String applicantName) throws IOException
+    public void removeApplication(String applicantName)
     {        
         try
         {

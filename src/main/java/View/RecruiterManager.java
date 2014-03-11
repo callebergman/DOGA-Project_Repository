@@ -286,17 +286,19 @@ public class RecruiterManager {
     /*
     Accepts the selected application
     */
-    public void accept()
+    public void accept() throws IOException
     {
         recruiterFacade.removeApplication(applicantName);
+        commit();
     }
     
      /*
     Denies the selected application
     */
-    public void deny()
+    public void deny() throws IOException
     {
         recruiterFacade.removeApplication(applicantName);
+        commit();
     }
 
     /**
