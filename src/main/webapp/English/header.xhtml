@@ -20,18 +20,14 @@ and open the template in the editor.
                         <a href="http://localhost:8080/DOGA-Project_Repository/faces/restricted/recruiterPage.xhtml">Login / Signup </a>
                     </li>
                 </ul>
-                <form>  
-                    <div class="language">
-                        <h:selectOneMenu id="language" class="sv" value="#{langManager.active_language}" valueChangeListener="#{langManager.changeLanguage}" onchange="submit()">                                           
+                    <h:form class="language">
+                        <h:selectOneMenu class="menu" value="#{langManager.active_language}" valueChangeListener="#{langManager.changeLanguage}" onchange="submit()">                                           
                             <c:forEach items="#{langManager.language_options.stream().map(b->b).distinct().toList()}" var="lang">
                                 <f:selectItem itemValue="#{lang}" itemLabel="#{lang}"/>
                             </c:forEach>   
                         </h:selectOneMenu>
-                    </div>
-                </form>
-
-            </div>
+                </h:form>
         </div>
-    </header>
-
+            </div>
+    </header>´
 </html>

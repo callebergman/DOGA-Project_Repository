@@ -3,7 +3,7 @@ background-position: 5px -936px;
 
 }
 
-#language {
+.menu {
 background: #2f2f2f url('../images/flags.png') no-repeat;
 font-size: 11px;
 color: #ccc;
