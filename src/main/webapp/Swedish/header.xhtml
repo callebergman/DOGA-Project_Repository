@@ -20,13 +20,13 @@ and open the template in the editor.
                     </li>
                 </ul>
                 <div class="language"> 
-                    <h:form>
+                    <form>
                     <h:selectOneMenu id="language" class="sv" value="#{langManager.active_language}" valueChangeListener="#{langManager.changeLanguage}" onchange="submit()">                                           
                         <c:forEach items="#{langManager.language_options.stream().map(b->b).distinct().toList()}" var="lang">
                             <f:selectItem itemValue="#{lang}" itemLabel="#{lang}"/>
                         </c:forEach>   
                     </h:selectOneMenu>
-                        <h:form>
+                        <form>
                 </div>
             </div>
         </div>
