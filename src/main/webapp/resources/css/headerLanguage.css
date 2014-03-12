@@ -1,10 +1,12 @@
 #bar .sv {
 background-position: 5px -936px;
 
+
 }
 
 .menu {
-background: #2f2f2f url('../images/flags.png') no-repeat;
+background: #2f2f2f url('https://cvmkr.com/images/flags.png') no-repeat;
+padding-left: 18px;
 font-size: 11px;
 color: #ccc;
 border: 0;
@@ -23,7 +25,7 @@ float: right;
 overflow: hidden;
 margin-left: 5px;
 width: 65px;
-
+padding:0 0 0 20px;
 }
 select {
 
@@ -31,6 +33,7 @@ font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial;
 border-radius: 4px;
 }
 select {
+
 box-sizing: border-box;
 align-items: center;
 white-space: pre;
@@ -43,11 +46,14 @@ display: block;
 padding-top: 7px;
 }
 #bar {
+
 font-size: 11px;
 }
 body {
+    
 font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial;
 line-height: 12px;
+
 }
 select {
 margin: 0em;
@@ -59,6 +65,7 @@ text-indent: 0px;
 text-shadow: none;
 display: inline-block;
 text-align: start;
+
 }
 select{
 -webkit-writing-mode: horizontal-tb;
