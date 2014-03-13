@@ -11,6 +11,7 @@ import java.util.Collection;
 /**
  *
  * @author Hikari
+ * Interface class for competence
  */
 public interface CompetenceDTO 
 {

@@ -162,7 +162,9 @@ public class FrontManager implements Serializable {
         log.writetofile(this.name,"submits application");
         return "complete";
     }
-
+    /***
+     *the login method redirects you and loggs you in 
+     */
     public void login () throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/DOGA-Project_Repository/faces/restricted/recruiterPage.xhtml");
     }
@@ -346,27 +348,39 @@ public class FrontManager implements Serializable {
     public void setToDate(String toDate) {
         this.toDate = toDate;
     }
-
+    /***
+     *@return competence_name 
+     */
     public List<String> getCompetence_names() {
         return competence_names;
     }
-
+    /***
+     *@param competence_names sets a new competence_name 
+     */
     public void setCompetence_names(List<String> competence_names) {
         this.competence_names = competence_names;
     }
-
+    /***
+     *@return currentArea 
+     */
     public String getCurrentArea() {
         return currentArea;
     }
-
+    /***
+     *@param currentArea sets a new currentArea 
+     */
     public void setCurrentArea(String currentArea) {
         this.currentArea = currentArea;
     }
-
+    /**
+     *@return competences 
+     */
     public List<CompetenceDTO> getCompetences() {
         return competences;
     }
-
+    /**
+     *@param competences sets a new competence 
+     */
     public void setCompetences(List<CompetenceDTO> competences) {
         this.competences = competences;
     }

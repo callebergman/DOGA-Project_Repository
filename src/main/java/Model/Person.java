@@ -23,6 +23,7 @@ import javax.persistence.OneToOne;
 /**
  *
  * @author User
+ * Entity class for person
  */
 @Entity
 public class Person implements Serializable {

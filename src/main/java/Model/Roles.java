@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 /**
  *
  * @author Hikari
+ * Entity Class for roles
  */
 @Entity
 public class Roles implements Serializable {

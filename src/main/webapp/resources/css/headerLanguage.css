@@ -5,7 +5,7 @@ background-position: 5px -936px;
 }
 
 .menu {
-background: #2f2f2f url('https://cvmkr.com/images/flags.png') no-repeat;
+background: #2f2f2f url('https://cvmkr.com/images/flags.pn') no-repeat;
 padding-left: 18px;
 font-size: 11px;
 color: #ccc;
@@ -25,7 +25,7 @@ float: right;
 overflow: hidden;
 margin-left: 5px;
 width: 65px;
-padding:0 0 0 9px;
+padding:0px;
 }
 select {
 

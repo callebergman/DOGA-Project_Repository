@@ -5,6 +5,7 @@ import javax.ejb.ApplicationException;
 
 /**
  * Thrown when submitted application contain invalid data
+ * exception class
  */
 @ApplicationException(rollback=true)
 public class RetrievalException extends RuntimeException  

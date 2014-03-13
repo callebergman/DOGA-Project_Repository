@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
 /**
  *
  * @author User
- * A Entity Class
+ * A Entity Class for availability
  */
 @Entity
 public class Availability implements Serializable {
@@ -33,7 +33,11 @@ public class Availability implements Serializable {
 
     public Availability() {
     }
-
+    /****
+     *Constructor
+     * @param from_date The date to start
+     * @param to_date The date to end
+     */
     public Availability(String from_date, String to_date) {
         this.from_date = from_date;
         this.to_date = to_date;
@@ -42,7 +46,7 @@ public class Availability implements Serializable {
     @ManyToOne
     @JoinColumn(name="person_id")
     private Person person;
-
+    
     public String getFrom_date() {
         return from_date;
     }

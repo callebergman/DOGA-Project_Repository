@@ -33,18 +33,27 @@ public class Authentication_Table implements Serializable {
     @JoinColumn(name = "userName")
     private Credential credential;
 
+    /****
+     *@return role 
+     */
     public Roles getRole() {
         return role;
     }
-
+    /****
+     *@param role sets a new role 
+     */
     public void setRole(Roles role) {
         this.role = role;
     }
-
+    /***
+     *@return credential 
+     */
     public Credential getCredential() {
         return credential;
     }
-
+    /***
+     *@param credential sets a new credential 
+     */
     public void setCredential(Credential credential) {
         this.credential = credential;
     }

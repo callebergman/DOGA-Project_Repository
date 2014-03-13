@@ -50,7 +50,10 @@ public class RecruiterManager {
     private Exception transactionFailure;
     private Exception OldTransactionFailure;
     public Log log = new Log();
-    
+  
+    /**
+     *The metod init retrives a list of applications 
+     */
     @PostConstruct
     public void init()
     {
@@ -80,14 +83,15 @@ public class RecruiterManager {
     }
     
     /**
-     * Returns the latest thrown exception.
+     * @return the latest thrown exception.
      */
     public Exception getException() {
         return OldTransactionFailure;
     }
     
     /****
-     *Handles bugfixes
+     *@return empty string
+     * this method handles bugfixes
      */
     private String jsf22Bugfix() {
         return "";
@@ -284,7 +288,7 @@ public class RecruiterManager {
         return "success";   
     }
     /*
-    Accepts the selected application
+    *Accepts the selected application
     */
     public void accept() throws IOException
     {
@@ -292,8 +296,8 @@ public class RecruiterManager {
         commit();
     }
     
-     /*
-    Denies the selected application
+    /*
+    *Denies the selected application
     */
     public void deny() throws IOException
     {

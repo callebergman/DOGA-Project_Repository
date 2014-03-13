@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 /**
  *
  * @author User
+ * Entity class for competence profile
  */
 @Entity
 public class Competence_profile implements Serializable {

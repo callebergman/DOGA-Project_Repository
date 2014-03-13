@@ -66,7 +66,10 @@ public class RecruiterFacade {
         }
         return list;
     }
-   
+   /****
+    *@param competence_id competence id
+    * the metod retrieves the competence name
+    */
     public String getCompetenceName (BigInteger competence_id){
         Competence  c;
         try{

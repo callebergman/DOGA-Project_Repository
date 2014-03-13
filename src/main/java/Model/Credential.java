@@ -22,6 +22,7 @@ import javax.persistence.OneToOne;
 /**
  *
  * @author Hikari
+ * entity class for credentials
  */
 @Entity
 public class Credential implements Serializable {
