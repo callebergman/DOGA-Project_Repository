@@ -23,7 +23,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import static java.util.Locale.setDefault;
+import java.util.ResourceBundle;
 import java.util.Set;
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -44,7 +48,15 @@ public class ApplicantFacade {
     
     @PersistenceContext(unitName = "projectPU")
     private EntityManager em;
+    private ResourceBundle messages;
+    private Locale locale = Locale.ENGLISH;
     private Log log;
+    
+    @PostConstruct
+    private void init () {
+        messages = ResourceBundle.getBundle("../com/exceptions", locale);
+    }
+    
     /***
      *testMethod is used to insert the competence data in the database
      * and making a recruiter account with a password and username
@@ -125,11 +137,11 @@ public class ApplicantFacade {
             Person  person = ADTO.getPerson();
 
             if ((person.getName()== null || person.getName().trim().length() == 0)|| (person.getSurname()== null || person.getSurname().trim().length() == 0) || (person.getEmail()== null || person.getEmail().trim().length() == 0))
-                throw new SubmissionException("Name and email is mandatory || Namn och email är obligatoriskt");
+                throw new SubmissionException( messages.getString("noNameOrEmail") );
             
             List<Competence_profile>  competences = ADTO.getCompetences();
             if (competences.isEmpty())
-                throw new SubmissionException("No competence submitted || Ingen kvalifikation tillgat" );
+                throw new SubmissionException( messages.getString("noCompetence") );
 
             Set<Integer>    tmp = new HashSet ();
             for (Competence_profile cp : competences) 
@@ -137,7 +149,7 @@ public class ApplicantFacade {
                 BigInteger t = cp.getCompetence().getCompetence_id();
                 if (!tmp.add (t.intValue()))
                 {
-                    throw new SubmissionException("Duplicate competence submitted || Fler av samma kvalifikation tillgat");
+                    throw new SubmissionException(messages.getString("duplicateCompetence"));
                 }
                 person.addCompetence_profiles(cp);
             }
@@ -148,7 +160,7 @@ public class ApplicantFacade {
             List<Availability>  availabilitys = ADTO.getAvailabilitys();
 
             if (availabilitys.isEmpty())
-                throw new SubmissionException("No availability submitted || Ingen tillgänglighet tillgat");
+                throw new SubmissionException(messages.getString("noAvailability"));
 
             for (Availability a : availabilitys) 
             {
@@ -156,9 +168,9 @@ public class ApplicantFacade {
                 toDate = (formatter.parse(a.getTo_date()));
 
                 if (fromDate.equals(toDate))
-                    throw new SubmissionException("Start date cannot be same as end date || Start datum kan inte vara samma som slutdatum");
+                    throw new SubmissionException(messages.getString("sameStartAndEnd"));
                 if (!fromDate.before(toDate))
-                    throw new SubmissionException("End date cannot be earlier thant start date || Slut datum kan inte vara innan start datum");
+                    throw new SubmissionException(messages.getString("endDateBeforeStartDate"));
                 person.addAvailability(a);
             }
             role.addPerson(person);
@@ -210,7 +222,7 @@ public class ApplicantFacade {
             query.setParameter ("n", email);
             Person   tmp = (Person) query.getSingleResult();
             if (tmp !=null)
-                throw new SubmissionException("Email is already in use || Email används redan"); 
+                throw new SubmissionException(messages.getString("emailInUse")); 
         }
         catch (NoResultException  e){ }
         catch (RuntimeException    e){
@@ -234,6 +246,11 @@ public class ApplicantFacade {
         }
         else
             return e.getClass().getName() + " "+  e.getMessage();
-        }
     }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+        messages = ResourceBundle.getBundle("../com/exceptions", locale);
+    }
+}
 

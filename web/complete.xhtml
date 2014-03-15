@@ -6,15 +6,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="front-style.css"  />
-        <title>Transaction Complete</title>
+        <title>#{msg['banner']}</title>
     </h:head>
     <h:body>
         <div id="wrap">
             <ui:include src="header.xhtml"/>
-            <h1>Transaction Complete</h1>
+            <h1>#{msg['banner']}</h1>
             <br/>
-            <h2>Thank you for your submission</h2>
-            <a href="front.xhtml">Back to main page</a>
+            <h2>#{msg['complete']}</h2>
+            <a href="front.xhtml">#{msg['back']}</a>
             <ui:include src="footer.xhtml"/>
         </div>
     </h:body>

@@ -18,15 +18,4 @@ public class SubmissionException extends RuntimeException
 
     public SubmissionException() {
     }
-    /***
-     *@return tokens
-     * @param i 
-     */
-    public String getMessage(int i) {
-        String msg = super.getMessage();
-        String[] tokens = msg.split(Pattern.quote("||"));
-        if (tokens.length == 1)
-            i = 0;    
-        return tokens[i]; 
-    }
 }

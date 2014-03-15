@@ -283,7 +283,7 @@ public class RecruiterManager {
     public String logout () throws IOException{
         FacesContext    context = FacesContext.getCurrentInstance();
         HttpServletResponse  response = (HttpServletResponse) context.getExternalContext().getResponse();
-        response.sendRedirect("http://localhost:8080/DOGA-Project_Repository/faces/front.xhtml");
+        response.sendRedirect("http://localhost:8080/DOGA-Project/faces/front.xhtml");
         //FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "success";   
     }
