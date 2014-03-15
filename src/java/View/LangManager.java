@@ -47,7 +47,7 @@ public class LangManager {
     private List<String>    competence_names_eng = new ArrayList<>();
     private List<String>    competence_names_alang = new ArrayList<>();
     
-    public String active_language = "";
+    public String locale = Locale.ENGLISH.toString();
     private static Map<String,Object> languages;
 
     @PostConstruct
@@ -77,25 +77,20 @@ public class LangManager {
             transactionFailure = e;
         }
         
-        switch (active_language){             
-            
-            case ("French"):
-                competence_names_alang = new ArrayList<>();
-                for (int i=0; i < competences.size (); i++)
-                    competence_names_alang.add (competences.get(i).getFr_name());
-                frontManager.setCompetence_names(competence_names_alang);
-                break;
-            
-            default:
-                competence_names_eng = new ArrayList<>();
-                competence_names_alang = new ArrayList<>();
-                
-                for (int i=0; i < competences.size (); i++)
-                    competence_names_eng.add (competences.get(i).getName());
-                for (int i=0; i < competences.size (); i++)
-                    competence_names_alang.add (competences.get(i).getName());
-                frontManager.setCompetence_names(competence_names_eng);
-                break;
+        if (locale.equals (Locale.FRENCH.toString())) {
+            competence_names_alang = new ArrayList<>();
+            for (int i=0; i < competences.size (); i++)
+                competence_names_alang.add (competences.get(i).getFr_name());
+            frontManager.setCompetence_names(competence_names_alang);
+        }
+        else {
+            competence_names_eng = new ArrayList<>();
+            competence_names_alang = new ArrayList<>();
+            for (int i=0; i < competences.size (); i++)
+                competence_names_eng.add (competences.get(i).getName());
+            for (int i=0; i < competences.size (); i++)
+                competence_names_alang.add (competences.get(i).getName());
+            frontManager.setCompetence_names(competence_names_eng);
         }
     }
     
@@ -106,11 +101,11 @@ public class LangManager {
      */
     public void changeLanguage (ValueChangeEvent event) throws IOException 
     {    
-        active_language = (String) event.getNewValue();
+        locale = (String) event.getNewValue();
         switchCompetence ();
         
         for (Map.Entry<String, Object> entry : languages.entrySet()) {
-            if(entry.getValue().toString().equals(active_language)){
+            if(entry.getValue().toString().equals(locale)){
                 FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale)entry.getValue());         
             }
         }
@@ -171,14 +166,15 @@ public class LangManager {
     /**
      *@return active_language
      */
-    public String getActive_language() {
-        return active_language;
+    public String getLocale() {
+        return locale;
     }
     /**
-     *@param active_language sets a new value to active_language 
+     * Sets current active language to locale
+     * @param locale
      */
-    public void setActive_language(String active_language) {
-        this.active_language = active_language;
+    public void setLocale(String locale) {
+        this.locale = locale;
     } 
    /**
      *@return frontManager 

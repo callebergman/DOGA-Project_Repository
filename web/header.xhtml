@@ -21,7 +21,7 @@ and open the template in the editor.
                     </li>
                 </ul>
                 <h:form class="language">
-                    <h:selectOneMenu class="menu" value="#{langManager.active_language}" valueChangeListener="#{langManager.changeLanguage}" onchange="submit()">                                          
+                    <h:selectOneMenu class="menu" value="#{langManager.locale}" valueChangeListener="#{langManager.changeLanguage}" onchange="submit()">                                          
                         <f:selectItems value="#{langManager.languages}"/>
                     </h:selectOneMenu>
                 </h:form>
