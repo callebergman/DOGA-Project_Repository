@@ -78,9 +78,16 @@
                                         <th>Area of expertise</th>
                                         <th>Years</th>
                                     </tr>
+                                    <c:set var="locale_fr">#{langManager.languages.get("French")}</c:set>
+                                    <c:set var="locale_en">#{langManager.languages.get("English")}</c:set>
                                     <ui:repeat var="comp" value="#{frontManager.competence_profiles}">
                                         <tr>
-                                            <td>#{comp.competence.name}</td>
+                                            <c:if test="#{langManager.locale eq locale_fr}">
+                                                <td>#{comp.competence.fr_name}</td>
+                                            </c:if>
+                                            <c:if test="#{langManager.locale eq locale_en}">
+                                                <td>#{comp.competence.name}</td>
+                                            </c:if>
                                             <td>#{comp.years_of_experience}</td>
                                         </tr>
                                     </ui:repeat>

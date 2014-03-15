@@ -27,7 +27,7 @@ import javax.faces.event.ValueChangeEvent;
  *
  * @author Hikari
  * The LangManager class handles the switch from
- * The English to Swedish page and vice versa
+ * English to French
  */
 
 @ManagedBean(name = "langManager")

@@ -64,15 +64,15 @@ public class ApplicantFacade {
         areas_eng[9] = "Servicing";
         
         String[] areas_fr = new String[10];
-        areas_fr[0] = "Saucisse à griller";
-        areas_fr[1] = "Opération carrousel";
+        areas_fr[0] = "Saucisse \u00e0 griller";
+        areas_fr[1] = "Op\u00e9ration carrousel";
         areas_fr[2] = "Le rabais";
         areas_fr[3] = "Programmation";
         areas_fr[4] = "Guidage";
-        areas_fr[5] = "La réparation de la machine";
+        areas_fr[5] = "La r\u00e9paration de la machine";
         areas_fr[6] = "Cuisson";
         areas_fr[7] = "Service";
-        areas_fr[8] = "Le évalué";
+        areas_fr[8] = "Le \u00e9valu\u00e9";
         areas_fr[9] = "Entretien";
         
         for (int i=0; i<areas_fr.length; i++)
