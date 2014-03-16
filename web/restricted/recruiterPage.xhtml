@@ -2,70 +2,76 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <h:outputStylesheet library="css" name="recruiterPage-style.css"  />
         <h:outputStylesheet library="css" name="recruitTable.css"  />        
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
-        <noscript>Sorry, your browser does not support JavaScript!</noscript>
+        <noscript>#{msg['noJava']}</noscript>
         <style type ="text/css"/>
     </h:head>
     <h:body> 
         <div id="wrap">
             <div id="bar">
                 <div id="content">
-                    <p class="tag"> Recruiter Login Page</p>
+                    <p class="tag"> #{msg['recruiterLoginPage']}</p>
+                    <h:form class="language">
+                    <h:selectOneMenu class="menu" value="#{langManager.locale}" valueChangeListener="#{langManager.changeLanguage}" onchange="submit()">                                          
+                        <f:selectItems value="#{langManager.languages}"/>
+                    </h:selectOneMenu>
+                    </h:form>
                     <ul class="nav">
                         <li class="ico">
                             <h:form>
-                                <h:commandLink action="#{recruiterManager.logout()}">Logout </h:commandLink>
+                                <h:commandLink action="#{recruiterManager.logout()}">#{msg['logout']} </h:commandLink>
                             </h:form>
                         </li>   
                     </ul>
                 </div>
             </div>
             <div>
-                <h2>Applicant Table</h2>
+                <h2>#{msg['applicantTable']}</h2>
             </div>
             <fieldset>                
                 <h:form>
-                <legend>Filter Options</legend>
-                <h3>Name</h3>
-                <label for="firstname">First name</label>
+                <legend>#{msg['filter']}</legend>
+                <h3>#{msg['name']}</h3>
+                <label for="firstname">#{msg['firstName']}</label>
                 <h:inputText id="firstname" value="#{recruiterManager.firstName}" />
-                <label for="lastname">Last name</label>
+                <label for="lastname">#{msg['lastName']}</label>
                 <h:inputText id="lastname" value="#{recruiterManager.lastName}"/>
-                <h3>Time Period</h3>
-                <label for="from">From</label>
+                <h3>#{msg['period']}</h3>
+                <label for="from">#{msg['from']}</label>
                 <h:inputText id="from" value="#{recruiterManager.fromDate}" />
-                <label for="to">To</label>
+                <label for="to">#{msg['to']}</label>
                 <h:inputText id="to" value="#{recruiterManager.toDate}"/>
                 
                 <br></br>
-                <label for="competence"><h3>Competence</h3></label>
+                <label for="competence"><h3>#{msg['competence']}</h3></label>
                 
                 <h:inputText id="competence" value="#{recruiterManager.area}"/>
-                 <h:commandButton id="commit" value="Commit" action="#{recruiterManager.commit()}"/>
+                 <h:commandButton id="commit" value="#{msg['commit']}" action="#{recruiterManager.commit()}"/>
                 <br></br>    
    
             <div class="CSSTableGenerator" >
                 <table >
                     <tr>
                         <td>
-                            Name
+                            #{msg['name']}
                         </td>
                         <td >
-                            Last Name
+                            #{msg['lname']}
                         </td>
                         <td>
-                            E-mail
+                            #{msg['em']}
                         </td>
                        
                          <td>
-                            Competences
+                            #{msg['competences']}
                         </td>
                         <td>
-                            Time Periods
+                            #{msg['time']}
                         </td>
                     </tr>
                     <ui:repeat var="item" value="#{recruiterManager.filterList}">
@@ -92,11 +98,11 @@
                 </table>   
             </div>
              <br></br>
-                <label for="SSN"><h3>Applicant</h3></label>  
+                <label for="SSN"><h3>#{msg['applicant']}</h3></label>  
                 <h:inputText id="appname" value="#{recruiterManager.applicantName}" />
                 <br></br>
-                <h:commandButton id="accept" value="Accept" action="#{recruiterManager.accept()}"/>
-                <h:commandButton id="deny" value="Deny" action="#{recruiterManager.deny()}"/>
+                <h:commandButton id="accept" value="#{msg['accept']}" action="#{recruiterManager.accept()}"/>
+                <h:commandButton id="deny" value="#{msg['deny']}" action="#{recruiterManager.deny()}"/>
                 </h:form>
                 </fieldset>
              <ui:include src="../footer.xhtml"/>

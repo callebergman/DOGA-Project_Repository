@@ -6,16 +6,16 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet library="css" name="front-style.css"  />
-        <title>Transaction Failed</title>
+        <title>#{msg['failBanner']}</title>
     </h:head>
     <h:body>
         <div id="wrap">
             <div id="bar">
                 <div id="content">
-                    <p class="tag"> Create applications or login to browse submissions </p>
+                    <p class="tag"> #{msg['header msg']} </p>
                 </div>
             </div>
-            <h1>Transaction Failed</h1>
+            <h1>#{msg['failBanner']}</h1>
             <c:choose>
                 <c:when test="#{recruiterManager.exception.cause != null}">
                     <h3><h:outputText value="#{recruiterManager.exception.cause.message}"/></h3>
@@ -24,7 +24,7 @@
                     <h3><h:outputText value="#{recruiterManager.exception.message}"/></h3>
                 </c:otherwise>
             </c:choose>
-            <a href="recruiterPage.xhtml">Back to main page</a>
+            <a href="recruiterPage.xhtml">#{msg['back']}</a>
             <ui:include src="/footer.xhtml"/>
         </div>
     </h:body>
