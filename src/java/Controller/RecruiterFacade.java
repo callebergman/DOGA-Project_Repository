@@ -10,7 +10,6 @@ import Model.ApplicationDTO;
 import Model.Competence;
 import Model.Person;
 import Model.RetrievalException;
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
