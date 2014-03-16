@@ -106,7 +106,6 @@ public class LangManager {
         
         for (Map.Entry<String, Object> entry : languages.entrySet()) {
             if(entry.getValue().toString().equals(locale)){
-                applicantFacade.setLocale((Locale) entry.getValue ());
                 FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale)entry.getValue());         
             }
         }

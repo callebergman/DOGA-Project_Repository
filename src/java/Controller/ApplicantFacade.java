@@ -31,6 +31,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -132,6 +133,7 @@ public class ApplicantFacade {
      */
     public void submitApplication (ApplicationDTO ADTO) throws ParseException 
     {
+        setLocale();
         try {
             Roles    role = em.find(Roles.class, "Applicant");
             Person  person = ADTO.getPerson();
@@ -217,6 +219,7 @@ public class ApplicantFacade {
      */
     public void validateEmail (String email)
     {
+        setLocale();
         try{
             Query   query = em.createQuery ("SELECT c FROM Person c WHERE c.email=:n");
             query.setParameter ("n", email);
@@ -248,8 +251,11 @@ public class ApplicantFacade {
             return e.getClass().getName() + " "+  e.getMessage();
     }
 
-    public void setLocale(Locale locale) {
-        this.locale = locale;
+    /**
+     * Load bundle for current locale of context
+     */
+    public void setLocale() {
+        locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
         messages = ResourceBundle.getBundle("../com/exceptions", locale);
     }
 }
