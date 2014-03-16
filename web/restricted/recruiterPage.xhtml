@@ -19,11 +19,6 @@
             <div id="bar">
                 <div id="content">
                     <p class="tag"> #{msg['recruiterLoginpage']}</p>
-                    <h:form class="language">
-                    <h:selectOneMenu class="menu" value="#{langManager.locale}" valueChangeListener="#{langManager.changeLanguage}" onchange="submit()">                                          
-                        <f:selectItems value="#{langManager.languages}"/>
-                    </h:selectOneMenu>
-                    </h:form>
                     <ul class="nav">
                         <li class="ico">
                             <h:form>
@@ -31,6 +26,11 @@
                             </h:form>
                         </li>   
                     </ul>
+                    <h:form class="language">
+                        <h:selectOneMenu class="menu" value="#{langManager.locale}" valueChangeListener="#{langManager.changeLanguage}" onchange="submit()">                                          
+                            <f:selectItems value="#{langManager.languages}"/>
+                        </h:selectOneMenu>
+                    </h:form>
                 </div>
             </div>
             </header>
