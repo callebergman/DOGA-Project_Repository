@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="loginForm-style.css"  />
+    </h:head>
+    <h:body> 
+        <f:view locale="#{langManager.locale}"/>
+        <div id="wrap">           
+            <ui:include src="header.xhtml"/>
+            <div id="login">
+                <form method="post" action="j_security_check">
+                    <h1>#{msg['recruiterLogin']}</h1>
+                    <p>
+                        <br></br>
+                        #{msg['userName']} <input type="text" name="j_username" />
+                        #{msg['password']} <input type="password" name="j_password" />
+                    </p> 
+                    <input type="submit" value="#{msg['login']}" />
+                </form>
+            </div> 
+            <ui:include src="footer.xhtml"/>
+        </div>
+    </h:body>
+</html>
+

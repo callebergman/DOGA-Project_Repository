@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <application>
+     	   <locale-config>
+     	        <default-locale>en</default-locale>
+                <supported-locale>fr</supported-locale>
+     	   </locale-config>
+	   <resource-bundle>
+		<base-name>com.front</base-name>
+		<var>msg</var>
+	   </resource-bundle>
+     </application>
+    
+    <navigation-rule>
+        <from-view-id>/front.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{!frontManager.success}</if>
+            <to-view-id>/front-error.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <if>#{!langManager.success}</if>
+            <to-view-id>/front-error.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/restricted/recruiterPage.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{!recruiterManager.success}</if>
+            <to-view-id>/restricted/recruiterPage-error.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>
