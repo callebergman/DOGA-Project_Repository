@@ -7,21 +7,17 @@
         <h:outputStylesheet library="css" name="loginForm-style.css"  />
     </h:head>
     <h:body> 
-        <div id="wrap">
-            <div id="bar">
-                <div id="content">
-                    <p class="tag"> Create applications or login to browse submissions </p>
-                </div>
-            </div>
+        <div id="wrap">           
+            <ui:include src="header.xhtml"/>
             <div id="login">
                 <form method="post" action="j_security_check">
-                    <h1>Recruiter login</h1>
+                    <h1>#{msg['recruiterLogin']}</h1>
                     <p>
                         <br></br>
-                        Username: <input type="text" name="j_username" />
-                        Password: <input type="password" name="j_password" />
+                        #{msg['userName']} <input type="text" name="j_username" />
+                        #{msg['password']} <input type="password" name="j_password" />
                     </p> 
-                    <input type="submit" value="Login" />
+                    <input type="submit" value="#{msg['login']}" />
                 </form>
             </div> 
             <ui:include src="footer.xhtml"/>

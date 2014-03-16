@@ -11,7 +11,7 @@
           <h:outputStylesheet library="css" name="headerLanguage.css"  />
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
         <h:outputScript name="js/frontPageJS.js" />
-        <noscript>Sorry, your browser does not support JavaScript!</noscript> 
+        <noscript>#{msg['noJava']}</noscript> 
    </h:head>
     <h:body>
         <f:view locale="#{langManager.locale}"/>
@@ -20,30 +20,30 @@
             <div id="main">
                 <div id="options">
                     <ul>
-                        <li><button id="opt1">#{msg['greeting']}</button></li>
-                        <li><button id="opt2">#{msg['greeting']}</button></li>
-                        <li><button id="opt3">Time periods</button></li>
-                        <li><button id="opt4">Finish</button></li>
+                        <li><button id="opt1">#{msg['basic']}</button></li>
+                        <li><button id="opt2">#{msg['area']}</button></li>
+                        <li><button id="opt3">#{msg['time']}</button></li>
+                        <li><button id="opt4">#{msg['end']}</button></li>
                     </ul>
                 </div>
 
                 <div id="applicationForm">
                     <div id="basicInfo">
-                        <h2 class="title" id = "header">Basic information</h2>
+                        <h2 class="title" id = "header">#{msg['basic']}</h2>
                             <div id="fillin">   
                                 <p> 
                                     <h:form id="formA1">
-                                    <h:outputLabel for="Input" value="First name:  "/><br/>
+                                    <h:outputLabel for="Input" value="#{msg['firstName']}"/><br/>
                                     <h:inputText id="name" value="#{frontManager.name}" onchange="submit();"/>
                                     <h:message class ="error" for="name"/><br/>
                                     </h:form>
                                     <h:form id="formA2"> 
-                                    <h:outputLabel for="Output" value="Last name: "/><br/>
+                                    <h:outputLabel for="Output" value="#{msg['lastName']}"/><br/>
                                     <h:inputText id="lastName" value="#{frontManager.lastName}" onchange="submit();"/>
                                     <h:message class ="error" for="lastName"/><br/>
                                     </h:form>
                                     <h:form id="formA3">
-                                    <h:outputLabel for="Output" value="Email: "/><br/>
+                                    <h:outputLabel for="Output" value="#{msg['email']}"/><br/>
                                     <h:inputText id="email" value="#{frontManager.email}" onchange="submit();"/>
                                     <h:message class ="error" for="email"/><br/>
                                     </h:form>
@@ -52,9 +52,9 @@
                         </div> 
                     <h:form id="formB">
                         <div id="expertise">
-                            <h2 class="title">Area of expertise</h2>
+                            <h2 class="title">#{msg['area']}</h2>
                             <div id="fillin">                        
-                                <p>Choose your area of expertise: 
+                                <p>#{msg['choose']}
                                     <br/>
                                     <h:selectOneMenu id="ca" value="#{frontManager.currentArea}">                                           
                                         <c:forEach items="#{frontManager.competence_names.stream().map(b->b).distinct().toList()}" var="area">
@@ -63,20 +63,20 @@
                                     </h:selectOneMenu>
                                     <br/>
                                     <br/>
-                                    <h:outputLabel for="Output" value="Years of expertise: "/>
+                                    <h:outputLabel for="Output" value="#{msg['years']}"/>
                                     <br/>
                                     <h:inputText id="areayears" value="#{frontManager.years}"/>
                                     <h:message class="error" for="areayears"/>
                                     <br/>    
                                     <br/>
-                                    <h:commandButton id="opt5" value="Add entry" action="#{frontManager.addCompetence()}" onfocus=" formBSetCookie ()"/>             
+                                    <h:commandButton id="opt5" value="#{msg['addEntry']}" action="#{frontManager.addCompetence()}" onfocus=" formBSetCookie ()"/>             
                                 </p>
                             </div>
                             <div class="CSSTableGenerator">
                                 <table border="1">
                                     <tr>
-                                        <th>Area of expertise</th>
-                                        <th>Years</th>
+                                        <th>#{msg['area']}</th>
+                                        <th>#{msg['singleyear']}</th>
                                     </tr>
                                     <c:set var="locale_fr">#{langManager.languages.get("French")}</c:set>
                                     <c:set var="locale_en">#{langManager.languages.get("English")}</c:set>
@@ -98,26 +98,26 @@
                     
                     <h:form id="formC">
                         <div id="periods">
-                            <h2 class="title">Time periods</h2>
+                            <h2 class="title">#{msg['time']}</h2>
                             <div id="fillin">                 
-                                <p>Choose the time you'll be available:
+                                <p>#{msg['chooseTime']}
                                     <br/>
                                     <br/>
-                                    <h:outputLabel for="Output" value="From: "/>
+                                    <h:outputLabel for="Output" value="#{msg['from']}"/>
                                     <br/>
-                                    Year:
+                                    #{msg['year']}
                                     <h:selectOneMenu id="time" value="#{frontManager.fromYear}">                                           
                                         <c:forEach begin="2014" end="2030" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
-                                    Month:
+                                    #{msg['month']}
                                     <h:selectOneMenu id="time1" value="#{frontManager.fromMonth}">                                           
                                         <c:forEach begin="1" end="12" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
-                                    Day:
+                                    #{msg['day']}
                                     <h:selectOneMenu id="time2" value="#{frontManager.fromDay}">                                           
                                         <c:forEach begin="1" end="32" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
@@ -125,21 +125,21 @@
                                     </h:selectOneMenu>   
                                     <br/>
                                     <br/>
-                                    <h:outputLabel for="Output" value="To: "/>
+                                    <h:outputLabel for="Output" value="#{msg['to']}"/>
                                     <br/>
-                                    Year:
+                                    #{msg['year']}
                                     <h:selectOneMenu id="time3" value="#{frontManager.toYear}">                                           
                                         <c:forEach begin="2014" end="2030" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
-                                    Month:
+                                    #{msg['month']}
                                     <h:selectOneMenu id="time4" value="#{frontManager.toMonth}">                                           
                                         <c:forEach begin="1" end="12" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
                                         </c:forEach>   
                                     </h:selectOneMenu>
-                                    Day:
+                                    #{msg['day']}
                                     <h:selectOneMenu id="time5" value="#{frontManager.toDay}">                                           
                                         <c:forEach begin="1" end="32" varStatus="status">
                                             <f:selectItem itemValue="${status.index}" itemLabel="${status.index}"/>
@@ -147,13 +147,13 @@
                                     </h:selectOneMenu>
                                     <br/>
                                     <br/>    
-                                    <h:commandButton id="opt6" value="Add time period" action="#{frontManager.addAvailability()}" onfocus="formCSetCookie ()"/>
+                                    <h:commandButton id="opt6" value="#{msg['addTime']}" action="#{frontManager.addAvailability()}" onfocus="formCSetCookie ()"/>
                                 </p>        
                                 <div class="CSSTableGenerator">
                                     <table border="1">
                                         <tr>
-                                            <th>From date</th>
-                                            <th>To date</th>
+                                            <th>#{msg['fromDate']}</th>
+                                            <th>#{msg['toDate']}</th>
                                         </tr>
 
                                         <ui:repeat var="a" value="#{frontManager.availabilities}">
@@ -171,27 +171,27 @@
 
                     <h:form id="formD">
                         <div id="preview">
-                            <h2 class="title" id = "header">Basic information</h2>
+                            <h2 class="title" id = "header">#{msg['basic']}</h2>
                             <p>                         
-                                <h:outputLabel for="Input" value="First name:  "/>
+                                <h:outputLabel for="Input" value="#{msg['firstName']}"/>
                                 <br/>
                                 <h:outputLabel class ="text" for="Input" value="#{frontManager.name}"/>
                                 <br/>
-                                <h:outputLabel for="Output" value="Last name: "/>
+                                <h:outputLabel for="Output" value="#{msg['lastName']}"/>
                                 <br/>
                                 <h:outputLabel class ="text" for="Input" value="#{frontManager.lastName}"/>
                                 <br/>
-                                <h:outputLabel for="Output" value="Email: "/>
+                                <h:outputLabel for="Output" value="#{msg['email']}"/>
                                 <br/>
                                 <h:outputLabel class ="text" for="Input" value="#{frontManager.email}"/>
                             </p>
 
-                            <h2 class="title" id = "header">Areas of Expertise</h2>
+                            <h2 class="title" id = "header">#{msg['area']}</h2>
                             <div class ="CSSTableGenerator">
                                 <table border="1">
                                     <tr>
-                                        <th>Area of expertise</th>
-                                        <th>Years</th>
+                                        <th>#{msg['area']}</th>
+                                        <th>#{msg['singleyear']}</th>
                                     </tr>
                                     <ui:repeat var="comp" value="#{frontManager.competence_profiles}">
                                         <tr>
@@ -202,12 +202,12 @@
                                 </table>
                             </div>
                             <br/>
-                            <h2 class="title" id = "header">Time Periods</h2>
+                            <h2 class="title" id = "header">#{msg['time']}</h2>
                             <div class="CSSTableGenerator">
                                 <table border="1">
                                     <tr>
-                                        <th>From date</th>
-                                        <th>To date</th>
+                                        <th>#{msg['fromDate']}</th>
+                                        <th>#{msg['toDate']}</th>
                                     </tr>
 
                                     <ui:repeat var="a" value="#{frontManager.availabilities}">
@@ -220,7 +220,7 @@
                                 </table>
                             </div>
                             <br/>
-                            <h:commandButton id ="opt7" value="Submit Application" action="#{frontManager.sendApp()}" onfocus="formDSetCookie ()"/>     
+                            <h:commandButton id ="opt7" value="#{msg['submitApplication']}" action="#{frontManager.sendApp()}" onfocus="formDSetCookie ()"/>     
                         </div>                          
                     </h:form>
                 </div>
